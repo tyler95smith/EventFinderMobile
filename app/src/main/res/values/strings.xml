@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EventFinderMobile</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_name_lbl">Event Name:</string>
+    <string name="location">Location</string>
+    <string name="location_lbl">Location:</string>
+    <string name="description">Description</string>
+    <string name="description_lbl">Description:</string>
+    <string name="age_min">Age Min</string>
+    <string name="age_min_lbl">Age Min:</string>
+    <string name="age_max">Age Max</string>
+    <string name="age_max_lbl">Age Max:</string>
+    <string name="interests">Interests</string>
+    <string name="interests_lbl">Interests:</string>
+</resources>
