@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'EventFinder.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 # You will find no database information here.  Look in secret_settings.py
-from secret_settings import *
+from EventFinder.secret_settings import *
 
 #DATABASES = {
 #    'default': {
