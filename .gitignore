@@ -7,8 +7,3 @@
 /build
 /captures
 .externalNativeBuild
-/EventFinderServer/EventFinder/secret_settings.py
-/EventFinderServer/EventFinder/__pycache__/
-/EventFinderServer/uwsgi.log
-/EventFinderServer/django.ini
-EventFinderServer/__pycache__/
