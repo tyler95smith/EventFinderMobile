@@ -25,7 +25,7 @@ SECRET_KEY = '%+^66e6nomvz*kxp!*wrc#1iqj)%r&_yczrunyri=wwat(gr=9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'api.nthbox.com']
 
 
 # Application definition
