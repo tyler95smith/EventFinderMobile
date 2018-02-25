@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eventfinder.www.eventfindermobile.NavigationBar">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="388dp"
+        android:layout_height="62dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="451dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/home"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="458dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="83dp"
+        android:layout_height="63dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
+        android:tint="@android:color/background_dark"
+        app:srcCompat="@drawable/bell"
+        tools:layout_editor_absoluteX="299dp"
+        tools:layout_editor_absoluteY="451dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="48dp"
+        android:layout_height="44dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/Add"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="462dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="76dp"
+        android:layout_height="67dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:tint="@android:color/background_dark"
+        app:srcCompat="@drawable/profile"
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="451dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton9"
+        android:layout_width="61dp"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/star"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="457dp" />
+
+</android.support.constraint.ConstraintLayout>

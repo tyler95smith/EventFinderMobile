@@ -12,4 +12,5 @@
     <string name="age_max_lbl">Age Max:</string>
     <string name="interests">Interests</string>
     <string name="interests_lbl">Interests:</string>
+    <string name="title_activity_navigation_bar">NavigationBar</string>
 </resources>
