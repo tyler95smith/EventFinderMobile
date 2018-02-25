@@ -1,8 +1,13 @@
 package com.eventfinder.www.eventfindermobile;
 
-/**
- * Created by redre on 2/24/2018.
- */
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class NewAccount {
+public class NewAccount extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_account);
+    }
 }
