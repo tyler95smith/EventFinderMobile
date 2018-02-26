@@ -14,58 +14,71 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="451dp" />
+        tools:layout_editor_absoluteY="451dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <ImageButton
         android:id="@+id/imageButton5"
         android:layout_width="55dp"
         android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
         android:background="@color/colorPrimary"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/home"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="458dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toEndOf="@+id/imageButton9"
+        app:srcCompat="@drawable/home" />
 
     <ImageButton
         android:id="@+id/imageButton6"
         android:layout_width="83dp"
-        android:layout_height="63dp"
+        android:layout_height="62dp"
+        android:layout_marginEnd="6dp"
         android:background="@color/colorPrimary"
         android:scaleType="centerCrop"
         android:tint="@android:color/background_dark"
-        app:srcCompat="@drawable/bell"
-        tools:layout_editor_absoluteX="299dp"
-        tools:layout_editor_absoluteY="451dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton8"
+        app:srcCompat="@drawable/bell" />
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="48dp"
+        android:layout_width="44dp"
         android:layout_height="44dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="28dp"
         android:background="@color/colorPrimary"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/add"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="462dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:srcCompat="@drawable/add" />
 
     <ImageButton
         android:id="@+id/imageButton8"
-        android:layout_width="76dp"
-        android:layout_height="67dp"
+        android:layout_width="68dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
         android:background="@color/colorPrimary"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:tint="@android:color/background_dark"
-        app:srcCompat="@drawable/profile"
-        tools:layout_editor_absoluteX="226dp"
-        tools:layout_editor_absoluteY="451dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton5"
+        app:srcCompat="@drawable/profile" />
 
     <ImageButton
         android:id="@+id/imageButton9"
-        android:layout_width="61dp"
-        android:layout_height="56dp"
+        android:layout_width="58dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginStart="20dp"
         android:background="@color/colorPrimary"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/star"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="457dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton7"
+        app:srcCompat="@drawable/star" />
 
 </android.support.constraint.ConstraintLayout>
