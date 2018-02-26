@@ -43,7 +43,7 @@
         android:layout_height="44dp"
         android:background="@color/colorPrimary"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/Add"
+        app:srcCompat="@drawable/add"
         tools:layout_editor_absoluteX="27dp"
         tools:layout_editor_absoluteY="462dp" />
 
