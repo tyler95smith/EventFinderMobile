@@ -10,16 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AddEventActivity">
-        </activity>
-        <activity android:name=".NewAccount" />
-        <activity android:name=".NavigationBar" />
-        <activity android:name=".NotificationsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NewAccount" />
+        <activity android:name=".NavigationBar" />
+        <activity android:name=".NotificationsActivity" />
+        <activity android:name=".HomeScreenActivity"></activity>
+        <activity android:name=".FavoriteEventsActivity"></activity>
     </application>
 
 </manifest>
