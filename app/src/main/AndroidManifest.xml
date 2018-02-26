@@ -19,6 +19,7 @@
         <activity android:name=".NewAccount" />
         <activity android:name=".NavigationBar" />
         <activity android:name=".FavoriteEventsActivity"></activity>
+        <activity android:name=".NotificationsActivity"></activity>
     </application>
 
 </manifest>
