@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewAccount" />
-        <activity android:name=".NavigationBar"></activity>
+        <activity android:name=".NavigationBar" />
+        <activity android:name=".FavoriteEventsActivity"></activity>
     </application>
 
 </manifest>
