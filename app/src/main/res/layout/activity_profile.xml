@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eventfinder.www.eventfindermobile.Profile">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="386dp"
+        android:layout_height="151dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="83dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profile2"
+        tools:layout_editor_absoluteX="151dp" />
+
+    <include
+        layout="@layout/activity_navigation_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextSwitcher
+        android:layout_width="140dp"
+        android:layout_height="36dp"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="87dp" />
+
+    <TextSwitcher
+        android:layout_width="103dp"
+        android:layout_height="16dp"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="123dp" />
+</android.support.constraint.ConstraintLayout>

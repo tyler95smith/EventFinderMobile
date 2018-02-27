@@ -22,7 +22,7 @@
         <activity android:name=".NotificationsActivity" />
         <activity android:name=".HomeScreenActivity" />
         <activity android:name=".FavoriteEventsActivity" />
-
+        <activity android:name=".Profile"></activity>
     </application>
 
 </manifest>
