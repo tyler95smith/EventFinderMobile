@@ -6,64 +6,52 @@
     android:layout_height="match_parent"
     tools:context="com.eventfinder.www.eventfindermobile.FavoriteEventsActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout"
+    <SearchView
+        android:id="@+id/simpleSearchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/simpleSearchView">
 
-        <SearchView
-            android:id="@+id/simpleSearchView"
-            android:layout_width="355dp"
+        <android.support.design.widget.TabItem
+            android:id="@+id/past_tab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/past" />
 
-        <RadioGroup
-            android:id="@+id/toggleGroup"
-            android:layout_width="fill_parent"
+        <android.support.design.widget.TabItem
+            android:id="@+id/future_tab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/simpleSearchView">
+            android:text="@string/future" />
 
-            <ToggleButton
-                android:id="@+id/btn_past"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textOff="Past"
-                android:textOn="Past"
-                android:textSize="14sp"
-                android:checked="true"
-            />
+    </android.support.design.widget.TabLayout>
 
-            <ToggleButton
-                android:id="@+id/btn_future"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textOff="Future"
-                android:textOn="Future"
-                android:textSize="14sp"
-            />
-        </RadioGroup>
-    </android.support.constraint.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:layout_marginBottom="16dp"
-        android:orientation="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/include2"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <include
+        android:id="@+id/include2"
+        layout="@layout/activity_navigation_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"></LinearLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
