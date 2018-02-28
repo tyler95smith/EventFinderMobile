@@ -84,14 +84,5 @@ public class NotificationsActivity extends AppCompatActivity {
                 startActivity(new Intent(NotificationsActivity.this, FavoriteEventsActivity.class));
             }
         });
-
-        Button btn = (Button)findViewById(R.id.m1);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, ChatActivity.class));
-            }
-        });
     }
 }
