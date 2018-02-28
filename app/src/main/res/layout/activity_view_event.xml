@@ -93,13 +93,11 @@
 
         </TableLayout>
 
-        <EditText
-            android:id="@+id/editText21"
+        <MultiAutoCompleteTextView
+            android:id="@+id/multiAutoCompleteTextView2"
             android:layout_width="match_parent"
-            android:layout_height="145dp"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:text="This box contains the event description." />
+            android:layout_height="150dp"
+            tools:text="Description" />
 
         <LinearLayout
             android:layout_width="match_parent"
