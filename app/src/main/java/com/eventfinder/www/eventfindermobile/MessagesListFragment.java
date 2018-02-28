@@ -25,5 +25,4 @@ public class MessagesListFragment extends Fragment{
     //      NOTE: need to understand this more before implementing.
     //            Search the web for "fragment factory android"
     //---------------------------------------------------------------------
-
 }
