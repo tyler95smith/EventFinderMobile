@@ -30,33 +30,17 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/chat_message_input"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageButton
-        android:id="@+id/chat_back_button"
-        android:layout_width="16dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/chat_back_desc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/left_arrow_32" />
-
     <TextView
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/chat_name_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toBottomOf="@+id/chat_back_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/chat_back_button"
-        app:layout_constraintTop_toTopOf="@+id/chat_back_button" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="12dp" />
 
     <ScrollView
         android:id="@+id/chat_messages_list"

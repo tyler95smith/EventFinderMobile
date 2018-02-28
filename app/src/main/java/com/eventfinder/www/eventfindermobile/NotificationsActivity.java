@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class NotificationsActivity extends AppCompatActivity {
@@ -40,6 +41,15 @@ public class NotificationsActivity extends AppCompatActivity {
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+            }
+        });
+
+        Button btn = (Button)findViewById(R.id.m1);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NotificationsActivity.this, ChatActivity.class));
             }
         });
 
