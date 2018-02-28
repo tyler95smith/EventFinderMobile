@@ -9,53 +9,53 @@
         android:id="@+id/tempbutton15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 1" />
+        android:text="Notification 1" />
 
     <Button
         android:id="@+id/tempbutton17"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 2" />
+        android:text="Notification 2" />
 
     <Button
         android:id="@+id/tempbutton18"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 3" />
+        android:text="Notification 3" />
 
     <Button
         android:id="@+id/tempbutton19"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 4" />
+        android:text="Notification 4" />
 
     <Button
         android:id="@+id/tempbutton20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 5" />
+        android:text="Notification 5" />
 
     <Button
         android:id="@+id/tempbutton21"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 6" />
+        android:text="Notification 6" />
 
     <Button
         android:id="@+id/tempbutton22"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 7" />
+        android:text="Notification 7" />
 
     <Button
         android:id="@+id/tempbutton23"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 8" />
+        android:text="Notification 8" />
 
     <Button
         android:id="@+id/tempbutton24"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Message 9" />
+        android:text="Notification 9" />
 </LinearLayout>
