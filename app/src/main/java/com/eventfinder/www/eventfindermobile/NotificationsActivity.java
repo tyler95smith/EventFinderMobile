@@ -44,15 +44,6 @@ public class NotificationsActivity extends AppCompatActivity {
             }
         });
 
-        Button btn = (Button)findViewById(R.id.m1);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, ChatActivity.class));
-            }
-        });
-
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
@@ -91,6 +82,15 @@ public class NotificationsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(NotificationsActivity.this, FavoriteEventsActivity.class));
+            }
+        });
+
+        Button btn = (Button)findViewById(R.id.m1);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NotificationsActivity.this, ChatActivity.class));
             }
         });
     }

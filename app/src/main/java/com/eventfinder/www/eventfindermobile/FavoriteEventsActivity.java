@@ -44,6 +44,7 @@ public class FavoriteEventsActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
