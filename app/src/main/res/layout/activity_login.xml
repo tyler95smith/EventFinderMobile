@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <EditText
-        android:id="@+id/editText13"
+        android:id="@+id/username"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <EditText
-        android:id="@+id/editText14"
+        android:id="@+id/password"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText13" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <TextView
         android:id="@+id/textView11"
@@ -67,10 +67,10 @@
         android:text="Create Account:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button12" />
+        app:layout_constraintTop_toBottomOf="@+id/submit" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/submit"
         android:layout_width="121dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -83,10 +83,10 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText14" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
-        android:id="@+id/button14"
+        android:id="@+id/newaccount"
         android:layout_width="183dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
