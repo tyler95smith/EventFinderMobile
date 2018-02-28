@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EventFinderMobile.iml" filepath="$PROJECT_DIR$/EventFinderMobile.iml" />
-      <module fileurl="file://G:\Repos\Android Projects\EventFinderMobile\.idea\EventFinderMobile.iml" filepath="G:\Repos\Android Projects\EventFinderMobile\.idea\EventFinderMobile.iml" />
       <module fileurl="file://C:\Users\redre\AndroidStudioProjects\EventFinderMobile\EventFinderMobile.iml" filepath="C:\Users\redre\AndroidStudioProjects\EventFinderMobile\EventFinderMobile.iml" />
+      <module fileurl="file://G:\Repos\Android Projects\EventFinderMobile\.idea\EventFinderMobile.iml" filepath="G:\Repos\Android Projects\EventFinderMobile\.idea\EventFinderMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
