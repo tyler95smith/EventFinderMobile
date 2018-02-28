@@ -6,6 +6,81 @@
     android:layout_height="match_parent"
     tools:context="com.eventfinder.www.eventfindermobile.AddEventActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="388dp"
+        android:layout_height="62dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="451dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/home"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toEndOf="@+id/favorite"
+        app:srcCompat="@drawable/home" />
+
+    <ImageButton
+        android:id="@+id/notification"
+        android:layout_width="83dp"
+        android:layout_height="62dp"
+        android:layout_marginEnd="6dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
+        android:tint="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile"
+        app:srcCompat="@drawable/bell" />
+
+    <ImageButton
+        android:id="@+id/add"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="28dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:srcCompat="@drawable/add" />
+
+    <ImageButton
+        android:id="@+id/profile"
+        android:layout_width="68dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="centerCrop"
+        android:tint="@android:color/background_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/home"
+        app:srcCompat="@drawable/profile" />
+
+    <ImageButton
+        android:id="@+id/favorite"
+        android:layout_width="58dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/add"
+        app:srcCompat="@drawable/star" />
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -161,16 +236,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <include
-        android:id="@+id/include"
-        layout="@layout/activity_navigation_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button25" />
 
 </android.support.constraint.ConstraintLayout>
