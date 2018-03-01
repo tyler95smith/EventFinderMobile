@@ -12,12 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="140dp"
+        android:checkedButton="@+id/UserRB"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/UserRB"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_weight="1"
@@ -31,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/OrganizationRB"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_weight="1"
@@ -40,8 +41,8 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/radioButton"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
+            app:layout_constraintStart_toStartOf="@+id/UserRB"
+            app:layout_constraintTop_toBottomOf="@+id/UserRB" />
     </RadioGroup>
 
     <TextView

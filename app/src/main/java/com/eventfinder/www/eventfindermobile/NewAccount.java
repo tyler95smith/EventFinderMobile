@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.RadioGroup;
 
 public class NewAccount extends AppCompatActivity {
 
@@ -44,7 +45,16 @@ public class NewAccount extends AppCompatActivity {
                         }
                     }
                     // if male/female not really sure should it be a button or toggle group?
-                    // account type should be a toggle group with one selected by default
+
+                    if (mainLayout.getChildAt(i) instanceof  RadioGroup)
+                    {
+                        RadioGroup child = (RadioGroup)mainLayout.getChildAt(i);
+                        // radioGroup is empty
+                        if (child.getCheckedRadioButtonId() == -1)
+                        {
+                            err_text = err_text + "An account type must be selected.\n";
+                        }
+                    }
                 }
                 if (validInput) {
                     startActivity(new Intent(NewAccount.this, HomeScreenActivity.class));
