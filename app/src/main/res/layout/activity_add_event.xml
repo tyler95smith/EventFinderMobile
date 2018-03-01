@@ -16,6 +16,16 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Date:"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/editText8"
+                app:layout_constraintTop_toBottomOf="@+id/editText8" />
+
+            <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,8 +145,8 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/description_lbl"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText8"
-                app:layout_constraintTop_toBottomOf="@+id/editText8" />
+                app:layout_constraintStart_toStartOf="@+id/editText13"
+                app:layout_constraintTop_toBottomOf="@+id/editText13" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -147,6 +157,16 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/editText11"
                 app:layout_constraintTop_toBottomOf="@+id/editText9" />
+
+            <EditText
+                android:id="@+id/editText13"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:ems="10"
+                android:inputType="date"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
