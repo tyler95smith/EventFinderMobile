@@ -8,7 +8,43 @@
     tools:context="com.eventfinder.www.eventfindermobile.NewAccount">
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/genderRadioGroup"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/editText6"
+        app:layout_constraintStart_toEndOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/editText6">
+
+        <ToggleButton
+            android:id="@+id/Female"
+            android:layout_width="80dp"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Female"
+            android:textOff="Female"
+            android:textOn="Female"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Male"
+            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+
+        <ToggleButton
+            android:id="@+id/Male"
+            android:layout_width="81dp"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:text="Male"
+            android:textOff="Male"
+            android:textOn="Male"
+            app:layout_constraintEnd_toStartOf="@+id/Female"
+            app:layout_constraintStart_toEndOf="@+id/editText3"
+            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/accRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="140dp"
@@ -90,26 +126,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
 
-    <Button
-        android:id="@+id/Male"
-        android:layout_width="81dp"
-        android:layout_height="43dp"
-        android:text="Male"
-        app:layout_constraintEnd_toStartOf="@+id/Female"
-        app:layout_constraintStart_toEndOf="@+id/editText3"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
-        tools:layout_editor_absoluteX="199dp" />
-
-    <Button
-        android:id="@+id/Female"
-        android:layout_width="80dp"
-        android:layout_height="43dp"
-        android:text="Female"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Male"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
-        tools:layout_editor_absoluteY="270dp" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -137,7 +153,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/accRadioGroup" />
 
     <EditText
         android:id="@+id/editText3"
