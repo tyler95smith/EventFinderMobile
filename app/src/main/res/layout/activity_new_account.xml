@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.eventfinder.www.eventfindermobile.NewAccount">
@@ -56,9 +57,9 @@
         android:layout_width="81dp"
         android:layout_height="43dp"
         android:text="Male"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
         app:layout_constraintEnd_toStartOf="@+id/Female"
         app:layout_constraintStart_toEndOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/editText6"
         tools:layout_editor_absoluteX="199dp" />
 
     <Button
@@ -66,9 +67,9 @@
         android:layout_width="80dp"
         android:layout_height="43dp"
         android:text="Female"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Male"
+        app:layout_constraintTop_toBottomOf="@+id/editText6"
         tools:layout_editor_absoluteY="270dp" />
 
     <TextView
@@ -135,9 +136,9 @@
         android:hint="Date of Birth"
         android:inputType="date"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
         app:layout_constraintEnd_toStartOf="@+id/Male"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText6"
         tools:layout_editor_absoluteY="270dp" />
 
     <EditText
