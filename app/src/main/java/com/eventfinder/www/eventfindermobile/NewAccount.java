@@ -29,6 +29,8 @@ public class NewAccount extends AppCompatActivity {
                 Context context = getApplicationContext();
                 CharSequence err_text = "";
                 int duration = Toast.LENGTH_SHORT;
+                String url = "";
+                
 
                 // loop through all children
                 for (int i = 0; i < mainLayout.getChildCount(); i++)
@@ -42,6 +44,9 @@ public class NewAccount extends AppCompatActivity {
                         {
                             validInput = false;
                             err_text = err_text + child.getHint().toString() + " cannot be blank!\n";
+                        }
+                        else if(child.getId() == R.id.username) {
+
                         }
                     }
                     // if male/female not really sure should it be a button or toggle group?
