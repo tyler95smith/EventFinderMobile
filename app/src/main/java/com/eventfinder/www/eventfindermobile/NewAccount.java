@@ -31,6 +31,7 @@ public class NewAccount extends AppCompatActivity {
                 // context and duration used in toast
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
+                String url = "";
 
                 if (hasValidInput(mainLayout)) {
                     startActivity(new Intent(NewAccount.this, HomeScreenActivity.class));
