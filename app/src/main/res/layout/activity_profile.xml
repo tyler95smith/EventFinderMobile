@@ -190,6 +190,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="age"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toStartOf="@+id/GenderBox"
         app:layout_constraintTop_toTopOf="@+id/textView17" />
 
@@ -199,17 +200,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="gender"
+        android:textColor="@android:color/background_dark"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toBottomOf="@+id/AgeBox" />
 
-    <EditView
+    <EditText
         android:id="@+id/EmailBox"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="email"
+        android:layout_height="36dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="14dp"
         android:enabled="false"
-        app:layout_constraintStart_toStartOf="@+id/GenderBox"
-        app:layout_constraintTop_toBottomOf="@+id/GenderBox" />
+        android:text="email"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/GenderBox" />
 
     <Button
         android:id="@+id/editButton"
