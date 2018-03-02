@@ -48,6 +48,7 @@ public class NewAccount extends AppCompatActivity {
     private boolean hasValidInput(ConstraintLayout mainLayout)
     {
         boolean validInput = true;
+        err_text = "";
 
         // loop through all children
         for (int i = 0; i < mainLayout.getChildCount(); i++)
@@ -68,10 +69,15 @@ public class NewAccount extends AppCompatActivity {
             if (mainLayout.getChildAt(i) instanceof  RadioGroup)
             {
                 RadioGroup child = (RadioGroup)mainLayout.getChildAt(i);
-                // radioGroup is empty
-                if (child.getCheckedRadioButtonId() == -1)
-                {
-                    err_text = err_text + "An account type must be selected.\n";
+                RadioGroup gender = (RadioGroup)findViewById(R.id.genderRadioGroup);
+
+                // this is a temporary ignore of the male and female fields so that we can demo
+                if (child != gender) {
+                    // radioGroup is empty
+                    if (child.getCheckedRadioButtonId() == -1) {
+                        validInput = false;
+                        err_text = err_text + "An account type must be selected.\n";
+                    }
                 }
             }
         }
