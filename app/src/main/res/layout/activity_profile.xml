@@ -93,7 +93,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/ProfilePic"
         android:layout_width="83dp"
         android:layout_height="80dp"
         android:scaleType="fitCenter"
@@ -114,8 +114,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar3" />
 
-    <TextView
-        android:id="@+id/textView14"
+    <EditText
+        android:id="@+id/NameBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
@@ -125,12 +125,13 @@
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="36sp"
         android:textStyle="bold"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/ProfilePic" />
 
-    <TextView
-        android:id="@+id/textView15"
+    <EditText
+        android:id="@+id/UsernameBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -139,9 +140,10 @@
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
 
     <TextView
         android:id="@+id/textView16"
@@ -153,7 +155,7 @@
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/multiAutoCompleteTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/InterestBox" />
 
     <TextView
         android:id="@+id/textView17"
@@ -184,32 +186,33 @@
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/AgeBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="age"
-        app:layout_constraintStart_toStartOf="@+id/textView21"
+        app:layout_constraintStart_toStartOf="@+id/GenderBox"
         app:layout_constraintTop_toTopOf="@+id/textView17" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/GenderBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="gender"
         app:layout_constraintStart_toEndOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+        app:layout_constraintTop_toBottomOf="@+id/AgeBox" />
 
-    <TextView
-        android:id="@+id/textView22"
+    <EditView
+        android:id="@+id/EmailBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="email"
-        app:layout_constraintStart_toStartOf="@+id/textView21"
-        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+        android:enabled="false"
+        app:layout_constraintStart_toStartOf="@+id/GenderBox"
+        app:layout_constraintTop_toBottomOf="@+id/GenderBox" />
 
     <Button
-        android:id="@+id/m1"
+        android:id="@+id/editButton"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -220,17 +223,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/multiAutoCompleteTextView"
-        android:layout_width="356dp"
-        android:layout_height="93dp"
+    <TextView
+        android:id="@+id/InterestBox"
+        android:layout_width="352dp"
+        android:layout_height="84dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:gravity="top"
-        android:text="MultiAutoCompleteTextView"
-        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:text="Interests"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <Button
+        android:id="@+id/addInterests"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="76dp"
+        android:text="Add Interests"
+        android:textSize="10sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/InterestBox" />
 
 </android.support.constraint.ConstraintLayout>
