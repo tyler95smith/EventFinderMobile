@@ -12,6 +12,8 @@ import android.widget.Toast;
 import android.widget.RadioGroup;
 
 public class NewAccount extends AppCompatActivity {
+    // global error message used in a toast
+    CharSequence err_text = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,43 +27,53 @@ public class NewAccount extends AppCompatActivity {
         accountbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean validInput = true;
+                //
+                // context and duration used in toast
                 Context context = getApplicationContext();
-                CharSequence err_text = "";
                 int duration = Toast.LENGTH_SHORT;
 
-                // loop through all children
-                for (int i = 0; i < mainLayout.getChildCount(); i++)
-                {
-                    // if edittext object
-                    if (mainLayout.getChildAt(i) instanceof EditText)
-                    {
-                        EditText child = (EditText)mainLayout.getChildAt(i);
-                        // if empty add to error message
-                        if ("".equals(child.getText().toString()))
-                        {
-                            validInput = false;
-                            err_text = err_text + child.getHint().toString() + " cannot be blank!\n";
-                        }
-                    }
-                    // if male/female not really sure should it be a button or toggle group?
-
-                    if (mainLayout.getChildAt(i) instanceof  RadioGroup)
-                    {
-                        RadioGroup child = (RadioGroup)mainLayout.getChildAt(i);
-                        // radioGroup is empty
-                        if (child.getCheckedRadioButtonId() == -1)
-                        {
-                            err_text = err_text + "An account type must be selected.\n";
-                        }
-                    }
-                }
-                if (validInput) {
+                if (hasValidInput(mainLayout)) {
                     startActivity(new Intent(NewAccount.this, HomeScreenActivity.class));
                 } else { // show error messages
                     Toast.makeText(context, err_text,duration).show();
                 }
             }
         });
+    }
+
+    //
+    // function that validates/checks if input is empty
+    // currently hardcoded to being ConstraintLayout
+    private boolean hasValidInput(ConstraintLayout mainLayout)
+    {
+        boolean validInput = true;
+
+        // loop through all children
+        for (int i = 0; i < mainLayout.getChildCount(); i++)
+        {
+            // if edittext object
+            if (mainLayout.getChildAt(i) instanceof EditText)
+            {
+                EditText child = (EditText)mainLayout.getChildAt(i);
+                // if empty add to error message
+                if ("".equals(child.getText().toString()))
+                {
+                    validInput = false;
+                    err_text = err_text + child.getHint().toString() + " cannot be blank!\n";
+                }
+            }
+            // if male/female not really sure should it be a button or toggle group?
+
+            if (mainLayout.getChildAt(i) instanceof  RadioGroup)
+            {
+                RadioGroup child = (RadioGroup)mainLayout.getChildAt(i);
+                // radioGroup is empty
+                if (child.getCheckedRadioButtonId() == -1)
+                {
+                    err_text = err_text + "An account type must be selected.\n";
+                }
+            }
+        }
+        return validInput;
     }
 }
