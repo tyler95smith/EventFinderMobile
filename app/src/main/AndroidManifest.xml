@@ -27,6 +27,7 @@
         <activity android:name=".FavoriteEventsActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".ChatActivity" />
+        <activity android:name=".ViewEventActivity" />
     </application>
 
 </manifest>
