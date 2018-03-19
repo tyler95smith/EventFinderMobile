@@ -31,6 +31,7 @@ public class Profile extends AppCompatActivity {
         final EditText name = (EditText)findViewById(R.id.NameBox);
         final Button addInt = (Button)findViewById(R.id.addInterests);
         final EditText about = (EditText)findViewById(R.id.aboutMe);
+        final Button pass = (Button)findViewById(R.id.changePass);
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,12 +68,18 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-
+        pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChangePassword passFrag = new ChangePassword();
+                passFrag.show(getSupportFragmentManager(), "changePass");
+            }
+        });
 
         addInt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new InterestFragment();
+                InterestFragment newFragment = new InterestFragment();
                 newFragment.show(getFragmentManager(), "interests");
             }
         });
@@ -82,21 +89,18 @@ public class Profile extends AppCompatActivity {
             public void onClick(View view) {
                 if(!name.isEnabled()) {
                     addInt.setVisibility(VISIBLE);
+                    pass.setVisibility(VISIBLE);
                     name.setEnabled(true);
                     about.setEnabled(true);
                     edit.setText("Submit");
                 } else {
                     addInt.setVisibility(GONE);
+                    pass.setVisibility(VISIBLE);
                     name.setEnabled(false);
                     about.setEnabled(false);
                     edit.setText("Edit Profile");
                 }
             }
         });
-
-
-
-
-
     }
 }

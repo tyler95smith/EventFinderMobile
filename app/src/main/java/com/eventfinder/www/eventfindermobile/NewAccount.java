@@ -34,7 +34,7 @@ public class NewAccount extends AppCompatActivity {
                 String url = "";
 
                 if (hasValidInput(mainLayout)) {
-                    startActivity(new Intent(NewAccount.this, Profile.class));
+                    startActivity(new Intent(NewAccount.this, Login.class));
                 } else { // show error messages
                     Toast.makeText(context, err_text,duration).show();
                 }
