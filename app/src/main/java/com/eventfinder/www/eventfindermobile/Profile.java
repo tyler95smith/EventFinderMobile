@@ -29,9 +29,8 @@ public class Profile extends AppCompatActivity {
         ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
         final Button edit = (Button)findViewById(R.id.editButton);
         final EditText name = (EditText)findViewById(R.id.NameBox);
-        final EditText username = (EditText)findViewById(R.id.UsernameBox);
-        final EditText email = (EditText)findViewById(R.id.EmailBox);
         final Button addInt = (Button)findViewById(R.id.addInterests);
+        final EditText about = (EditText)findViewById(R.id.aboutMe);
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,10 +83,12 @@ public class Profile extends AppCompatActivity {
                 if(!name.isEnabled()) {
                     addInt.setVisibility(VISIBLE);
                     name.setEnabled(true);
+                    about.setEnabled(true);
                     edit.setText("Submit");
                 } else {
                     addInt.setVisibility(GONE);
                     name.setEnabled(false);
+                    about.setEnabled(false);
                     edit.setText("Edit Profile");
                 }
             }
