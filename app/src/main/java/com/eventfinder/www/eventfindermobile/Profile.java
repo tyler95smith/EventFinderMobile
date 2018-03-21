@@ -32,6 +32,7 @@ public class Profile extends AppCompatActivity {
         final Button addInt = (Button)findViewById(R.id.addInterests);
         final EditText about = (EditText)findViewById(R.id.aboutMe);
         final Button pass = (Button)findViewById(R.id.changePass);
+        final InterestFragment newFragment = new InterestFragment();
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +80,6 @@ public class Profile extends AppCompatActivity {
         addInt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InterestFragment newFragment = new InterestFragment();
                 newFragment.show(getFragmentManager(), "interests");
             }
         });
