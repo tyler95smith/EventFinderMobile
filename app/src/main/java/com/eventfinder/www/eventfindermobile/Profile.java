@@ -37,62 +37,41 @@ public class Profile extends AppCompatActivity {
         final EditText about = (EditText)findViewById(R.id.aboutMe);
         final Button pass = (Button)findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
-        final User user = new User();
-        user.dateOfBirth = new Date(1998, 4, 6);
-        user.bio = "Test";
-        user.primaryLocation = "Logan";
+        final Bundle bundle = getIntent().getExtras();
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("user", (Serializable)user);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
-            }
-        });
-
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Profile.class));
             }
         });
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, AddEventActivity.class));
+                Intent intent = new Intent(Profile.this, AddEventActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         notbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, NotificationsActivity.class));
+                Intent intent = new Intent(Profile.this, NotificationsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         favbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, FavoriteEventsActivity.class));
-            }
-        });
-
-        pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ChangePassword passFrag = new ChangePassword();
-                passFrag.show(getSupportFragmentManager(), "changePass");
-            }
-        });
-
-        addInt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newFragment.show(getFragmentManager(), "interests");
+                Intent intent = new Intent(Profile.this, FavoriteEventsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
