@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import static android.view.View.AUTOFILL_HINT_USERNAME;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -33,11 +37,19 @@ public class Profile extends AppCompatActivity {
         final EditText about = (EditText)findViewById(R.id.aboutMe);
         final Button pass = (Button)findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
+        final User user = new User();
+        user.dateOfBirth = new Date(1998, 4, 6);
+        user.bio = "Test";
+        user.primaryLocation = "Logan";
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, HomeScreenActivity.class));
+                Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", (Serializable)user);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
             }
         });
 
