@@ -8,6 +8,10 @@ import java.util.Date;
  */
 
 public class User implements Serializable {
+    String username;
+    String firstName;
+    String lastName;
+    String email;
     Date dateOfBirth;
     String bio;
     String primaryLocation;
