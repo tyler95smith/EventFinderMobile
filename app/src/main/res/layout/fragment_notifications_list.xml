@@ -5,57 +5,69 @@
     android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/tempbutton15"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 1" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/tempbutton17"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/tempbutton18"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 3" />
+            <Button
+                android:id="@+id/tempbutton17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 2" />
 
-    <Button
-        android:id="@+id/tempbutton19"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 4" />
+            <Button
+                android:id="@+id/tempbutton20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 5" />
 
-    <Button
-        android:id="@+id/tempbutton20"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 5" />
+            <Button
+                android:id="@+id/tempbutton24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 9" />
 
-    <Button
-        android:id="@+id/tempbutton21"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 6" />
+            <Button
+                android:id="@+id/tempbutton15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 1" />
 
-    <Button
-        android:id="@+id/tempbutton22"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 7" />
+            <Button
+                android:id="@+id/tempbutton22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 7" />
 
-    <Button
-        android:id="@+id/tempbutton23"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 8" />
+            <Button
+                android:id="@+id/tempbutton19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 4" />
 
-    <Button
-        android:id="@+id/tempbutton24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notification 9" />
+            <Button
+                android:id="@+id/tempbutton18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 3" />
+
+            <Button
+                android:id="@+id/tempbutton21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 6" />
+
+            <Button
+                android:id="@+id/tempbutton23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notification 8" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

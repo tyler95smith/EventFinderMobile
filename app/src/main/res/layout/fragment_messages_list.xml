@@ -5,57 +5,69 @@
     android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/m1"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 1" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button17"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 2" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button18"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 3" />
+            <Button
+                android:id="@+id/m1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 1" />
 
-    <Button
-        android:id="@+id/button19"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 4" />
+            <Button
+                android:id="@+id/button19"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 4" />
 
-    <Button
-        android:id="@+id/button20"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 5" />
+            <Button
+                android:id="@+id/button22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 7" />
 
-    <Button
-        android:id="@+id/button21"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 6" />
+            <Button
+                android:id="@+id/button18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 3" />
 
-    <Button
-        android:id="@+id/button22"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 7" />
+            <Button
+                android:id="@+id/button24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 9" />
 
-    <Button
-        android:id="@+id/button23"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 8" />
+            <Button
+                android:id="@+id/button23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 8" />
 
-    <Button
-        android:id="@+id/button24"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message 9" />
+            <Button
+                android:id="@+id/button20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 5" />
+
+            <Button
+                android:id="@+id/button21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 6" />
+
+            <Button
+                android:id="@+id/button17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Message 2" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

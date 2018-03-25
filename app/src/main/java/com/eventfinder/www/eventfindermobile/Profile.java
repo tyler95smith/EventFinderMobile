@@ -1,13 +1,22 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import static android.view.View.AUTOFILL_HINT_USERNAME;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class Profile extends AppCompatActivity {
 
@@ -22,78 +31,67 @@ public class Profile extends AppCompatActivity {
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
         ImageButton notbtn = (ImageButton)findViewById(R.id.notification);
         ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
+        final Button edit = (Button)findViewById(R.id.editButton);
+        final EditText name = (EditText)findViewById(R.id.NameBox);
+        final Button addInt = (Button)findViewById(R.id.addInterests);
+        final EditText about = (EditText)findViewById(R.id.aboutMe);
+        final Button pass = (Button)findViewById(R.id.changePass);
+        final InterestFragment newFragment = new InterestFragment();
+        final Bundle bundle = getIntent().getExtras();
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, HomeScreenActivity.class));
-            }
-        });
-
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Profile.this, Profile.class));
+                Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
             }
         });
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, AddEventActivity.class));
+                Intent intent = new Intent(Profile.this, AddEventActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         notbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, NotificationsActivity.class));
+                Intent intent = new Intent(Profile.this, NotificationsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         favbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Profile.this, FavoriteEventsActivity.class));
-            }
-        });
-
-        final Button edit = (Button)findViewById(R.id.editButton);
-        final EditText name = (EditText)findViewById(R.id.NameBox);
-        final EditText username = (EditText)findViewById(R.id.UsernameBox);
-        final EditText email = (EditText)findViewById(R.id.EmailBox);
-        final Button addInt = (Button)findViewById(R.id.addInterests);
-
-        addInt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //open addInterest panel
+                Intent intent = new Intent(Profile.this, FavoriteEventsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edit.getText() == "Edit Profile") {
+                if(!name.isEnabled()) {
+                    addInt.setVisibility(VISIBLE);
+                    pass.setVisibility(VISIBLE);
                     name.setEnabled(true);
-                    username.setEnabled(true);
-                    email.setEnabled(true);
-                    addInt.setVisibility(View.VISIBLE);
+                    about.setEnabled(true);
                     edit.setText("Submit");
                 } else {
-                    edit.setText("Edit Profile");
-                    username.setEnabled(false);
-                    email.setEnabled(false);
-                    addInt.setVisibility(View.GONE);
+                    addInt.setVisibility(GONE);
+                    pass.setVisibility(VISIBLE);
                     name.setEnabled(false);
+                    about.setEnabled(false);
+                    edit.setText("Edit Profile");
                 }
             }
         });
-
-
-
-
-
-
     }
 }

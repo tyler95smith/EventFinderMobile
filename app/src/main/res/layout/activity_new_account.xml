@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/editText6"
-        app:layout_constraintStart_toEndOf="@+id/editText3"
-        app:layout_constraintTop_toBottomOf="@+id/editText6">
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toEndOf="@+id/date_of_birth"
+        app:layout_constraintTop_toBottomOf="@+id/email">
 
         <ToggleButton
             android:id="@+id/Female"
@@ -28,7 +28,7 @@
             android:textOn="Female"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/Male"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
 
         <ToggleButton
             android:id="@+id/Male"
@@ -39,8 +39,8 @@
             android:textOff="Male"
             android:textOn="Male"
             app:layout_constraintEnd_toStartOf="@+id/Female"
-            app:layout_constraintStart_toEndOf="@+id/editText3"
-            app:layout_constraintTop_toBottomOf="@+id/editText6" />
+            app:layout_constraintStart_toEndOf="@+id/date_of_birth"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
     </RadioGroup>
 
     <RadioGroup
@@ -139,7 +139,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/date_of_birth" />
 
     <Button
         android:id="@+id/account"
@@ -156,7 +156,7 @@
         app:layout_constraintTop_toBottomOf="@+id/accRadioGroup" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/date_of_birth"
         android:layout_width="155dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -167,11 +167,11 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/Male"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintTop_toBottomOf="@+id/email"
         tools:layout_editor_absoluteY="270dp" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/password"
         android:layout_width="356dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
@@ -185,7 +185,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/password2"
         android:layout_width="356dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
@@ -196,10 +196,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/email"
         android:layout_width="356dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
@@ -210,6 +210,6 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/password2" />
 
 </android.support.constraint.ConstraintLayout>

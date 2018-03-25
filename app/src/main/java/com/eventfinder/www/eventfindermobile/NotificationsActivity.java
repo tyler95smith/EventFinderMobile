@@ -48,39 +48,41 @@ public class NotificationsActivity extends AppCompatActivity {
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
         ImageButton notbtn = (ImageButton)findViewById(R.id.notification);
         ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
+        final Bundle bundle = getIntent().getExtras();
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, HomeScreenActivity.class));
-            }
-        });
-
-        profilebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, Profile.class));
+                Intent intent = new Intent(NotificationsActivity.this, HomeScreenActivity.class);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
             }
         });
 
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, AddEventActivity.class));
+                Intent intent = new Intent(NotificationsActivity.this, AddEventActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
-        notbtn.setOnClickListener(new View.OnClickListener() {
+        profilebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, NotificationsActivity.class));
+                Intent intent = new Intent(NotificationsActivity.this, Profile.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
         favbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NotificationsActivity.this, FavoriteEventsActivity.class));
+                Intent intent = new Intent(NotificationsActivity.this, FavoriteEventsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
