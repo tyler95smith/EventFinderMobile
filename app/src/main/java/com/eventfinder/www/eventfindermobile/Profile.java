@@ -1,20 +1,17 @@
 package com.eventfinder.www.eventfindermobile;
 
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
-import static android.view.View.AUTOFILL_HINT_USERNAME;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -24,7 +21,6 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        String url = "https://api.nthbox.com/api";
 
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
@@ -38,6 +34,25 @@ public class Profile extends AppCompatActivity {
         final Button pass = (Button)findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
         final Bundle bundle = getIntent().getExtras();
+        User user = (User)bundle.getSerializable("user");
+        //about.setText(user.bio);
+        String fullName = user.firstName + " " + user.lastName;
+        //name.setText(fullName);
+        EditText username = (EditText)findViewById(R.id.UsernameBox);
+        //username.setText(user.username);
+        TextView gender = (TextView)findViewById(R.id.GenderBox);
+        //gender.setText(user.gender);
+        TextView age = (TextView)findViewById(R.id.AgeBox);
+        long years = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            LocalDate now = LocalDate.now();
+            years = ChronoUnit.YEARS.between(now, user.dateOfBirth);
+        }
+        //age.setText((int) years);
+        EditText email = (EditText)findViewById(R.id.EmailBox);
+        email.setText(user.email);
+
+
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override

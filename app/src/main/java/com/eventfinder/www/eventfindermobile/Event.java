@@ -17,7 +17,7 @@ public class Event implements Serializable {
     String description;
     int ageMin;
     int ageMax;
-    ArrayList<String> interests;
+    ArrayList<Interests> interests;
     ArrayList<User> attendees;
     User host;
     boolean isHidden = false;
