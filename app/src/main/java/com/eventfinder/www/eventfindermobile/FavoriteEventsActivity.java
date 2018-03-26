@@ -100,5 +100,36 @@ public class FavoriteEventsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    };
+
+        GetPastEvents();
+    }
+
+    void GetPastEvents(){
+        final TextView mTextView = (TextView) findViewById(R.id.TestText);
+        final
+        // ...
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url ="http://tyler.nthbox.com:8080/api/getpastevents/?user=2";
+
+        // Request a string response from the provided URL.
+        JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        mTextView.setText("Response is: "+ response.toString());
+
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mTextView.setText(error.toString() + " " + error.getMessage());
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
 }
