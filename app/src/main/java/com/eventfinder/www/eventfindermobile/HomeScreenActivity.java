@@ -1,6 +1,7 @@
 package com.eventfinder.www.eventfindermobile;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -16,6 +18,15 @@ public class HomeScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         User user = new User();
+        user.firstName = "Claire";
+        user.lastName = "Romney";
+        user.username = "redreadergirl";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            user.dateOfBirth = LocalDate.of(1998, 4, 6);
+        }
+        user.bio = "This is me";
+        user.email = "redreadergirl@hotmail.com";
+        user.gender = "Female";
         final Bundle bundle = new Bundle();
         bundle.putSerializable("user", (Serializable)user);
 
