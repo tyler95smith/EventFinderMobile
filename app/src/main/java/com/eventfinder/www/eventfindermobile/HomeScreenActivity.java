@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class HomeScreenActivity extends AppCompatActivity {
@@ -26,6 +27,11 @@ public class HomeScreenActivity extends AppCompatActivity {
         user.bio = "This is me";
         user.email = "redreadergirl@hotmail.com";
         user.gender = "Female";
+        ArrayList<String> ints = new ArrayList<>();
+        ints.add("Biking");
+        ints.add("Hiking");
+        ints.add("Coding");
+        user.interests = ints;
         final Bundle bundle = new Bundle();
         bundle.putSerializable("user", (Serializable)user);
 

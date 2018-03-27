@@ -149,10 +149,11 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Age:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintStart_toStartOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/InterestBox" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
 
     <TextView
         android:id="@+id/textView18"
@@ -209,34 +210,13 @@
         android:id="@+id/editButton"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="Edit Profile"
         android:textAllCaps="false"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-    <TextView
-        android:id="@+id/InterestBox"
-        android:layout_width="352dp"
-        android:layout_height="54dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Interests"
-        android:textColor="@android:color/background_dark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-    <Button
-        android:id="@+id/addInterests"
-        android:layout_width="118dp"
-        android:layout_height="40dp"
-        android:text="Add Interests"
-        android:textSize="10sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/InterestBox"
-        app:layout_constraintTop_toBottomOf="@+id/InterestBox" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView14"
@@ -258,6 +238,7 @@
         android:text="Description"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -266,10 +247,47 @@
         android:id="@+id/changePass"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
         android:text="Change Password"
         android:textSize="10sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/addInterests"
-        app:layout_constraintTop_toBottomOf="@+id/addInterests" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="349dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/interestBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/addInterests"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:text="+ Add Interests"
+                android:textSize="10sp"
+                android:visibility="gone"
+                tools:layout_editor_absoluteX="269dp"
+                tools:layout_editor_absoluteY="235dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

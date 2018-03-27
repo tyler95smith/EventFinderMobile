@@ -2,6 +2,7 @@ package com.eventfinder.www.eventfindermobile;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,6 +18,7 @@ public class User implements Serializable {
     String bio;
     String gender;
     String primaryLocation;
+    ArrayList<String> interests;
     int id;
     boolean hideLocation = false;
     boolean isBanned = false;
