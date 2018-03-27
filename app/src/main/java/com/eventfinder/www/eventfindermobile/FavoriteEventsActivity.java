@@ -31,6 +31,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
@@ -134,15 +135,14 @@ public class FavoriteEventsActivity extends AppCompatActivity {
             public void onResponse(Object response) {
                 try {
                     JSONArray data = (JSONArray) response; // convert object to JSONArray
-                    Vector<Event> eventArr = BuildEventArray(data);
+                    Vector<Event> eventArr = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
                     //create a event_banner for each event
                     //add event from array
                     // pop event
                     // add event_banner to past event fragment
 
-                    //Handle JSON response... for now just shows a simple message
-                    Toast.makeText(context, "The request was successful: " + eventArr.get(0).eventName, duration).show();
+                    Toast.makeText(context, "The request was successful: " + eventArr.get(0).eventDate, duration).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, "There was an error working with the response: " + e.toString(),duration).show();
@@ -160,7 +160,7 @@ public class FavoriteEventsActivity extends AppCompatActivity {
 
     Vector<Event> BuildEventArray(JSONArray data) {
         try {
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"); // The date in the json is formatted as "yyyy-MM-ddThh:mm:ssZ" I've ignored the Z which does something to the timezone
             Vector<Event> eventArr = new Vector<Event>();
             JSONObject eventObj;
 
@@ -170,10 +170,10 @@ public class FavoriteEventsActivity extends AppCompatActivity {
 
                 // fill event object with data
                 eventObj = data.getJSONObject(i);
-                //temp.dateCreated = df.parse(eventObj.getString("date_created"));
+                temp.dateCreated = df.parse(eventObj.getString("date_created"));
                 temp.eventName = eventObj.getString("event_name");
                 temp.location = eventObj.getString("location");
-                //temp.eventDate =
+                temp.eventDate = df.parse(eventObj.getString("event_date"));
                 temp.description = eventObj.getString("description");
                 temp.ageMin = eventObj.getInt("age_min");
                 temp.ageMax = eventObj.getInt("age_max");
@@ -181,6 +181,7 @@ public class FavoriteEventsActivity extends AppCompatActivity {
                 //temp.attendees = eventObj.getJSONArray("attendees"); // need to convert JSONArray to ArrayList
                 //temp.host = eventObj.getInt("host");                  // Does this need to be a user?
                 temp.isHidden = eventObj.getBoolean("is_hidden");
+
                 // add to results
                 eventArr.add(temp);
             }
