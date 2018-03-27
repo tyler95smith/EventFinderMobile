@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -21,9 +22,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         user.firstName = "Claire";
         user.lastName = "Romney";
         user.username = "redreadergirl";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            user.dateOfBirth = LocalDate.of(1998, 4, 6);
-        }
+        user.dateOfBirth = new Date(98, 4, 6);
         user.bio = "This is me";
         user.email = "redreadergirl@hotmail.com";
         user.gender = "Female";

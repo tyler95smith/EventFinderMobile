@@ -2,6 +2,7 @@ package com.eventfinder.www.eventfindermobile;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by redre on 3/22/2018.
@@ -12,10 +13,11 @@ public class User implements Serializable {
     String firstName;
     String lastName;
     String email;
-    LocalDate dateOfBirth;
+    Date dateOfBirth;
     String bio;
     String gender;
     String primaryLocation;
+    int id;
     boolean hideLocation = false;
     boolean isBanned = false;
 }
