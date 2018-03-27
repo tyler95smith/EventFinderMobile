@@ -27,6 +27,7 @@ import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
 import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -120,7 +121,6 @@ public class FavoriteEventsActivity extends AppCompatActivity {
     }
 
     void GetPastEvents(){
-        // ...
         final Context context = getApplicationContext();
 
         // Create listener to determine how to handle the response from the request
@@ -190,4 +190,21 @@ public class FavoriteEventsActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    // This function needs to be modified somehow to convert based on class type ie user vs interests
+    ArrayList<String> JsonArrayToArrayList(JSONArray data) {
+        ArrayList<String> list = new ArrayList<String>();
+        try {
+            if (data != null) {
+                int len = data.length();
+                for (int i = 0; i < len; i++) {
+                    list.add(data.get(i).toString());
+                }
+            }
+            return list;
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
 }
