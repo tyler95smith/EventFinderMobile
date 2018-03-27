@@ -3,6 +3,7 @@ package com.eventfinder.www.eventfindermobile;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -35,20 +38,22 @@ public class Profile extends AppCompatActivity {
         final InterestFragment newFragment = new InterestFragment();
         final Bundle bundle = getIntent().getExtras();
         User user = (User)bundle.getSerializable("user");
-        //about.setText(user.bio);
+        about.setText(user.bio);
         String fullName = user.firstName + " " + user.lastName;
-        //name.setText(fullName);
+        name.setText(fullName);
         EditText username = (EditText)findViewById(R.id.UsernameBox);
-        //username.setText(user.username);
+        username.setText(user.username);
         TextView gender = (TextView)findViewById(R.id.GenderBox);
-        //gender.setText(user.gender);
+        gender.setText(user.gender);
         TextView age = (TextView)findViewById(R.id.AgeBox);
-        long years = 0;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            LocalDate now = LocalDate.now();
-            years = ChronoUnit.YEARS.between(now, user.dateOfBirth);
+        Calendar now = Calendar.getInstance();
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(user.dateOfBirth);
+        int years = now.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+        if(now.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+            years--;
         }
-        //age.setText((int) years);
+        age.setText(String.valueOf(years));
         EditText email = (EditText)findViewById(R.id.EmailBox);
         email.setText(user.email);
 
