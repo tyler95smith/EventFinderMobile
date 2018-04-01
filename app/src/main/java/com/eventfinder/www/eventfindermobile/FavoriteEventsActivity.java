@@ -192,13 +192,13 @@ public class FavoriteEventsActivity extends AppCompatActivity {
     }
 
     // This function needs to be modified somehow to convert based on class type ie user vs interests
-    ArrayList<String> JsonArrayToArrayList(JSONArray data) {
-        ArrayList<String> list = new ArrayList<String>();
+     <T> ArrayList<T> JsonArrayToArrayList(Class<T> classType, JSONArray data) {
+        ArrayList<T> list = new ArrayList<T>();
         try {
             if (data != null) {
                 int len = data.length();
                 for (int i = 0; i < len; i++) {
-                    list.add(data.get(i).toString());
+                    list.add((T)data.get(i));
                 }
             }
             return list;
@@ -206,5 +206,4 @@ public class FavoriteEventsActivity extends AppCompatActivity {
             return null;
         }
     }
-
 }
