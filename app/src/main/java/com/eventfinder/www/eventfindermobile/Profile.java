@@ -8,12 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -56,8 +60,18 @@ public class Profile extends AppCompatActivity {
         age.setText(String.valueOf(years));
         EditText email = (EditText)findViewById(R.id.EmailBox);
         email.setText(user.email);
-
-
+        ArrayList<String> interests = user.interests;
+        TextView ints = (TextView)findViewById(R.id.interestBox);
+        String stringOfInterests;
+        if(interests.isEmpty()) {
+            stringOfInterests = "None";
+        } else {
+            stringOfInterests = "";
+            for (String i : interests) {
+                stringOfInterests += (i + "\n");
+            }
+        }
+        ints.setText(stringOfInterests);
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
