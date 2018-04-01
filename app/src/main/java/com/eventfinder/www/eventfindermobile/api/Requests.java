@@ -1,4 +1,7 @@
 package com.eventfinder.www.eventfindermobile.api;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.eventfinder.www.eventfindermobile.Event;
 import com.eventfinder.www.eventfindermobile.api.*;
 
 import com.android.volley.Response;
@@ -6,10 +9,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * Requests:
@@ -42,4 +47,30 @@ public class Requests {
         catch (JSONException e) { return null;}
     }
 
+    /*
+        Volley Request to get Past Events
+     */
+    public static JsonArrayRequest getPastEvents(int userID, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "getpastevents/?user=" + userID;
+
+        try {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            listener.onResponse(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+
+                    });
+            return req;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
