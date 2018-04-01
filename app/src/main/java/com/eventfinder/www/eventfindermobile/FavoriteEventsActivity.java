@@ -1,5 +1,6 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.design.widget.TabLayout;
@@ -123,6 +124,9 @@ public class FavoriteEventsActivity extends AppCompatActivity {
     void GetPastEvents(){
         final Context context = getApplicationContext();
 
+        // to add a fragment a transaction, and possible a manager()? need to be created.
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
         // Create listener to determine how to handle the response from the request
         VolleyResponseListener listener = new VolleyResponseListener() {
             int duration = Toast.LENGTH_SHORT;
@@ -137,10 +141,19 @@ public class FavoriteEventsActivity extends AppCompatActivity {
                     JSONArray data = (JSONArray) response; // convert object to JSONArray
                     Vector<Event> eventArr = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
-                    //create a event_banner for each event
-                    //add event from array
-                    // pop event
-                    // add event_banner to past event fragment
+                    EventBannerFragment tempFrag;
+                    for (int i = 0; i < eventArr.size(); i++) {
+                        //create a event_banner for each event
+                        tempFrag = new EventBannerFragment();
+
+                        //add event from array to event_banner
+
+                        // pop event from eventArr
+
+                        // add event_banner to past event fragment
+                        ft.add(R.id.past_tab, tempFrag, "event_banner_" + i);
+                        //ft.commit(); // fails here
+                    }
 
                     Toast.makeText(context, "The request was successful: " + eventArr.get(0).eventDate, duration).show();
                 } catch (Exception e) {
