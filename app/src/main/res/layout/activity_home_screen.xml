@@ -25,65 +25,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event A - 10 miles" />
+                <fragment
+                    android:id="@+id/event_banner"
+                    android:name="com.eventfinder.www.eventfindermobile.EventBanner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
 
-                <Button
-                    android:id="@+id/button11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event B - 5 Miles" />
-
-                <Button
-                    android:id="@+id/button10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event C - 8 Miles" />
-
-                <Button
-                    android:id="@+id/button9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event D - 4 Miles" />
-
-                <Button
-                    android:id="@+id/button8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event E - 16 Miles" />
-
-                <Button
-                    android:id="@+id/button7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event F - 23 Miles" />
-
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event G - 2 Miles" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event H - 0 Miles" />
-
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event I - 1 Mile" />
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Event J - 3 Miles" />
             </LinearLayout>
 
         </ScrollView>

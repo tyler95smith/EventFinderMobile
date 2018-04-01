@@ -62,13 +62,16 @@ public class Profile extends AppCompatActivity {
         email.setText(user.email);
         ArrayList<String> interests = user.interests;
         TextView ints = (TextView)findViewById(R.id.interestBox);
-        String stringOfIntersts = "";
-        for (String i: interests) {
-            stringOfIntersts += (i + "\n");
+        String stringOfInterests;
+        if(interests.isEmpty()) {
+            stringOfInterests = "None";
+        } else {
+            stringOfInterests = "";
+            for (String i : interests) {
+                stringOfInterests += (i + "\n");
+            }
         }
-        ints.setText(stringOfIntersts);
-
-
+        ints.setText(stringOfInterests);
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override

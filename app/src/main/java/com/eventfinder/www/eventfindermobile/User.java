@@ -10,16 +10,16 @@ import java.util.Date;
  */
 
 public class User implements Serializable {
-    String username;
-    String firstName;
-    String lastName;
-    String email;
-    Date dateOfBirth;
-    String bio;
-    String gender;
+    String username = ".";
+    String firstName = ".";
+    String lastName = ".";
+    String email = ".";
+    Date dateOfBirth = new Date();
+    String bio = ".";
+    String gender = "Male";
     String primaryLocation;
     ArrayList<String> interests;
-    int id;
+    int id = 0;
     boolean hideLocation = false;
     boolean isBanned = false;
 }

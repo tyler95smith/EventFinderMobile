@@ -20,18 +20,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         User user = new User();
-        user.firstName = "Claire";
-        user.lastName = "Romney";
-        user.username = "redreadergirl";
-        user.dateOfBirth = new Date(98, 4, 6);
-        user.bio = "This is me";
-        user.email = "redreadergirl@hotmail.com";
-        user.gender = "Female";
-        ArrayList<String> ints = new ArrayList<>();
-        ints.add("Biking");
-        ints.add("Hiking");
-        ints.add("Coding");
-        user.interests = ints;
+        final Event[] event = new Event[1];
         final Bundle bundle = new Bundle();
         bundle.putSerializable("user", (Serializable)user);
 
@@ -78,15 +67,11 @@ public class HomeScreenActivity extends AppCompatActivity {
             }
         });
 
-        Button btn = (Button)findViewById(R.id.button);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeScreenActivity.this, ViewEventActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
+        Bundle clicked = getIntent().getExtras();
+        if(clicked != null) {
+            Intent intent = new Intent(HomeScreenActivity.this, ViewEventActivity.class);
+            intent.putExtras(clicked);
+            startActivity(intent);
+        }
     }
 }

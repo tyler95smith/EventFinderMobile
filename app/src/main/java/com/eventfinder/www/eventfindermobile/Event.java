@@ -10,13 +10,13 @@ import java.util.Date;
  */
 
 public class Event implements Serializable {
-    Date dateCreated;
-    String eventName;
-    String location;
-    Date eventDate;
-    String description;
-    int ageMin;
-    int ageMax;
+    Date dateCreated = new Date();
+    String eventName = "Test";
+    String location = "Test";
+    Date eventDate = new Date();
+    String description = ".";
+    int ageMin = 0;
+    int ageMax = 100;
     ArrayList<Interests> interests;
     ArrayList<User> attendees;
     User host;
