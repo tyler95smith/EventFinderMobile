@@ -2,6 +2,8 @@ package com.eventfinder.www.eventfindermobile;
 
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class HomeScreenActivity extends FragmentActivity implements EventBanner.OnHeadlineSelectedListener{
+
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +25,7 @@ public class HomeScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
         User user = new User();
         final Event[] event = new Event[1];
-        final Bundle bundle = new Bundle();
+        bundle = new Bundle();
         bundle.putSerializable("user", (Serializable)user);
 
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
@@ -66,12 +70,12 @@ public class HomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        Bundle clicked = getIntent().getExtras();
-        if(clicked != null) {
-            Intent intent = new Intent(HomeScreenActivity.this, ViewEventActivity.class);
-            intent.putExtras(clicked);
-            startActivity(intent);
-        }
+    public void onArticleSelected(Event event) {
+        Intent intent = new Intent(HomeScreenActivity.this, ViewEventActivity.class);
+        bundle.putSerializable("event", event);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

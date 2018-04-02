@@ -1,6 +1,11 @@
 package com.eventfinder.www.eventfindermobile;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -8,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,6 +29,8 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class Profile extends AppCompatActivity {
+    private ImageView image;
+    private static final int SELECT_PICTURE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +68,21 @@ public class Profile extends AppCompatActivity {
         age.setText(String.valueOf(years));
         EditText email = (EditText)findViewById(R.id.EmailBox);
         email.setText(user.email);
-        ArrayList<String> interests = user.interests;
-        TextView ints = (TextView)findViewById(R.id.interestBox);
-        String stringOfInterests;
-        if(interests.isEmpty()) {
+        //ArrayList<String> interests = user.interests;
+        //TextView ints = (TextView)findViewById(R.id.interestBox);
+        //String stringOfInterests;
+        /**if(interests.isEmpty()) {
             stringOfInterests = "None";
         } else {
             stringOfInterests = "";
             for (String i : interests) {
                 stringOfInterests += (i + "\n");
             }
-        }
-        ints.setText(stringOfInterests);
+        }**/
+
+        image = (ImageView)findViewById(R.id.ProfilePic);
+
+        //ints.setText(stringOfInterests);
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,5 +138,34 @@ public class Profile extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            Bitmap bitmap = getPath(data.getData());
+            image.setImageBitmap(bitmap);
+        }
+    }
+
+    private Bitmap getPath(Uri data) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = managedQuery(data, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String filePath = cursor.getString(column_index);
+        cursor.close();
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+
+        return bitmap;
+    }
+
+    public void selectImage(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
     }
 }

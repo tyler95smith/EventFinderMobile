@@ -1,5 +1,6 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -21,14 +22,21 @@ import java.util.List;
  */
 
 public class EventBanner extends ListFragment {
-
-    Event[] events;
+    Event event = new Event();
+    Event[] events = new Event[] {
+            event
+    };
     DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
         //pull 10 events and add them to Event[] events
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
+        //Event[] event = bundle.getSerializable("events");
+
+
         for(int i = 0; i < events.length; i++) {
             HashMap<String, String> hm = new HashMap<String, String>();
             Event temp = events[i];
@@ -47,13 +55,31 @@ public class EventBanner extends ListFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    OnHeadlineSelectedListener mCallback;
+
+    public interface OnHeadlineSelectedListener {
+        public void onArticleSelected(Event event);
+    }
+
+    Intent intent;
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        intent = getActivity().getIntent();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnHeadlineSelectedListener)activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
-        super.onListItemClick(listView, view, position, id);
-        Bundle clicked = new Bundle();
-        clicked.putSerializable("event", events[position]);
-
-        Intent intent = getActivity().getIntent();
-        intent.putExtras(clicked);
+        mCallback.onArticleSelected(events[position]);
     }
 }
