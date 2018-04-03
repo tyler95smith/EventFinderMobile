@@ -53,6 +53,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         bundle = new Bundle();
 
         GetPastEvents();
+        GetFutureEvents();
 
         final Bundle dataBundle = getIntent().getExtras();
         User user = (User)dataBundle.getSerializable("user");
@@ -157,11 +158,13 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
                     //Bundle bundle = new Bundle();
-                    intent.putExtra("events", eventArr);
+                    String prefix = "past_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
                     //intent.putExtras(bundle);
 
                     EventBanner eventBanner = new EventBanner();
-                    ft.add(R.id.past_events_list, eventBanner, "event_banner");
+                    ft.add(R.id.past_events_list, eventBanner, "past_event_banner");
                     ft.commit();
 
                     Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
@@ -174,6 +177,56 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
 
         // Make API request to create a new account with entered data
         JsonArrayRequest req = Requests.getPastEvents(2,listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    void GetFutureEvents(){
+        final Context context = getApplicationContext();
+
+        // to add a fragment a transaction, and possible a manager()? need to be created.
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        // Create listener to determine how to handle the response from the request
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            int duration = Toast.LENGTH_SHORT;
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Oops. There was an error making the request: " + message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                try {
+                    JSONArray data = (JSONArray) response; // convert object to JSONArray
+
+                    Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
+
+                    Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
+                    //printEventArray(eventArr);
+                    Intent intent = FavoriteEventsActivity.this.getIntent();
+                    //Bundle bundle = new Bundle();
+                    String prefix = "future_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
+                    //intent.putExtras(bundle);
+
+                    EventBanner eventBanner = new EventBanner();
+                    ft.add(R.id.future_events_list, eventBanner, "future_event_banner");
+                    ft.commit();
+
+                    Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "There was an error working with the response: " + e.toString(),duration).show();
+                }
+            }
+        };
+
+        // Make API request to create a new account with entered data
+        JsonArrayRequest req = Requests.getFutureEvents(2,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
