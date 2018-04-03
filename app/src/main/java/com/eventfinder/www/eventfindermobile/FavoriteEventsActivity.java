@@ -141,10 +141,10 @@ public class FavoriteEventsActivity extends AppCompatActivity {
                     JSONArray data = (JSONArray) response; // convert object to JSONArray
                     Vector<Event> eventArr = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
-                    EventBannerFragment tempFrag;
+                    EventBanner tempFrag;
                     for (int i = 0; i < eventArr.size(); i++) {
                         //create a event_banner for each event
-                        tempFrag = new EventBannerFragment();
+                        tempFrag = new EventBanner();
 
                         //add event from array to event_banner
 

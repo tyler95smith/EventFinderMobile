@@ -129,12 +129,22 @@ public class Profile extends AppCompatActivity {
                     name.setEnabled(true);
                     about.setEnabled(true);
                     edit.setText("Submit");
+                    image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent();
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+                        }
+                    });
                 } else {
                     addInt.setVisibility(GONE);
-                    pass.setVisibility(VISIBLE);
+                    pass.setVisibility(GONE);
                     name.setEnabled(false);
                     about.setEnabled(false);
                     edit.setText("Edit Profile");
+                    image.setOnClickListener(null);
                 }
             }
         });
@@ -160,12 +170,5 @@ public class Profile extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
 
         return bitmap;
-    }
-
-    public void selectImage(View view) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
     }
 }

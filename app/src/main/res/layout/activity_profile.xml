@@ -100,8 +100,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profile2"
-        android:onClick="selectImage" />
+        app:srcCompat="@drawable/profile2" />
 
     <TextView
         android:id="@+id/textView13"
