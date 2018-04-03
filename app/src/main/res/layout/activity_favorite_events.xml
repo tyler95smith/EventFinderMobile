@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.eventfinder.www.eventfindermobile.FavoriteEventsActivity">
 
+    <TextView
+        android:id="@+id/testText"
+        android:layout_width="361dp"
+        android:layout_height="322dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fav_event_viewpager" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="388dp"

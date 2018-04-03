@@ -31,22 +31,28 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
-public class FavoriteEventsActivity extends AppCompatActivity {
+public class FavoriteEventsActivity extends AppCompatActivity implements EventBanner.OnHeadlineSelectedListener {
     private TabLayout tabs;
     private ViewPager viewPager;
     private FavoriteEventsPagerAdapter adapter;
 
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_events);
+
+        bundle = new Bundle();
+
+        GetPastEvents();
 
         final Bundle dataBundle = getIntent().getExtras();
         User user = (User)dataBundle.getSerializable("user");
@@ -80,7 +86,7 @@ public class FavoriteEventsActivity extends AppCompatActivity {
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
         ImageButton notbtn = (ImageButton)findViewById(R.id.notification);
         ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
-        final Bundle bundle = getIntent().getExtras();
+        //final Bundle bundle = getIntent().getExtras();
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,8 +123,13 @@ public class FavoriteEventsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        GetPastEvents();
+    public void onArticleSelected(Event event) {
+        Intent intent = new Intent(FavoriteEventsActivity.this, ViewEventActivity.class);
+        bundle.putSerializable("event", event);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void GetPastEvents(){
@@ -139,23 +150,20 @@ public class FavoriteEventsActivity extends AppCompatActivity {
             public void onResponse(Object response) {
                 try {
                     JSONArray data = (JSONArray) response; // convert object to JSONArray
-                    Vector<Event> eventArr = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
+                    Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
-                    EventBannerFragment tempFrag;
-                    for (int i = 0; i < eventArr.size(); i++) {
-                        //create a event_banner for each event
-                        tempFrag = new EventBannerFragment();
+                    Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
+                    //printEventArray(eventArr);
+                    Intent intent = FavoriteEventsActivity.this.getIntent();
+                    //Bundle bundle = new Bundle();
+                    intent.putExtra("events", eventArr);
+                    //intent.putExtras(bundle);
 
-                        //add event from array to event_banner
+                    EventBanner eventBanner = new EventBanner();
+                    ft.add(R.id.past_events_list, eventBanner, "event_banner");
+                    ft.commit();
 
-                        // pop event from eventArr
-
-                        // add event_banner to past event fragment
-                        ft.add(R.id.past_tab, tempFrag, "event_banner_" + i);
-                        //ft.commit(); // fails here
-                    }
-
-                    Toast.makeText(context, "The request was successful: " + eventArr.get(0).eventDate, duration).show();
+                    Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, "There was an error working with the response: " + e.toString(),duration).show();
@@ -218,5 +226,17 @@ public class FavoriteEventsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    void printEventArray(Event[] arr) {
+        TextView textView = findViewById(R.id.testText);
+
+        String text = "";
+        for (int i = 0; i < arr.length;i++)
+        {
+            text += " ";
+            text += arr[i].eventName + ", ";
+        }
+        textView.setText(text);
     }
 }

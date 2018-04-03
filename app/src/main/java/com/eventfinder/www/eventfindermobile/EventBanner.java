@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by redre on 4/1/2018.
@@ -35,6 +36,9 @@ public class EventBanner extends ListFragment {
         Intent intent = getActivity().getIntent();
         Bundle bundle = intent.getExtras();
         //Event[] event = bundle.getSerializable("events");
+        if ((Event[])intent.getSerializableExtra("events") != null) {
+            events = (Event[]) intent.getSerializableExtra("events");
+        }
 
 
         for(int i = 0; i < events.length; i++) {
