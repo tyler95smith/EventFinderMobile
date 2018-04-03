@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class HomeScreenActivity extends FragmentActivity implements EventBanner.OnHeadlineSelectedListener{
+public class HomeScreenActivity extends AppCompatActivity implements EventBanner.OnHeadlineSelectedListener{
 
     Bundle bundle;
 

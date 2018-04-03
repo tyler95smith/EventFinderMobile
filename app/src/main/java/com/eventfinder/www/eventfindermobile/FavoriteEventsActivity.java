@@ -150,6 +150,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
             public void onResponse(Object response) {
                 try {
                     JSONArray data = (JSONArray) response; // convert object to JSONArray
+
                     Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
                     Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
