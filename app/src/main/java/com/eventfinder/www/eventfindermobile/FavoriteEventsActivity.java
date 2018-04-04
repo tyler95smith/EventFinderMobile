@@ -31,22 +31,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 
-public class FavoriteEventsActivity extends AppCompatActivity {
+public class FavoriteEventsActivity extends AppCompatActivity implements EventBanner.OnHeadlineSelectedListener {
     private TabLayout tabs;
     private ViewPager viewPager;
     private FavoriteEventsPagerAdapter adapter;
 
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_events);
+
+        bundle = new Bundle();
+
+        GetPastEvents();
+        GetFutureEvents();
 
         final Bundle dataBundle = getIntent().getExtras();
         User user = (User)dataBundle.getSerializable("user");
@@ -80,7 +87,7 @@ public class FavoriteEventsActivity extends AppCompatActivity {
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
         ImageButton notbtn = (ImageButton)findViewById(R.id.notification);
         ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
-        final Bundle bundle = getIntent().getExtras();
+        //final Bundle bundle = getIntent().getExtras();
 
         homebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,8 +124,13 @@ public class FavoriteEventsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
-        GetPastEvents();
+    public void onArticleSelected(Event event) {
+        Intent intent = new Intent(FavoriteEventsActivity.this, ViewEventActivity.class);
+        bundle.putSerializable("event", event);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     void GetPastEvents(){
@@ -139,23 +151,23 @@ public class FavoriteEventsActivity extends AppCompatActivity {
             public void onResponse(Object response) {
                 try {
                     JSONArray data = (JSONArray) response; // convert object to JSONArray
-                    Vector<Event> eventArr = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
-                    //EventBanner tempFrag;
-                    for (int i = 0; i < eventArr.size(); i++) {
-                        //create a event_banner for each event
-                        //tempFrag = new EventBanner();
+                    Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
-                        //add event from array to event_banner
+                    Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
+                    //printEventArray(eventArr);
+                    Intent intent = FavoriteEventsActivity.this.getIntent();
+                    //Bundle bundle = new Bundle();
+                    String prefix = "past_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
+                    //intent.putExtras(bundle);
 
-                        // pop event from eventArr
+                    EventBanner eventBanner = new EventBanner();
+                    ft.add(R.id.past_events_list, eventBanner, "past_event_banner");
+                    ft.commit();
 
-                        // add event_banner to past event fragment
-                        //ft.add(R.id.past_tab, tempFrag, "event_banner_" + i);
-                        //ft.commit(); // fails here
-                    }
-
-                    Toast.makeText(context, "The request was successful: " + eventArr.get(0).eventDate, duration).show();
+                    Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(context, "There was an error working with the response: " + e.toString(),duration).show();
@@ -164,7 +176,57 @@ public class FavoriteEventsActivity extends AppCompatActivity {
         };
 
         // Make API request to create a new account with entered data
-        JsonArrayRequest req = Requests.getPastEvents(2,listener);
+        JsonArrayRequest req = Requests.getPastEvents(100,listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    void GetFutureEvents(){
+        final Context context = getApplicationContext();
+
+        // to add a fragment a transaction, and possible a manager()? need to be created.
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        // Create listener to determine how to handle the response from the request
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            int duration = Toast.LENGTH_SHORT;
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Oops. There was an error making the request: " + message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                try {
+                    JSONArray data = (JSONArray) response; // convert object to JSONArray
+
+                    Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
+
+                    Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
+                    //printEventArray(eventArr);
+                    Intent intent = FavoriteEventsActivity.this.getIntent();
+                    //Bundle bundle = new Bundle();
+                    String prefix = "future_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
+                    //intent.putExtras(bundle);
+
+                    EventBanner eventBanner = new EventBanner();
+                    ft.add(R.id.future_events_list, eventBanner, "future_event_banner");
+                    ft.commit();
+
+                    Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "There was an error working with the response: " + e.toString(),duration).show();
+                }
+            }
+        };
+
+        // Make API request to create a new account with entered data
+        JsonArrayRequest req = Requests.getFutureEvents(100,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
@@ -218,5 +280,17 @@ public class FavoriteEventsActivity extends AppCompatActivity {
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    void printEventArray(Event[] arr) {
+        TextView textView = findViewById(R.id.testText);
+
+        String text = "";
+        for (int i = 0; i < arr.length;i++)
+        {
+            text += " ";
+            text += arr[i].eventName + ", ";
+        }
+        textView.setText(text);
     }
 }

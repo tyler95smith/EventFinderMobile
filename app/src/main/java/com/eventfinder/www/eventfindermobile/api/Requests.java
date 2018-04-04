@@ -73,4 +73,31 @@ public class Requests {
             return null;
         }
     }
+
+    /*
+       Volley Request to get Future Events
+    */
+    public static JsonArrayRequest getFutureEvents(int userID, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "getfutureevents/?user=" + userID;
+
+        try {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            listener.onResponse(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+
+                    });
+            return req;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

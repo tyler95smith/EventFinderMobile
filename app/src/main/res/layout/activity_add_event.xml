@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/star" />
 
     <Button
-        android:id="@+id/button25"
+        android:id="@+id/submitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -105,8 +105,8 @@
                 android:layout_marginTop="8dp"
                 android:text="Date:"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText8"
-                app:layout_constraintTop_toBottomOf="@+id/editText8" />
+                app:layout_constraintStart_toStartOf="@+id/locationText"
+                app:layout_constraintTop_toBottomOf="@+id/locationText" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -126,11 +126,11 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/location_lbl"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText7"
-                app:layout_constraintTop_toBottomOf="@+id/editText7" />
+                app:layout_constraintStart_toStartOf="@+id/eventNameText"
+                app:layout_constraintTop_toBottomOf="@+id/eventNameText" />
 
             <EditText
-                android:id="@+id/editText8"
+                android:id="@+id/locationText"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="8dp"
@@ -149,11 +149,11 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/interests_lbl"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText10"
-                app:layout_constraintTop_toBottomOf="@+id/editText10" />
+                app:layout_constraintStart_toStartOf="@+id/ageMin"
+                app:layout_constraintTop_toBottomOf="@+id/ageMin" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/eventNameText"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="8dp"
@@ -166,7 +166,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <EditText
-                android:id="@+id/editText12"
+                android:id="@+id/interestsText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -178,18 +178,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <EditText
-                android:id="@+id/editText11"
+                android:id="@+id/ageMax"
                 android:layout_width="62dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="32dp"
                 android:ems="10"
                 android:inputType="numberSigned"
                 android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/editText10"
+                app:layout_constraintStart_toEndOf="@+id/ageMin"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/ageMin"
                 android:layout_width="63dp"
                 android:layout_height="35dp"
                 android:ems="10"
@@ -205,11 +205,11 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/age_min_lbl"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText9"
-                app:layout_constraintTop_toBottomOf="@+id/editText9" />
+                app:layout_constraintStart_toStartOf="@+id/descriptionText"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/descriptionText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -228,8 +228,8 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/description_lbl"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText13"
-                app:layout_constraintTop_toBottomOf="@+id/editText13" />
+                app:layout_constraintStart_toStartOf="@+id/dateText"
+                app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -238,11 +238,11 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/age_max_lbl"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/editText11"
-                app:layout_constraintTop_toBottomOf="@+id/editText9" />
+                app:layout_constraintStart_toStartOf="@+id/ageMax"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
 
             <EditText
-                android:id="@+id/editText13"
+                android:id="@+id/dateText"
                 android:layout_width="150dp"
                 android:layout_height="35dp"
                 android:ems="10"
