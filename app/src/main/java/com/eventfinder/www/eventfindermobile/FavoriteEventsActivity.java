@@ -176,7 +176,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         };
 
         // Make API request to create a new account with entered data
-        JsonArrayRequest req = Requests.getPastEvents(100,listener);
+        JsonArrayRequest req = Requests.getPastEvents(2,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
@@ -226,7 +226,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         };
 
         // Make API request to create a new account with entered data
-        JsonArrayRequest req = Requests.getFutureEvents(100,listener);
+        JsonArrayRequest req = Requests.getFutureEvents(2,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
