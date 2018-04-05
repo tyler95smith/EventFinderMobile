@@ -289,4 +289,17 @@
         </LinearLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/reportUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Report User"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

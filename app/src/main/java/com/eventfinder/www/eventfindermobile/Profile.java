@@ -51,10 +51,16 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final EditText name = (EditText) findViewById(R.id.NameBox);
         final Button addInt = (Button) findViewById(R.id.addInterests);
         final EditText about = (EditText) findViewById(R.id.aboutMe);
+        final Button report = (Button)findViewById(R.id.reportUser);
         final Button pass = (Button) findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
+        if(!user.me) {
+            edit.setVisibility(GONE);
+            report.setVisibility(VISIBLE);
+        }
+
         user = (User) bundle.getSerializable("user");
         about.setText(user.bio);
         String fullName = user.firstName + " " + user.lastName;
