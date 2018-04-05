@@ -1,5 +1,6 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -8,23 +9,15 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -48,6 +41,7 @@ public class Profile extends AppCompatActivity {
         final EditText about = (EditText)findViewById(R.id.aboutMe);
         final Button pass = (Button)findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
+        final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
         User user = (User)bundle.getSerializable("user");
         about.setText(user.bio);
@@ -68,17 +62,34 @@ public class Profile extends AppCompatActivity {
         age.setText(String.valueOf(years));
         EditText email = (EditText)findViewById(R.id.EmailBox);
         email.setText(user.email);
-        //ArrayList<String> interests = user.interests;
-        //TextView ints = (TextView)findViewById(R.id.interestBox);
-        //String stringOfInterests;
-        /**if(interests.isEmpty()) {
+        ArrayList<String> interests = user.interests;
+        TextView ints = (TextView)findViewById(R.id.interestBox);
+        String stringOfInterests;
+        if(interests.size() < 1) {
             stringOfInterests = "None";
         } else {
             stringOfInterests = "";
             for (String i : interests) {
                 stringOfInterests += (i + "\n");
             }
-        }**/
+        }
+
+        final FragmentManager fm = getFragmentManager();
+        addInt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newFragment.show(fm, "interests");
+            }
+        });
+
+
+        final android.support.v4.app.FragmentManager changeManage = getSupportFragmentManager();
+        pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changep.show(changeManage, "password");
+            }
+        });
 
         image = (ImageView)findViewById(R.id.ProfilePic);
 

@@ -18,7 +18,8 @@ public class Event implements Serializable {
     int ageMin = 0;
     int ageMax = 100;
     ArrayList<Interests> interests;
-    ArrayList<User> attendees;
+    ArrayList<User> attendees = new ArrayList<>();
     User host;
+    int maxAttendees;
     boolean isHidden = false;
 }

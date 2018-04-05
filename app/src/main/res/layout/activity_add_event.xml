@@ -99,6 +99,50 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Max Attendees:"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/maxAttend"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionText" />
+
+            <EditText
+                android:id="@+id/maxAttend"
+                android:layout_width="86dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="4dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                android:text="None"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/ageMax"
+                tools:layout_editor_absoluteY="273dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="200dp"
+                android:layout_marginTop="8dp"
+                android:text="Time:"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/locationText"
+                app:layout_constraintTop_toBottomOf="@+id/locationText" />
+
+            <EditText
+                android:id="@+id/time"
+                android:layout_width="150dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="192dp"
+                android:ems="10"
+                android:inputType="date"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+            <TextView
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,16 +186,6 @@
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/interests_lbl"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/ageMin"
-                app:layout_constraintTop_toBottomOf="@+id/ageMin" />
-
             <EditText
                 android:id="@+id/eventNameText"
                 android:layout_width="0dp"
@@ -166,24 +200,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <EditText
-                android:id="@+id/interestsText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-            <EditText
                 android:id="@+id/ageMax"
                 android:layout_width="62dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginStart="4dp"
                 android:ems="10"
                 android:inputType="numberSigned"
+                android:text="99"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/ageMin"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -194,6 +217,7 @@
                 android:layout_height="35dp"
                 android:ems="10"
                 android:inputType="numberSigned"
+                android:text="0"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView6"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -250,6 +274,15 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView26"
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+            <Button
+                android:id="@+id/interests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Interests"
+                app:layout_constraintBottom_toBottomOf="@+id/ageMin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/maxAttend" />
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
