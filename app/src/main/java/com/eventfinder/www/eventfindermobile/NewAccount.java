@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -104,7 +106,7 @@ public class NewAccount extends AppCompatActivity {
         EditText email = (EditText)findViewById(R.id.email);
         EditText dob = (EditText)findViewById(R.id.date_of_birth);
 
-        name.addTextChangedListener(new TextValidator(name) {
+       name.addTextChangedListener(new TextValidator(name) {
             @Override public void validate(TextView textView, String text) {
                 if (text == null || text.isEmpty())
                 {
@@ -133,9 +135,16 @@ public class NewAccount extends AppCompatActivity {
 
         duppassword.addTextChangedListener(new TextValidator(duppassword) {
             @Override public void validate(TextView textView, String text) {
+                EditText password = (EditText)findViewById(R.id.password);
+
                 if (text == null || text.isEmpty())
                 {
                     textView.setError("You must re-type the password!");
+                }
+
+                if (!(password.getText().toString()).equals(text))
+                {
+                    textView.setError("Passwords do not match!");
                 }
             }
         });
@@ -145,6 +154,10 @@ public class NewAccount extends AppCompatActivity {
                 if (text == null || text.isEmpty())
                 {
                     textView.setError("Email cannot be blank!");
+                }
+
+                if ((!Patterns.EMAIL_ADDRESS.matcher(text).matches())) {
+                    textView.setError("Email not correctly formatted!");
                 }
             }
         });
