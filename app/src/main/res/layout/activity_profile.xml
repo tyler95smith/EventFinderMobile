@@ -96,6 +96,7 @@
         android:id="@+id/ProfilePic"
         android:layout_width="83dp"
         android:layout_height="80dp"
+        android:layout_marginTop="4dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,11 +150,10 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Age:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        app:layout_constraintStart_toStartOf="@+id/textView18"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+        app:layout_constraintBottom_toTopOf="@+id/textView18"
+        app:layout_constraintStart_toStartOf="@+id/textView18" />
 
     <TextView
         android:id="@+id/textView18"
@@ -161,8 +161,8 @@
         android:layout_height="wrap_content"
         android:text="Gender:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintBottom_toTopOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="@+id/textView19" />
 
     <TextView
         android:id="@+id/textView19"
@@ -171,8 +171,8 @@
         android:layout_marginStart="16dp"
         android:text="Email:"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/AgeBox"
@@ -222,17 +222,16 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="About Me:"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/textView19"
-        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+        app:layout_constraintBottom_toTopOf="@+id/aboutMe"
+        app:layout_constraintStart_toStartOf="@+id/textView19" />
 
     <EditText
         android:id="@+id/aboutMe"
         android:layout_width="352dp"
-        android:layout_height="61dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:enabled="false"
         android:text="Description"
@@ -240,8 +239,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/editButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/changePass"
@@ -258,8 +256,9 @@
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="349dp"
-        android:layout_height="44dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView17"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView13">
 

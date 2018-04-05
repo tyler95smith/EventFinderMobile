@@ -1,5 +1,6 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
@@ -11,17 +12,26 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class AddEventActivity extends AppCompatActivity {
+public class AddEventActivity extends AppCompatActivity implements InterestFragment.InterestListener{
+    ArrayList<String> interests;
+    Event event;
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, ArrayList<String> ints) {
+        interests = ints;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-
+        event = new Event();
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
@@ -39,7 +49,8 @@ public class AddEventActivity extends AppCompatActivity {
         Button submit = (Button)findViewById(R.id.submitBtn);
         Button interest = (Button)findViewById(R.id.interests);
         final User user = (User)bundle.getSerializable("user");
-
+        bundle.putSerializable("event", event);
+        getIntent().putExtras(bundle);
         final FragmentManager fm = getFragmentManager();
         final InterestFragment intFrag = new InterestFragment();
         interest.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +87,9 @@ public class AddEventActivity extends AppCompatActivity {
                 } else if(Pattern.matches("[0-9]+", maxAttend.getText()) == false && maxAttend.getText().toString().length() > 0) {
                     Toast.makeText(context, "Max Attendees is not valid", duration).show();
                 }else {
-                    Event event = new Event();
+                    if(interests.size() > 0) {
+                        event.interests = interests;
+                    }
                     event.eventName = eventName.getText().toString();
                     event.ageMax = Integer.parseInt(ageMax.getText().toString());
                     event.ageMin = Integer.parseInt(ageMin.getText().toString());

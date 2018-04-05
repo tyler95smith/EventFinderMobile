@@ -17,7 +17,7 @@ public class Event implements Serializable {
     String description = ".";
     int ageMin = 0;
     int ageMax = 100;
-    ArrayList<Interests> interests;
+    ArrayList<String> interests;
     ArrayList<User> attendees = new ArrayList<>();
     User host;
     int maxAttendees;

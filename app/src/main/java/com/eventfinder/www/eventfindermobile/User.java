@@ -22,4 +22,5 @@ public class User implements Serializable {
     int id = 0;
     boolean hideLocation = false;
     boolean isBanned = false;
+    boolean hasInterests = false;
 }

@@ -1,10 +1,12 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,12 +18,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class InterestFragment extends DialogFragment {
-    CharSequence[] ints = new String[72];
+    CharSequence[] ints;
     int numbOfInt = 72;
-    ArrayList<Integer> selectInt = new ArrayList();
+    ArrayList<String> selectInt;
     boolean[] checked = new boolean[numbOfInt];
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        ints = new CharSequence[numbOfInt];
         ints[0] = "Acting";
         ints[1] = "Badmitton";
         ints[2] = "Band";
@@ -94,18 +97,35 @@ public class InterestFragment extends DialogFragment {
         ints[69] = "Wrestling";
         ints[70] = "Writing";
         ints[71] = "Yoga";
-        if(selectInt.isEmpty()) {
+        if(selectInt == null) {
+            selectInt = new ArrayList<>();
             Arrays.fill(checked, false);
         }
+            Intent intent = getActivity().getIntent();
+            Bundle bundle = intent.getExtras();
+            if(bundle.containsKey("event")) {
+                Event event = (Event)bundle.getSerializable("event");
+            } else {
+                User user = (User) bundle.getSerializable("user");
+                if(user.hasInterests == true) {
+                    selectInt = user.interests;
+                    for (int i = 0; i < numbOfInt; i++) {
+                        if (selectInt.contains(ints[i])) {
+                            checked[i] = true;
+                        }
+                    }
+                }
+            }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Add Interests:")
                 .setMultiChoiceItems(ints, checked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i, boolean b) {
                         if(b) {
-                            selectInt.add(i);
-                        } else if(selectInt.contains(i)) {
-                            selectInt.remove(Integer.valueOf(i));
+                            selectInt.add((String)ints[i]);
+                        } else if(selectInt.contains((String)ints[i])) {
+                            selectInt.remove((String)ints[i]);
                         }
                     }
                 })
@@ -113,11 +133,11 @@ public class InterestFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for(int j = 0; j < numbOfInt; j++) {
-                            if(selectInt.contains(j)) {
+                            if(selectInt.contains((String)ints[j])) {
                                 checked[j] = true;
                             }
                         }
-                        //change GUI and send to server
+                        mListener.onDialogPositiveClick(InterestFragment.this, selectInt);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -125,12 +145,12 @@ public class InterestFragment extends DialogFragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         for(int j = 0; j < numbOfInt; j++) {
                             if(checked[j] == false) {
-                                if(selectInt.contains(j)) {
-                                    selectInt.remove(j);
+                                if(selectInt.contains((String)ints[j])) {
+                                    selectInt.remove((String)ints[j]);
                                 }
                             } else {
-                                if(!selectInt.contains(j)) {
-                                    selectInt.add(j);
+                                if(!selectInt.contains((String)ints[j])) {
+                                    selectInt.add((String)ints[j]);
                                 }
                             }
                         }
@@ -138,5 +158,21 @@ public class InterestFragment extends DialogFragment {
                 });
 
         return builder.create();
+    }
+
+    public interface InterestListener {
+        public void onDialogPositiveClick(DialogFragment dialog, ArrayList<String> ints);
+    }
+
+    InterestListener mListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (InterestListener)activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement InterestListener");
+        }
     }
 }
