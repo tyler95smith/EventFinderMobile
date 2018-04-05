@@ -42,6 +42,7 @@ public class NewAccount extends AppCompatActivity {
 
                 if (hasValidInput(mainLayout)) {
                     createAccount();
+                    Toast.makeText(context, "Confirmation Email Sent", Toast.LENGTH_LONG);
                     startActivity(new Intent(NewAccount.this, Login.class));
                 } else { // show error messages
                     Toast.makeText(context, err_text,duration).show();
