@@ -65,7 +65,7 @@ public class Profile extends AppCompatActivity {
         ArrayList<String> interests = user.interests;
         TextView ints = (TextView)findViewById(R.id.interestBox);
         String stringOfInterests;
-        if(interests.size() < 1) {
+        if(interests == null || interests.size() < 1) {
             stringOfInterests = "None";
         } else {
             stringOfInterests = "";

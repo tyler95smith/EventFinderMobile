@@ -18,7 +18,7 @@ public class User implements Serializable {
     String bio = ".";
     String gender = "Male";
     String primaryLocation;
-    ArrayList<String> interests;
+    ArrayList<String> interests = new ArrayList<>();
     int id = 0;
     boolean hideLocation = false;
     boolean isBanned = false;
