@@ -42,131 +42,142 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        ImageButton homebtn = (ImageButton)findViewById(R.id.home);
-        ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
-        ImageButton addbtn = (ImageButton)findViewById(R.id.add);
-        ImageButton notbtn = (ImageButton)findViewById(R.id.notification);
-        ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
-        final Button edit = (Button)findViewById(R.id.editButton);
-        final EditText name = (EditText)findViewById(R.id.NameBox);
-        final Button addInt = (Button)findViewById(R.id.addInterests);
-        final EditText about = (EditText)findViewById(R.id.aboutMe);
-        final Button pass = (Button)findViewById(R.id.changePass);
+        ImageButton homebtn = (ImageButton) findViewById(R.id.home);
+        ImageButton profilebtn = (ImageButton) findViewById(R.id.profile);
+        ImageButton addbtn = (ImageButton) findViewById(R.id.add);
+        ImageButton notbtn = (ImageButton) findViewById(R.id.notification);
+        ImageButton favbtn = (ImageButton) findViewById(R.id.favorite);
+        final Button edit = (Button) findViewById(R.id.editButton);
+        final EditText name = (EditText) findViewById(R.id.NameBox);
+        final Button addInt = (Button) findViewById(R.id.addInterests);
+        final EditText about = (EditText) findViewById(R.id.aboutMe);
+        final Button pass = (Button) findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
-        user = (User)bundle.getSerializable("user");
+        user = (User) bundle.getSerializable("user");
         about.setText(user.bio);
         String fullName = user.firstName + " " + user.lastName;
         name.setText(fullName);
-        EditText username = (EditText)findViewById(R.id.UsernameBox);
+        EditText username = (EditText) findViewById(R.id.UsernameBox);
         username.setText(user.username);
-        TextView gender = (TextView)findViewById(R.id.GenderBox);
+        TextView gender = (TextView) findViewById(R.id.GenderBox);
         gender.setText(user.gender);
-        TextView age = (TextView)findViewById(R.id.AgeBox);
+        TextView age = (TextView) findViewById(R.id.AgeBox);
         Calendar now = Calendar.getInstance();
         Calendar dob = Calendar.getInstance();
         dob.setTime(user.dateOfBirth);
         int years = now.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-        if(now.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
+        if (now.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)) {
             years--;
         }
         age.setText(String.valueOf(years));
-        EditText email = (EditText)findViewById(R.id.EmailBox);
+        EditText email = (EditText) findViewById(R.id.EmailBox);
         email.setText(user.email);
         interests = user.interests;
-        ints = (TextView)findViewById(R.id.interestBox);
-        if(user.interests != null) {
+        ints = (TextView) findViewById(R.id.interestBox);
+        if (user.interests != null) {
             user.hasInterests = true;
         }
-        if(user.hasInterests == true) {
+        if (user.hasInterests == true) {
             updateInterestString();
-        }
-        final FragmentManager fm = getFragmentManager();
-        addInt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newFragment.show(fm, "interests");
-            }
-        });
-
-
-        final android.support.v4.app.FragmentManager changeManage = getSupportFragmentManager();
-        pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changep.show(changeManage, "password");
-            }
-        });
-
-        image = (ImageView)findViewById(R.id.ProfilePic);
-
-        //ints.setText(stringOfInterests);
-
-        homebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
-            }
-        });
-
-        addbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, AddEventActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-
-        notbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, NotificationsActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-
-        favbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Profile.this, FavoriteEventsActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });
-
-        edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!name.isEnabled()) {
-                    addInt.setVisibility(VISIBLE);
-                    pass.setVisibility(VISIBLE);
-                    name.setEnabled(true);
-                    about.setEnabled(true);
-                    edit.setText("Submit");
-                    image.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent();
-                            intent.setType("image/*");
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-                        }
-                    });
-                } else {
-                    addInt.setVisibility(GONE);
-                    pass.setVisibility(GONE);
-                    name.setEnabled(false);
-                    about.setEnabled(false);
-                    edit.setText("Edit Profile");
-                    image.setOnClickListener(null);
+            ArrayList<String> interests = user.interests;
+            TextView ints = (TextView) findViewById(R.id.interestBox);
+            String stringOfInterests;
+            if (interests == null || interests.size() < 1) {
+                stringOfInterests = "None";
+            } else {
+                stringOfInterests = "";
+                for (String i : interests) {
+                    stringOfInterests += (i + "\n");
                 }
             }
-        });
+            final FragmentManager fm = getFragmentManager();
+            addInt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    newFragment.show(fm, "interests");
+                }
+            });
+
+
+            final android.support.v4.app.FragmentManager changeManage = getSupportFragmentManager();
+            pass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    changep.show(changeManage, "password");
+                }
+            });
+
+            image = (ImageView) findViewById(R.id.ProfilePic);
+
+            //ints.setText(stringOfInterests);
+
+            homebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                }
+            });
+
+            addbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profile.this, AddEventActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
+            notbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profile.this, NotificationsActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
+            favbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Profile.this, FavoriteEventsActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
+
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!name.isEnabled()) {
+                        addInt.setVisibility(VISIBLE);
+                        pass.setVisibility(VISIBLE);
+                        name.setEnabled(true);
+                        about.setEnabled(true);
+                        edit.setText("Submit");
+                        image.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent();
+                                intent.setType("image/*");
+                                intent.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+                            }
+                        });
+                    } else {
+                        addInt.setVisibility(GONE);
+                        pass.setVisibility(GONE);
+                        name.setEnabled(false);
+                        about.setEnabled(false);
+                        edit.setText("Edit Profile");
+                        image.setOnClickListener(null);
+                    }
+                }
+            });
+        }
     }
 
     public void updateInterestString() {
