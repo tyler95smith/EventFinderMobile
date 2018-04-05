@@ -98,7 +98,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/name"
         android:layout_width="356dp"
         android:layout_height="35dp"
         android:layout_marginEnd="8dp"
@@ -108,6 +108,7 @@
         android:hint="Name"
         android:inputType="textPersonName"
         android:textSize="14sp"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -122,9 +123,10 @@
         android:hint="Username"
         android:inputType="textPersonName"
         android:textSize="14sp"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/name"/>
 
     <TextView
         android:id="@+id/textView2"
@@ -180,6 +182,7 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="14sp"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -194,6 +197,7 @@
         android:hint="Retype Password"
         android:inputType="textPassword"
         android:textSize="14sp"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
@@ -208,6 +212,7 @@
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="14sp"
+        android:maxLength="50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password2" />

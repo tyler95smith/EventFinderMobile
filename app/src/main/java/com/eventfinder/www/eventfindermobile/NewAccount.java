@@ -14,19 +14,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RadioGroup;
 
 import java.util.HashMap;
 
 public class NewAccount extends AppCompatActivity {
-    // global error message used in a toast
-    CharSequence err_text = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
+
+        // this adds TextWatch objects to the various views which allows input validation after they finish typing
+        addTextInputValidators();
 
         final ConstraintLayout mainLayout = findViewById(R.id.main_layout);
 
@@ -40,11 +42,11 @@ public class NewAccount extends AppCompatActivity {
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
 
-                if (hasValidInput(mainLayout)) {
+                if (isInputValid(mainLayout)) {
                     createAccount();
                     startActivity(new Intent(NewAccount.this, Login.class));
                 } else { // show error messages
-                    Toast.makeText(context, err_text,duration).show();
+                    Toast.makeText(context, "Please fix the errors above!",duration).show();
                 }
             }
         });
@@ -53,27 +55,23 @@ public class NewAccount extends AppCompatActivity {
     //
     // function that validates/checks if input is empty
     // currently hardcoded to being ConstraintLayout
-    private boolean hasValidInput(ConstraintLayout mainLayout)
+    private boolean isInputValid(ConstraintLayout mainLayout)
     {
-        boolean validInput = true;
-        err_text = "";
-
         // loop through all children
         for (int i = 0; i < mainLayout.getChildCount(); i++)
         {
-            // if edittext object
+            // if child is a editText view
             if (mainLayout.getChildAt(i) instanceof EditText)
             {
                 EditText child = (EditText)mainLayout.getChildAt(i);
-                // if empty add to error message
-                if ("".equals(child.getText().toString()))
+                // if there is an error message
+                if (!("".equals(child.getError())) && child.getError() != null)
                 {
-                    validInput = false;
-                    err_text = err_text + child.getHint().toString() + " cannot be blank!\n";
+                    return false;
                 }
             }
             // if male/female not really sure should it be a button or toggle group?
-
+/*
             if (mainLayout.getChildAt(i) instanceof  RadioGroup)
             {
                 RadioGroup child = (RadioGroup)mainLayout.getChildAt(i);
@@ -83,13 +81,81 @@ public class NewAccount extends AppCompatActivity {
                 if (child != gender) {
                     // radioGroup is empty
                     if (child.getCheckedRadioButtonId() == -1) {
-                        validInput = false;
+                        inputValid = false;
                         err_text = err_text + "An account type must be selected.\n";
                     }
                 }
             }
+*/
         }
-        return validInput;
+        return true;
+    }
+
+    //
+    // This function will run code to 'validate' the text fields after they are changed
+    //
+    void addTextInputValidators()
+    {
+        EditText name = (EditText)findViewById(R.id.name);
+        EditText username = (EditText)findViewById(R.id.username);
+        EditText password = (EditText)findViewById(R.id.password);
+        EditText duppassword = (EditText)findViewById(R.id.password2);
+        EditText email = (EditText)findViewById(R.id.email);
+        EditText dob = (EditText)findViewById(R.id.date_of_birth);
+
+        name.addTextChangedListener(new TextValidator(name) {
+            @Override public void validate(TextView textView, String text) {
+                if (text == null || text.isEmpty())
+                {
+                    textView.setError("Name cannot be blank!");
+                }
+            }
+        });
+
+        username.addTextChangedListener(new TextValidator(username) {
+            @Override public void validate(TextView textView, String text) {
+                if (text == null || text.isEmpty())
+                {
+                    textView.setError("Username cannot be blank!");
+                }
+            }
+        });
+
+        password.addTextChangedListener(new TextValidator(password) {
+            @Override public void validate(TextView textView, String text) {
+                if (text == null || text.isEmpty())
+                {
+                    textView.setError("Password cannot be blank!");
+                }
+            }
+        });
+
+        duppassword.addTextChangedListener(new TextValidator(duppassword) {
+            @Override public void validate(TextView textView, String text) {
+                if (text == null || text.isEmpty())
+                {
+                    textView.setError("You must re-type the password!");
+                }
+            }
+        });
+
+        email.addTextChangedListener(new TextValidator(email) {
+            @Override public void validate(TextView textView, String text) {
+                if (text == null || text.isEmpty())
+                {
+                    textView.setError("Email cannot be blank!");
+                }
+            }
+        });
+
+        dob.addTextChangedListener(new TextValidator(dob) {
+            @Override public void validate(TextView textView, String text) {
+                if (text == null || text.isEmpty())
+                {
+                    textView.setError("Date of Birth cannot be blank!");
+                }
+            }
+        });
     }
 
     //User params (username, email, password)
