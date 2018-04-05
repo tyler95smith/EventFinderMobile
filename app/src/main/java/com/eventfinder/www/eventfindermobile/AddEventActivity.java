@@ -58,23 +58,23 @@ public class AddEventActivity extends AppCompatActivity {
                 String dateTime = dateOfEvent + " " + timeOfEvent;
                 DateValidator dv = new DateValidator();
                 int duration = Toast.LENGTH_SHORT;
-                if(eventName.getText() == null || eventName.getText().length() > 100) {
-                    Toast.makeText(context, "Event Name is not valid", duration);
-                } else if(location.getText() == null || location.getText().length() > 200) {
-                    Toast.makeText(context, "Location is not valid", duration);
+                if(0 >= eventName.getText().length() || eventName.getText().length() > 100) {
+                    Toast.makeText(context, "Event Name is not valid", duration).show();
+                } else if(0 >= location.getText().length() || location.getText().length() > 200) {
+                    Toast.makeText(context, "Location is not valid", duration).show();
                 } else if(dv.validate(dateOfEvent) == false || dv.inFuture(dv.returnDate(dateOfEvent)) == false) {
-                    Toast.makeText(context, "Date is not valid", duration);
-                } else if(timeOfEvent == null || dv.getDateTime(dateTime) == null) {
-                    Toast.makeText(context, "Time is not valid", duration);
-                } else if(description.getText() == null || description.getText().length() > 512) {
-                    Toast.makeText(context, "Description is not valid", duration);
-                } else if(ageMax.getText() == null || Pattern.matches("[0-9]+", ageMax.getText()) == false ||
-                ageMin.getText() == null || Pattern.matches("[0-9]+", ageMin.getText()) == false) {
-                    Toast.makeText(context, "Invalid Age Range", duration);
+                    Toast.makeText(context, "Date is not valid", duration).show();
+                } else if(dv.validateTime(timeOfEvent) == false || dv.getDateTime(dateTime) == null) {
+                    Toast.makeText(context, "Time is not valid", duration).show();
+                } else if(description.getText().length() <= 0 || description.getText().length() > 512) {
+                    Toast.makeText(context, "Description is not valid", duration).show();
+                } else if(ageMax.getText().length() <= 0 || Pattern.matches("[0-9]+", ageMax.getText()) == false ||
+                ageMin.getText().length() <= 0 || Pattern.matches("[0-9]+", ageMin.getText()) == false) {
+                    Toast.makeText(context, "Invalid Age Range", duration).show();
                 } else if(Integer.parseInt(ageMax.getText().toString()) < Integer.parseInt(ageMin.getText().toString())) {
-                    Toast.makeText(context, "Min age is Greater than Max age", duration);
-                } else if(Pattern.matches("[0-9]+", maxAttend.getText().toString()) == false && (maxAttend.getText().toString() != "None" && maxAttend.getText() != null)) {
-                    Toast.makeText(context, "Max Attendees is not valid", duration);
+                    Toast.makeText(context, "Min age is Greater than Max age", duration).show();
+                } else if(Pattern.matches("[0-9]+", maxAttend.getText()) == false && maxAttend.getText().toString().length() > 0) {
+                    Toast.makeText(context, "Max Attendees is not valid", duration).show();
                 }else {
                     Event event = new Event();
                     event.eventName = eventName.getText().toString();
@@ -85,9 +85,10 @@ public class AddEventActivity extends AppCompatActivity {
                     event.description = description.getText().toString();
                     event.host = user;
                     event.attendees.add(user);
-                    if(maxAttend.getText() != null && maxAttend.getText().toString() != "None") {
+                    if(maxAttend.getText().toString().length() > 0) {
                         event.maxAttendees = Integer.parseInt(maxAttend.getText().toString());
                     }
+                    //add event to database
                     bundle.putSerializable("event", event);
                     Intent intent = new Intent(AddEventActivity.this, ViewEventActivity.class);
                     intent.putExtras(bundle);

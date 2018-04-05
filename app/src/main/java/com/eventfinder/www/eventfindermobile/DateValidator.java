@@ -19,10 +19,22 @@ public class DateValidator {
     private static final String DATE_PATTERN =
             "(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)";
 
-
+    private static final String TIME_PATTERN =
+            "(0[1-9]|1[012]):(0[0-9]|[1-5][0-9]) ([ap][m])";
 
     public DateValidator(){
         pattern = Pattern.compile(DATE_PATTERN);
+    }
+
+    public boolean validateTime(final String time) {
+        pattern = Pattern.compile(TIME_PATTERN);
+        matcher = pattern.matcher(time);
+        if(matcher.matches()) {
+            matcher.reset();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean validate(final String date) {
