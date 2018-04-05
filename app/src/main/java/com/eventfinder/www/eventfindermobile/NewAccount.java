@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RadioGroup;
+import android.widget.ToggleButton;
 
 import java.util.HashMap;
 
@@ -31,6 +32,9 @@ public class NewAccount extends AppCompatActivity {
 
         // this adds TextWatch objects to the various views which allows input validation after they finish typing
         addTextInputValidators();
+
+        // set OnCheckedChangeListener
+        ((RadioGroup) findViewById(R.id.genderRadioGroup)).setOnCheckedChangeListener(ToggleListener);
 
         final ConstraintLayout mainLayout = findViewById(R.id.main_layout);
 
@@ -60,21 +64,29 @@ public class NewAccount extends AppCompatActivity {
     // currently hardcoded to being ConstraintLayout
     private boolean isInputValid(ConstraintLayout mainLayout)
     {
-        // loop through all children
+        boolean isValid = true;
+        // loop through all children and apply general inputValidation
         for (int i = 0; i < mainLayout.getChildCount(); i++)
         {
             // if child is a editText view
             if (mainLayout.getChildAt(i) instanceof EditText)
             {
                 EditText child = (EditText)mainLayout.getChildAt(i);
-                // if there is an error message
-                if (!("".equals(child.getError())) && child.getError() != null)
+
+                if (child.getText() == null || child.getText().toString().isEmpty())
                 {
-                    return false;
+                    child.setError(child.getHint() + " cannot be blank!");
+                    isValid = false;
                 }
+                // if there is an error message
+                //if (!("".equals(child.getError())) && child.getError() != null)
+                //{
+                //    isValid = false;
+                //}
             }
+
             // if male/female not really sure should it be a button or toggle group?
-/*
+
             if (mainLayout.getChildAt(i) instanceof  RadioGroup)
             {
                 RadioGroup child = (RadioGroup)mainLayout.getChildAt(i);
@@ -84,14 +96,39 @@ public class NewAccount extends AppCompatActivity {
                 if (child != gender) {
                     // radioGroup is empty
                     if (child.getCheckedRadioButtonId() == -1) {
-                        inputValid = false;
-                        err_text = err_text + "An account type must be selected.\n";
+                        isValid = false;
+                        //err_text = err_text + "An account type must be selected.\n";
                     }
                 }
             }
-*/
         }
-        return true;
+
+        // specific input validation
+        EditText email = (EditText)findViewById(R.id.email);
+        EditText password = (EditText)findViewById(R.id.password);
+        EditText duppassword = (EditText)findViewById(R.id.password2);
+        EditText dob = (EditText)findViewById(R.id.date_of_birth);
+
+        DateValidator dateValidator = new DateValidator();
+
+        if (!(duppassword.getText().toString()).equals(password.getText().toString()))
+        {
+            duppassword.setError("Passwords do not match!");
+            isValid = false;
+        }
+
+        if ((!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())) {
+            email.setError("Email not correctly formatted!");
+            isValid = false;
+        }
+
+        if (!dateValidator.validate(dob.getText().toString()))
+        {
+            dob.setError("Date of Birth is not formatted correctly");
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     //
@@ -164,12 +201,35 @@ public class NewAccount extends AppCompatActivity {
 
         dob.addTextChangedListener(new TextValidator(dob) {
             @Override public void validate(TextView textView, String text) {
+                DateValidator dateValidator = new DateValidator();
                 if (text == null || text.isEmpty())
                 {
                     textView.setError("Date of Birth cannot be blank!");
                 }
+
+                if (!dateValidator.validate(text))
+                {
+                    textView.setError("Date of Birth is not formatted correctly");
+                }
+
             }
         });
+    }
+
+    static final RadioGroup.OnCheckedChangeListener ToggleListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(final RadioGroup radioGroup, final int i) {
+            for (int j = 0; j < radioGroup.getChildCount(); j++) {
+                final ToggleButton view = (ToggleButton) radioGroup.getChildAt(j);
+                view.setChecked(view.getId() == i);
+            }
+        }
+    };
+
+    public void onToggle(View view) {
+        ((RadioGroup)view.getParent()).check(0);
+        ((RadioGroup)view.getParent()).check(view.getId());
+        // app specific stuff ..
     }
 
     //User params (username, email, password)
