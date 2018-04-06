@@ -125,7 +125,7 @@ public class NewAccount extends AppCompatActivity {
         if (!dateValidator.validate(dob.getText().toString()))
         {
             dob.setError("Date of Birth is not formatted correctly");
-            isValid = false;
+            //isValid = false;
         }
 
         return isValid;

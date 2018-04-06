@@ -167,7 +167,7 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
             @Override
             public void onResponse(Object response) {
                 //Handle JSON response... for now just shows a simple message
-                Toast.makeText(context, "The request to create account was made successfully.", duration).show();
+                Toast.makeText(context, "Event created successfully.", duration).show();
 
                 //only start event activity if API request to create activity is successful
                 bundle.putSerializable("event", event);
@@ -179,9 +179,10 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
         HashMap<String, String> params = formatEventParams(event);
         ArrayList<Integer> attendeeIDs = new ArrayList<>();
         // Make API request to create a new account with entered data
-        for(User a : event.attendees){
+        /*for(User a : event.attendees){
             attendeeIDs.add(a.id);
-        }
+        }*/
+        attendeeIDs.add(29);
         JsonObjectRequest req = Requests.createNewEvent(formatEventParams(event), null, attendeeIDs, listener);
 
         if(req != null) {
@@ -197,7 +198,7 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
         params.put("description", event.description);
         params.put("age_min", String.valueOf(event.ageMin));
         params.put("age_max", String.valueOf(event.ageMax));
-        params.put("host", "10"); //hard coded id for now...
+        params.put("host", "29"); //hard coded id for now...
         //params.put("host", String.valueOf(event.host.id));
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         params.put("event_date", format.format(event.eventDate));
