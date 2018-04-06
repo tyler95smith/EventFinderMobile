@@ -10,11 +10,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.eventfinder.www.eventfindermobile.api.EventFinderAPI;
 import com.eventfinder.www.eventfindermobile.api.Requests;
 import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
 import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Vector;
 
 public class Login extends AppCompatActivity {
 
@@ -29,7 +35,7 @@ public class Login extends AppCompatActivity {
         submitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getToken();
+                requestToken();
             }
         });
 
@@ -53,7 +59,7 @@ public class Login extends AppCompatActivity {
     }
 
 
-    private void getToken()
+    private void requestToken()
     {
         final Context context = getApplicationContext();
 
@@ -63,13 +69,21 @@ public class Login extends AppCompatActivity {
             @Override
             public void onError(String message) {
                 Toast.makeText(context, "Invalid Username or Password", duration).show();
-                System.out.print(message.toString());
             }
 
             @Override
             public void onResponse(Object response) {
-                Toast.makeText(context, "Login Successful", duration).show();
-                startActivity(new Intent(Login.this, HomeScreenActivity.class));
+                try {
+                    JSONObject obj = new JSONObject(response.toString());
+                    String mytoken = obj.getString("token");
+                    EventFinderAPI api = new EventFinderAPI();
+                    api.setToken(mytoken);
+                    System.out.println("Saved Token:" + api.getToken());
+                    Toast.makeText(context, "Login Successful", duration).show();
+                    startActivity(new Intent(Login.this, HomeScreenActivity.class));
+                } catch (Exception E) {
+                    System.out.println("Not valid JSON");
+                }
             }
         };
 

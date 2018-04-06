@@ -1,4 +1,5 @@
 package com.eventfinder.www.eventfindermobile.api;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.eventfinder.www.eventfindermobile.Event;
@@ -6,7 +7,6 @@ import com.eventfinder.www.eventfindermobile.api.*;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -14,7 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Vector;
+
 
 /**
  * Requests:
@@ -55,6 +55,8 @@ public class Requests {
             JSONObject acctJSON = new JSONObject(acctParams);
             acctJSON.put("user", userJSON);
 
+
+
             JsonObjectRequest req = new JsonObjectRequest(url, acctJSON,
                     new Response.Listener<JSONObject>() {
                         @Override
@@ -62,11 +64,23 @@ public class Requests {
                             listener.onResponse(response);
                         }
                     }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+                    }
+                )
+            {
                 @Override
-                public void onErrorResponse(VolleyError error) {
-                    listener.onError(error.toString());
+                public HashMap<String, String> getHeaders () throws AuthFailureError {
+                    EventFinderAPI api = new EventFinderAPI();
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "JWT " + api.getToken());
+                    System.out.println("Headers " + params.toString());
+                    return params;
+
                 }
-            });
+            };
             return req;
         } catch (JSONException e) {
             return null;
@@ -92,8 +106,17 @@ public class Requests {
                         public void onErrorResponse(VolleyError error) {
                             listener.onError(error.toString());
                         }
-
-                    });
+                    })
+            {
+                @Override
+                public HashMap<String, String> getHeaders () throws AuthFailureError {
+                    EventFinderAPI api = new EventFinderAPI();
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "JWT " + api.getToken());
+                    System.out.println("Headers " + params.toString());
+                    return params;
+                }
+            };
             return req;
         } catch (Exception e) {
             return null;
@@ -119,8 +142,17 @@ public class Requests {
                         public void onErrorResponse(VolleyError error) {
                             listener.onError(error.toString());
                         }
-
-                    });
+                    })
+            {
+                @Override
+                public HashMap<String, String> getHeaders () throws AuthFailureError {
+                    EventFinderAPI api = new EventFinderAPI();
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "JWT " + api.getToken());
+                    System.out.println("Headers " + params.toString());
+                    return params;
+                }
+            };
             return req;
         } catch (Exception e) {
             return null;
