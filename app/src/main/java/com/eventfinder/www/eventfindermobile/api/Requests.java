@@ -47,6 +47,30 @@ public class Requests {
         catch (JSONException e) { return null;}
     }
 
+    public static JsonObjectRequest updatePersonalAccount(HashMap<String,String> acctParams, HashMap<String,String> userParams, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "updatepersonaccount/";
+        try {
+            JSONObject userJSON = new JSONObject(userParams);
+            JSONObject acctJSON = new JSONObject(acctParams);
+            acctJSON.put("user", userJSON);
+
+            JsonObjectRequest req = new JsonObjectRequest(url, acctJSON,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            listener.onResponse(response);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(error.toString());
+                }
+            });
+            return req;
+        }
+        catch(JSONException e) { return null; }
+    }
+
     /*
         Volley Request to get Past Events
      */

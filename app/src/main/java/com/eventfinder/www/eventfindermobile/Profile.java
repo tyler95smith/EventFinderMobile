@@ -2,6 +2,7 @@ package com.eventfinder.www.eventfindermobile;
 
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -16,9 +17,17 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.eventfinder.www.eventfindermobile.api.Requests;
+import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
+import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
@@ -56,12 +65,14 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final InterestFragment newFragment = new InterestFragment();
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
+
+        user = (User) bundle.getSerializable("user");
+
         if(!user.me) {
             edit.setVisibility(GONE);
             report.setVisibility(VISIBLE);
         }
 
-        user = (User) bundle.getSerializable("user");
         about.setText(user.bio);
         String fullName = user.firstName + " " + user.lastName;
         name.setText(fullName);
@@ -171,6 +182,7 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
                                 intent.setType("image/*");
                                 intent.setAction(Intent.ACTION_GET_CONTENT);
                                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+                                updateUser(); // i think this is where this goes
                             }
                         });
                     } else {
@@ -214,5 +226,61 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
 
         return bitmap;
+    }
+
+    //User params (username, email, password)
+    private HashMap<String, String> getUserParams()
+    {
+        HashMap<String, String> params = new HashMap<>();
+        EditText username = (EditText)findViewById(R.id.UsernameBox);
+        EditText email = (EditText)findViewById(R.id.EmailBox);
+        //EditText password = (EditText)findViewById(R.id.password);
+        params.put("username",username.getText().toString());
+        params.put("email", email.getText().toString());
+        //params.put("password", password.getText().toString());
+        return params;
+    }
+
+    //All other account params other than username, email and password
+    private HashMap<String, String> getAcctParams()
+    {
+        HashMap<String, String> params = new HashMap<String, String>();
+        //EditText dob = (EditText)findViewById(R.id.date_of_birth);
+        EditText name = (EditText)findViewById(R.id.NameBox);
+        EditText bio = (EditText)findViewById(R.id.aboutMe);
+        //params.put("date_of_birth", dob.getText().toString());
+        params.put("name",name.getText().toString());
+        params.put("bio",bio.getText().toString());
+        return params;
+    }
+
+    private void getInterests() {
+
+    }
+
+    private void updateUser() {
+        final Context context = getApplicationContext();
+
+        // Create listener to determine how to handle the response from the request
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            int duration = Toast.LENGTH_SHORT;
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Oops. There was an error making the request.", duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                //Handle JSON response... for now just shows a simple message
+                Toast.makeText(context, "The request to update account was made successfully.", duration).show();
+            }
+        };
+
+        // Make API request to create a new account with entered data
+        JsonObjectRequest req = Requests.updatePersonalAccount(getAcctParams(), getUserParams(), listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
     }
 }
