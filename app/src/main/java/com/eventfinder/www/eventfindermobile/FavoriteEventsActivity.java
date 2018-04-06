@@ -51,10 +51,9 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_events);
 
-        bundle = new Bundle();
+        bundle = getIntent().getExtras();
 
-        final Bundle dataBundle = getIntent().getExtras();
-        User user = (User)dataBundle.getSerializable("user");
+        User user = (User)bundle.getSerializable("user");
 
         // don't think user is being implemented yet
         /*
