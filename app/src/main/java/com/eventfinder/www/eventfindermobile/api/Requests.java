@@ -23,6 +23,7 @@ import java.util.Vector;
 
 public class Requests {
 
+<<<<<<< HEAD
     public static JsonObjectRequest ValidateUsername(HashMap<String, String> username, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "validateusername/";
         JSONObject emailJSON = new JSONObject(username);
@@ -58,6 +59,9 @@ public class Requests {
     }
 
     public static JsonObjectRequest createPersonalAccount(HashMap<String,String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
+=======
+    public static JsonObjectRequest createPersonalAccount(HashMap<String, String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
+>>>>>>> d926b0494c2eefb82235aaa62cd9fe723f91dec5
         String url = EventFinderAPI.API_URL + "createpersonaccount/";
         try {
             JSONObject userJSON = new JSONObject(userParams);
@@ -77,8 +81,34 @@ public class Requests {
                 }
             });
             return req;
+        } catch (JSONException e) {
+            return null;
         }
-        catch (JSONException e) { return null;}
+    }
+
+    public static JsonObjectRequest updatePersonalAccount(HashMap<String, String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "updatepersonaccount/";
+        try {
+            JSONObject userJSON = new JSONObject(userParams);
+            JSONObject acctJSON = new JSONObject(acctParams);
+            acctJSON.put("user", userJSON);
+
+            JsonObjectRequest req = new JsonObjectRequest(url, acctJSON,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            listener.onResponse(response);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(error.toString());
+                }
+            });
+            return req;
+        } catch (JSONException e) {
+            return null;
+        }
     }
 
     /*
@@ -133,5 +163,27 @@ public class Requests {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    /*
+        Volley Request to get a JWT (JSON Web Token)
+     */
+    public static JsonObjectRequest login(HashMap<String, String> credentials, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "token/login/";
+
+            JSONObject credentialsJSON = new JSONObject(credentials);
+            JsonObjectRequest req = new JsonObjectRequest(url, credentialsJSON,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            listener.onResponse(response);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(error.toString());
+                }
+            });
+            return req;
     }
 }
