@@ -268,7 +268,7 @@
                 android:layout_width="150dp"
                 android:layout_height="35dp"
                 android:ems="10"
-                android:hint="dd/mm/yyyy"
+                android:hint="yyyy-mm-dd"
                 android:inputType="text"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView26"

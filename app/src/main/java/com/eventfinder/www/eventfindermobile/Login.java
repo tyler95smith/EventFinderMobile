@@ -80,5 +80,4 @@ public class Login extends AppCompatActivity {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
         }
     }
-
 }

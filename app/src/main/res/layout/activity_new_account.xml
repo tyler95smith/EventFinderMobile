@@ -162,7 +162,7 @@
         android:layout_width="181dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Date of Birth (mm/dd/yyyy)"
+        android:hint="Date of Birth (yyyy-mm-dd)"
         android:inputType="text"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/email"

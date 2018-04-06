@@ -17,7 +17,7 @@ public class DateValidator {
     private Matcher matcher;
 
     private static final String DATE_PATTERN =
-            "(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)";
+            "((19|20)\\d\\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])";
 
     private static final String TIME_PATTERN =
             "(0[1-9]|1[012]):(0[0-9]|[1-5][0-9]) ([ap][m])";
@@ -42,9 +42,9 @@ public class DateValidator {
         if(matcher.matches()) {
             matcher.reset();
             if(matcher.find()) {
-                String month = matcher.group(1);
-                String day = matcher.group(2);
-                int year = Integer.parseInt(matcher.group(3));
+                String month = matcher.group(2);
+                String day = matcher.group(3);
+                int year = Integer.parseInt(matcher.group(1));
 
                 if(day.equals("31") && (month.equals("04") || month.equals("06") || month.equals("09") || month.equals("11"))) {
                     return false;
@@ -65,7 +65,7 @@ public class DateValidator {
     }
 
     public Date returnDate(String string) {
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd");
         Date date = new Date();
         try {
             date = format.parse(string);
@@ -81,7 +81,7 @@ public class DateValidator {
     }
 
     public Date getDateTime(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+        SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd hh:mm aa");
         Date dateTime = new Date();
         try {
             dateTime = format.parse(date);
