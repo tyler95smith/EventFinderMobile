@@ -1,4 +1,7 @@
 package com.eventfinder.www.eventfindermobile.api;
+import android.content.Context;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.eventfinder.www.eventfindermobile.Event;
@@ -52,8 +55,10 @@ public class Requests {
         String url = EventFinderAPI.API_URL + "updatepersonaccount/";
         try {
             JSONObject userJSON = new JSONObject(userParams);
+            userJSON.put("password", "thisismandatory");
             JSONObject acctJSON = new JSONObject(acctParams);
             acctJSON.put("user", userJSON);
+            acctJSON.put("id", "1"); // this is currently hard coded and needs to be changed to use the user objects id (user.id) but will need the id passed to this function.
 
             JsonObjectRequest req = new JsonObjectRequest(url, acctJSON,
                     new Response.Listener<JSONObject>() {

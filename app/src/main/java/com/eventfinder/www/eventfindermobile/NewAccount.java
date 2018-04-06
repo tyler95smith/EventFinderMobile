@@ -25,6 +25,9 @@ import java.util.HashMap;
 
 public class NewAccount extends AppCompatActivity {
 
+    //
+    // TODO Consolidate the input validation to reduce duplicate code
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,12 +131,18 @@ public class NewAccount extends AppCompatActivity {
             isValid = false;
         }
 
+        if (dateValidator.inFuture(dateValidator.returnDate(dob.getText().toString())))
+        {
+            dob.setError("Date of Birth cannot be in the future");
+            isValid = false;
+        }
+
         return isValid;
     }
 
     //
     // This function will run code to 'validate' the text fields after they are changed
-    //
+    // TODO rework this to be onFocusChangeListeners instead of TextChangedListeners
     void addTextInputValidators()
     {
         EditText name = (EditText)findViewById(R.id.name);
@@ -210,6 +219,11 @@ public class NewAccount extends AppCompatActivity {
                 if (!dateValidator.validate(text))
                 {
                     textView.setError("Date of Birth is not formatted correctly");
+                }
+
+                if (dateValidator.inFuture(dateValidator.returnDate(textView.getText().toString())))
+                {
+                    textView.setError("Date of Birth cannot be in the future");
                 }
 
             }
