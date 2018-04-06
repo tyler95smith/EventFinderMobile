@@ -1,4 +1,7 @@
 package com.eventfinder.www.eventfindermobile.api;
+import android.content.Context;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.eventfinder.www.eventfindermobile.Event;
@@ -24,7 +27,6 @@ import java.util.Vector;
  */
 
 public class Requests {
-
 
     public static JsonObjectRequest ValidateUsername(HashMap<String, String> username, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "validateusername/";
@@ -60,7 +62,8 @@ public class Requests {
         return req;
     }
 
-    public static JsonObjectRequest createPersonalAccount(HashMap<String, String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
+    public static JsonObjectRequest createPersonalAccount(HashMap<String,String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
+
         String url = EventFinderAPI.API_URL + "createpersonaccount/";
         try {
             JSONObject userJSON = new JSONObject(userParams);
@@ -89,8 +92,11 @@ public class Requests {
         String url = EventFinderAPI.API_URL + "updatepersonaccount/";
         try {
             JSONObject userJSON = new JSONObject(userParams);
+            userJSON.put("password", "thisismandatory");
+            userJSON.put("username", "changeme2");
             JSONObject acctJSON = new JSONObject(acctParams);
             acctJSON.put("user", userJSON);
+            acctJSON.put("id", "2"); // this is currently hard coded and needs to be changed to use the user objects id (user.id) but will need the id passed to this function.
 
             JsonObjectRequest req = new JsonObjectRequest(url, acctJSON,
                     new Response.Listener<JSONObject>() {
