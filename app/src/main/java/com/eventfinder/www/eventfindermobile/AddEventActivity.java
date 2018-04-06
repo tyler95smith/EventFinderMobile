@@ -12,9 +12,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.eventfinder.www.eventfindermobile.api.Requests;
+import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
+import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class AddEventActivity extends AppCompatActivity implements InterestFragment.InterestListener{
@@ -32,12 +39,12 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         event = new Event();
+        final Bundle bundle = getIntent().getExtras();
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
         ImageButton addbtn = (ImageButton)findViewById(R.id.add);
         ImageButton notbtn = (ImageButton)findViewById(R.id.notification);
         ImageButton favbtn = (ImageButton)findViewById(R.id.favorite);
-        final Bundle bundle = getIntent().getExtras();
         final EditText location = (EditText)findViewById(R.id.locationText);
         final EditText eventName = (EditText)findViewById(R.id.eventNameText);
         final EditText ageMax = (EditText)findViewById(R.id.ageMax);
@@ -87,7 +94,7 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
                 } else if(Pattern.matches("[0-9]+", maxAttend.getText()) == false && maxAttend.getText().toString().length() > 0) {
                     Toast.makeText(context, "Max Attendees is not valid", duration).show();
                 }else {
-                    if(interests.size() > 0) {
+                    if(interests != null) {
                         event.interests = interests;
                     }
                     event.eventName = eventName.getText().toString();
@@ -102,10 +109,8 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
                         event.maxAttendees = Integer.parseInt(maxAttend.getText().toString());
                     }
                     //add event to database
-                    bundle.putSerializable("event", event);
-                    Intent intent = new Intent(AddEventActivity.this, ViewEventActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    createEvent(event, bundle);
+                    //starting new activity moved to createEvent function
                 }
             }
         });
@@ -145,5 +150,58 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
                 startActivity(intent);
             }
         });
+    }
+
+    private void createEvent(final Event event, final Bundle bundle)
+    {
+        final Context context = getApplicationContext();
+
+        // Create listener to determine how to handle the response from the request
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            int duration = Toast.LENGTH_SHORT;
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Oops. There was an error making the request. Please try again.", duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                //Handle JSON response... for now just shows a simple message
+                Toast.makeText(context, "Event created successfully.", duration).show();
+
+                //only start event activity if API request to create activity is successful
+                bundle.putSerializable("event", event);
+                Intent intent = new Intent(AddEventActivity.this, ViewEventActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        };
+        HashMap<String, String> params = formatEventParams(event);
+        ArrayList<Integer> attendeeIDs = new ArrayList<>();
+        // Make API request to create a new account with entered data
+        /*for(User a : event.attendees){
+            attendeeIDs.add(a.id);
+        }*/
+        attendeeIDs.add(29);
+        JsonObjectRequest req = Requests.createNewEvent(formatEventParams(event), null, attendeeIDs, listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    private HashMap<String,String> formatEventParams(Event event)
+    {
+        HashMap<String,String>  params = new HashMap<>();
+        params.put("event_name", event.eventName);
+        params.put("location", event.location);
+        params.put("description", event.description);
+        params.put("age_min", String.valueOf(event.ageMin));
+        params.put("age_max", String.valueOf(event.ageMax));
+        params.put("host", "29"); //hard coded id for now...
+        //params.put("host", String.valueOf(event.host.id));
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        params.put("event_date", format.format(event.eventDate));
+        return params;
     }
 }
