@@ -158,6 +158,10 @@ public class NewAccount extends AppCompatActivity {
                 {
                     textView.setError("Username cannot be blank!");
                 }
+
+                if(!validator("username")) {
+                    textView.setError("Username is already associated with an account");
+                }
             }
         });
 
@@ -196,6 +200,11 @@ public class NewAccount extends AppCompatActivity {
                 if ((!Patterns.EMAIL_ADDRESS.matcher(text).matches())) {
                     textView.setError("Email not correctly formatted!");
                 }
+
+                boolean notUsed = validator("email");
+                if(!notUsed) {
+                    textView.setError("Email is Already Associated with an Account");
+                }
             }
         });
 
@@ -225,6 +234,30 @@ public class NewAccount extends AppCompatActivity {
             }
         }
     };
+
+    boolean validator(String type) {
+        final Context context = getApplicationContext();
+        final boolean[] valid = {true};
+        VolleyResponseListener listen = new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                valid[0] = false;
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                valid[0] = true;
+            }
+        };
+        JsonObjectRequest req = Requests.ValidateUsername(getUserParams(), listen);
+        if(type == "email") {
+            req = Requests.ValidateEmail(getUserParams(), listen);
+        }
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+        return valid[0];
+    }
 
     public void onToggle(View view) {
         ((RadioGroup)view.getParent()).check(0);
