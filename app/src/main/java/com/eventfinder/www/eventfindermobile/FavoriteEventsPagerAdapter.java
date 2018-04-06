@@ -12,8 +12,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 //
 //===================================================================
 public class FavoriteEventsPagerAdapter extends FragmentPagerAdapter{
-    private static final int TAB_COUNT = 2;
-    private static final int NOTIFICATIONS_TAB_POS = 0;
+    private static final int TAB_COUNT = 3;
+    private static final int PAST_TAB_POS = 0;
+    private static final int FUTURE_TAB_POS=1;
+    private static final int MY_TAB_POS=2;
     //Do not need MESSAGES_TAB_POS with current logic
 
     //---------------------------------------------------------------
@@ -28,10 +30,12 @@ public class FavoriteEventsPagerAdapter extends FragmentPagerAdapter{
     //---------------------------------------------------------------
     @Override
     public Fragment getItem(int position) {
-        if(position == NOTIFICATIONS_TAB_POS) {
+        if(position == PAST_TAB_POS) {
             return new PastEventsListFragment();
-        } else {
+        } else if(position == FUTURE_TAB_POS) {
             return new FutureEventsListFragment();
+        } else {
+            return new MyEventsListFragment();
         }
     }
 

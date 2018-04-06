@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,11 +53,24 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
 
         bundle = new Bundle();
 
-        GetPastEvents();
-        GetFutureEvents();
-
         final Bundle dataBundle = getIntent().getExtras();
         User user = (User)dataBundle.getSerializable("user");
+
+        // don't think user is being implemented yet
+        /*
+        if (user != null) {
+            GetPastEvents(user.id);
+            GetFutureEvents(user.id);
+        }
+
+
+        TextView testText = (TextView)findViewById(R.id.testText);
+        testText.setText(String.valueOf(user.id));
+*/
+
+        // once the user logged in is being passed around switch to the above code
+        GetPastEvents(2);
+        GetFutureEvents(2);
 
         //
         // Set up tabs (TabLayout) with the Viewpager using the NotificationsPagerAdapter
@@ -133,7 +147,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         startActivity(intent);
     }
 
-    void GetPastEvents(){
+    void GetPastEvents(int userid){
         final Context context = getApplicationContext();
 
         // to add a fragment a transaction, and possible a manager()? need to be created.
@@ -176,14 +190,14 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         };
 
         // Make API request to create a new account with entered data
-        JsonArrayRequest req = Requests.getPastEvents(2,listener);
+        JsonArrayRequest req = Requests.getPastEvents(userid,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
         }
     }
 
-    void GetFutureEvents(){
+    void GetFutureEvents(int userid){
         final Context context = getApplicationContext();
 
         // to add a fragment a transaction, and possible a manager()? need to be created.
@@ -226,7 +240,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         };
 
         // Make API request to create a new account with entered data
-        JsonArrayRequest req = Requests.getFutureEvents(2,listener);
+        JsonArrayRequest req = Requests.getFutureEvents(userid,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);

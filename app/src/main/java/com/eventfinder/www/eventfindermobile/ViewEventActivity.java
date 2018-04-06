@@ -15,6 +15,11 @@ public class ViewEventActivity extends AppCompatActivity {
         User user = (User)bundle.getSerializable("user");
         Event event = (Event)bundle.getSerializable("event");
 
+        if(event != null)
+        {
+
+        }
+
         final Button report = (Button)findViewById(R.id.reportEvent);
         if(event.host == user) {
             report.setVisibility(View.GONE);

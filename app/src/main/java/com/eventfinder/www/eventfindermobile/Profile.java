@@ -182,10 +182,10 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
                                 intent.setType("image/*");
                                 intent.setAction(Intent.ACTION_GET_CONTENT);
                                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-                                updateUser(); // i think this is where this goes
                             }
                         });
                     } else {
+                        updateUser(); // i think this is where this goes
                         addInt.setVisibility(GONE);
                         pass.setVisibility(GONE);
                         name.setEnabled(false);
@@ -232,11 +232,13 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
     private HashMap<String, String> getUserParams()
     {
         HashMap<String, String> params = new HashMap<>();
-        EditText username = (EditText)findViewById(R.id.UsernameBox);
-        EditText email = (EditText)findViewById(R.id.EmailBox);
+        EditText name = (EditText)findViewById(R.id.NameBox);
+        //EditText username = (EditText)findViewById(R.id.UsernameBox);
+        //EditText email = (EditText)findViewById(R.id.EmailBox);
         //EditText password = (EditText)findViewById(R.id.password);
-        params.put("username",username.getText().toString());
-        params.put("email", email.getText().toString());
+        params.put("name",name.getText().toString());
+        //params.put("username",username.getText().toString());
+        //params.put("email", email.getText().toString());
         //params.put("password", password.getText().toString());
         return params;
     }
@@ -246,10 +248,8 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
     {
         HashMap<String, String> params = new HashMap<String, String>();
         //EditText dob = (EditText)findViewById(R.id.date_of_birth);
-        EditText name = (EditText)findViewById(R.id.NameBox);
         EditText bio = (EditText)findViewById(R.id.aboutMe);
         //params.put("date_of_birth", dob.getText().toString());
-        params.put("name",name.getText().toString());
         params.put("bio",bio.getText().toString());
         return params;
     }
@@ -260,13 +260,15 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
 
     private void updateUser() {
         final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_LONG;
+        //Toast.makeText(context, "Made it into the updateUser function!!!", duration).show();
 
         // Create listener to determine how to handle the response from the request
         VolleyResponseListener listener = new VolleyResponseListener() {
-            int duration = Toast.LENGTH_SHORT;
+            //int duration = Toast.LENGTH_SHORT;
             @Override
             public void onError(String message) {
-                Toast.makeText(context, "Oops. There was an error making the request.", duration).show();
+                Toast.makeText(context, "Oops. There was an error making the request: " + message, duration).show();
             }
 
             @Override
