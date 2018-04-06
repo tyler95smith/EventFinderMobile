@@ -23,7 +23,6 @@ import java.util.Vector;
 
 public class Requests {
 
-<<<<<<< HEAD
     public static JsonObjectRequest ValidateUsername(HashMap<String, String> username, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "validateusername/";
         JSONObject emailJSON = new JSONObject(username);
@@ -59,9 +58,7 @@ public class Requests {
     }
 
     public static JsonObjectRequest createPersonalAccount(HashMap<String,String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
-=======
-    public static JsonObjectRequest createPersonalAccount(HashMap<String, String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
->>>>>>> d926b0494c2eefb82235aaa62cd9fe723f91dec5
+
         String url = EventFinderAPI.API_URL + "createpersonaccount/";
         try {
             JSONObject userJSON = new JSONObject(userParams);
