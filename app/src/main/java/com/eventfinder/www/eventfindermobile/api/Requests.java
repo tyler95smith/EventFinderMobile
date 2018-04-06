@@ -93,9 +93,10 @@ public class Requests {
         try {
             JSONObject userJSON = new JSONObject(userParams);
             userJSON.put("password", "thisismandatory");
+            userJSON.put("username", "changeme2");
             JSONObject acctJSON = new JSONObject(acctParams);
             acctJSON.put("user", userJSON);
-            acctJSON.put("id", "1"); // this is currently hard coded and needs to be changed to use the user objects id (user.id) but will need the id passed to this function.
+            acctJSON.put("id", "2"); // this is currently hard coded and needs to be changed to use the user objects id (user.id) but will need the id passed to this function.
 
             JsonObjectRequest req = new JsonObjectRequest(url, acctJSON,
                     new Response.Listener<JSONObject>() {

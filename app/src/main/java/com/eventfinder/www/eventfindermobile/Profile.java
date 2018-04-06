@@ -233,11 +233,11 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
     {
         HashMap<String, String> params = new HashMap<>();
         EditText name = (EditText)findViewById(R.id.NameBox);
-        EditText username = (EditText)findViewById(R.id.UsernameBox);
+        //EditText username = (EditText)findViewById(R.id.UsernameBox);
         //EditText email = (EditText)findViewById(R.id.EmailBox);
         //EditText password = (EditText)findViewById(R.id.password);
         params.put("name",name.getText().toString());
-        params.put("username",username.getText().toString());
+        //params.put("username",username.getText().toString());
         //params.put("email", email.getText().toString());
         //params.put("password", password.getText().toString());
         return params;
