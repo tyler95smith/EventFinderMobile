@@ -10,11 +10,12 @@
         android:id="@+id/reportEvent"
         android:layout_width="117dp"
         android:layout_height="90dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:text="Report\nEvent"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="413dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="134dp" />
 
     <Button
         android:id="@+id/request"
@@ -58,10 +59,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
         android:text="USU Campus Quad"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/description"
-        tools:layout_editor_absoluteX="101dp" />
+        app:layout_constraintStart_toEndOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView12"
