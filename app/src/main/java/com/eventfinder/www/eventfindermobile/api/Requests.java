@@ -13,6 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -162,6 +164,7 @@ public class Requests {
         }
     }
 
+
     /*
         Volley Request to get a JWT (JSON Web Token)
      */
@@ -182,5 +185,37 @@ public class Requests {
                 }
             });
             return req;
+    }
+
+    public static JsonObjectRequest createNewEvent(HashMap<String,String> params, ArrayList<Integer> interestIDs, ArrayList<Integer> attendeeIDs, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "createevent/";
+        try {
+            JSONArray interests = new JSONArray();
+            if(interestIDs != null) {
+                interests = new JSONArray(interestIDs);
+            }
+            JSONArray attendees = new JSONArray(attendeeIDs);
+            JSONObject eventJSON = new JSONObject(params);
+            eventJSON.put("interests", interests);
+            eventJSON.put("attendees", attendees);
+            System.out.print(eventJSON);
+
+            JsonObjectRequest req = new JsonObjectRequest(url, eventJSON,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            listener.onResponse(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+                    }
+            );
+            return req;
+        }
+        catch (Exception e) { return null;}
     }
 }
