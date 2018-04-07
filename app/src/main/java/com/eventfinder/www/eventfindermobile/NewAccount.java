@@ -120,6 +120,24 @@ public class NewAccount extends AppCompatActivity {
             isValid = false;
         }
 
+        if (password.getText().toString().length() < 8)
+        {
+            password.setError("Password must be more than 8 characters!");
+            isValid = false;
+        }
+
+        if (password.getText().toString().equals(password.getText().toString().toLowerCase()))
+        {
+            password.setError("Upper and Lower case characters are required!");
+            isValid = false;
+        }
+
+        if (!password.getText().toString().matches(".*\\d+.*"))
+        {
+            password.setError("A mix of numbers and letters is required!");
+            isValid = false;
+        }
+
         if ((!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())) {
             email.setError("Email not correctly formatted!");
             isValid = false;

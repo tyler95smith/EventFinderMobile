@@ -14,6 +14,7 @@ public class Event implements Serializable {
     String eventName = "Test";
     String location = "Test";
     Date eventDate = new Date();
+    String time = "12:00 am";
     String description = ".";
     int ageMin = 0;
     int ageMax = 100;

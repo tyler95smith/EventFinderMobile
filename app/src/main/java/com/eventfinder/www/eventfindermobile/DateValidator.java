@@ -81,7 +81,7 @@ public class DateValidator {
     }
 
     public Date getDateTime(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd hh:mm aa");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm aa");
         Date dateTime = new Date();
         try {
             dateTime = format.parse(date);
