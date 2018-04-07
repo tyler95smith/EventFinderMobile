@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,17 +62,27 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         if (user != null) {
             GetPastEvents(user.id);
             GetFutureEvents(user.id);
+            GetMyEvents(user.id);
+        } else {
+            //make error toast
         }
 
 
         TextView testText = (TextView)findViewById(R.id.testText);
         testText.setText(String.valueOf(user.id));
 */
-
         // once the user logged in is being passed around switch to the above code
-        GetPastEvents(2);
-        GetFutureEvents(2);
-
+        int testId = 2;
+        GetPastEvents(testId);
+        GetFutureEvents(testId);
+        //GetMyEvents(testId);
+/*
+        // code to ver
+        LinearLayout linearLayout = findViewById(R.id.my_events_list);
+        TextView testView = new TextView(this);
+        testView.setText("IS THIS SHOWING UP?");
+        linearLayout.addView(testView);
+*/
         //
         // Set up tabs (TabLayout) with the Viewpager using the NotificationsPagerAdapter
         // so the correct fragment can be displayed within the viewpager
@@ -93,6 +104,8 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
             }
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                viewPager.setCurrentItem(position);
             }
         });
 
@@ -241,6 +254,56 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
 
         // Make API request to create a new account with entered data
         JsonArrayRequest req = Requests.getFutureEvents(userid,listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    void GetMyEvents(int userid){
+        final Context context = getApplicationContext();
+
+        // to add a fragment a transaction, and possible a manager()? need to be created.
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        // Create listener to determine how to handle the response from the request
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            int duration = Toast.LENGTH_SHORT;
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Oops. There was an error making the request: " + message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                try {
+                    JSONArray data = (JSONArray) response; // convert object to JSONArray
+
+                    Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
+
+                    Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
+                    //printEventArray(eventArr);
+                    Intent intent = FavoriteEventsActivity.this.getIntent();
+                    //Bundle bundle = new Bundle();
+                    String prefix = "my_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
+                    //intent.putExtras(bundle);
+
+                    EventBanner eventBanner = new EventBanner();
+                    ft.add(R.id.my_events_list, eventBanner, "fav_my_event_banner");
+                    ft.commit();
+
+                    Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "There was an error working with the response: " + e.toString(),duration).show();
+                }
+            }
+        };
+
+        // Make API request to create a new account with entered data
+        JsonArrayRequest req = Requests.getMyEvents(userid,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);

@@ -3,6 +3,7 @@ package com.eventfinder.www.eventfindermobile;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 //===================================================================
 //
@@ -11,7 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 //  position (notifications fragment/messages fragment).
 //
 //===================================================================
-public class FavoriteEventsPagerAdapter extends FragmentPagerAdapter{
+public class FavoriteEventsPagerAdapter extends FragmentStatePagerAdapter{
     private static final int TAB_COUNT = 3;
     private static final int PAST_TAB_POS = 0;
     private static final int FUTURE_TAB_POS=1;

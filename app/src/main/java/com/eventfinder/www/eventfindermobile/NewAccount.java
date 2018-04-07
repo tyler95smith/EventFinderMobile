@@ -127,7 +127,7 @@ public class NewAccount extends AppCompatActivity {
 
         if (!dateValidator.validate(dob.getText().toString()))
         {
-            dob.setError("Date of Birth is not formatted correctly");
+            //dob.setError("Date of Birth is not formatted correctly");
             //isValid = false;
         }
 
@@ -224,12 +224,12 @@ public class NewAccount extends AppCompatActivity {
                 {
                     textView.setError("Date of Birth cannot be blank!");
                 }
-
+/*
                 if (!dateValidator.validate(text))
                 {
                     textView.setError("Date of Birth is not formatted correctly");
                 }
-
+*/
                 if (dateValidator.inFuture(dateValidator.returnDate(textView.getText().toString())))
                 {
                     textView.setError("Date of Birth cannot be in the future");

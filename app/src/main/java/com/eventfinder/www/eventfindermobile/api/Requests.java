@@ -203,6 +203,39 @@ public class Requests {
         }
     }
 
+    public static JsonArrayRequest getMyEvents(int userID, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "getmyevents/?user=" + userID;
+
+        try {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            listener.onResponse(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+                    })
+            {
+                @Override
+                public HashMap<String, String> getHeaders () throws AuthFailureError {
+                    EventFinderAPI api = new EventFinderAPI();
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "JWT " + api.getToken());
+                    System.out.println("Headers " + params.toString());
+                    return params;
+                }
+            };
+            return req;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     /*
         Volley Request to get a JWT (JSON Web Token)
