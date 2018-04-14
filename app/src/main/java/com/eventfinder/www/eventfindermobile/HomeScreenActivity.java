@@ -1,5 +1,6 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
@@ -21,12 +22,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class HomeScreenActivity extends AppCompatActivity {
+public class HomeScreenActivity extends AppCompatActivity implements InterestSearch.InterestListener{
 
     Bundle bundle;
     ListView eventList;
     DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
     Event[] events;
+    Button button = (Button)findViewById(R.id.interest);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,5 +112,10 @@ public class HomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, String selected) {
+        button.setText(selected);
     }
 }

@@ -51,7 +51,7 @@ public class InviteBannerFragment extends ListFragment {
     OnHeadlineSelectedListener mCallback;
 
     public interface OnHeadlineSelectedListener {
-        public void onArticleSelected(Notification notif);
+        public void onArticleSelected(Notification not);
     }
 
     Intent intent;
