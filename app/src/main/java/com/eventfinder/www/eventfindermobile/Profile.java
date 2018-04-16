@@ -66,7 +66,12 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
 
-        user = (User) bundle.getSerializable("user");
+        if(bundle.containsKey("viewUser")) {
+            user = (User)bundle.getSerializable("viewUser");
+            bundle.remove("viewUser");
+        } else {
+            user = (User) bundle.getSerializable("user");
+        }
 
         if(!user.me) {
             edit.setVisibility(GONE);
