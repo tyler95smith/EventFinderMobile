@@ -28,12 +28,14 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
     ListView eventList;
     DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm");
     Event[] events;
-    Button button = (Button)findViewById(R.id.interest);
+    Button interestBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        interestBtn = (Button)findViewById(R.id.interest);
+
         Event event = new Event();
         Event event2 = new Event();
         events = new Event[] {
@@ -116,6 +118,6 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String selected) {
-        button.setText(selected);
+        interestBtn.setText(selected);
     }
 }
