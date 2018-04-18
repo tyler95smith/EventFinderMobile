@@ -106,12 +106,12 @@ public class NotificationsActivity extends AppCompatActivity implements InviteBa
     }
 
     void displayNotif() {
-        getSupportFragmentManager().beginTransaction()
+        /*getSupportFragmentManager().beginTransaction()
                 .add(R.id.invite, new InviteBannerFragment())
                 .commit();
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.message, new NotificationBanner())
-                .commit();
+                .commit();*/
     }
 
     @Override
