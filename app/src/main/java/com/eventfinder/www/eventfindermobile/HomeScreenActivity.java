@@ -59,7 +59,7 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
         eventList.setAdapter(simpleAdapter);
 
         User user = new User();
-        bundle = new Bundle();
+        bundle = getIntent().getExtras();
         bundle.putSerializable("user", (Serializable)user);
 
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);

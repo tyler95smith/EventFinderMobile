@@ -19,6 +19,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.FileReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -80,7 +82,7 @@ public class Login extends AppCompatActivity {
                     api.setToken(mytoken);
                     System.out.println("Saved Token:" + api.getToken());
                     Toast.makeText(context, "Login Successful", duration).show();
-                    startActivity(new Intent(Login.this, HomeScreenActivity.class));
+                    getUserInfo();
                 } catch (Exception E) {
                     System.out.println("Not valid JSON");
                 }
@@ -89,6 +91,49 @@ public class Login extends AppCompatActivity {
 
         // Make API request to get a new JWT token
         JsonObjectRequest req = Requests.login(getCredentials(), listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    void getUserInfo() {
+        final Context context = getApplicationContext();
+        final Bundle bundle = new Bundle();
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                try {
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                    User user = new User();
+                    JSONObject temp = (JSONObject) response;
+                    JSONObject userPart = temp.getJSONObject("user");
+                    DateValidator valid = new DateValidator();
+                    Date birth = valid.returnDate(temp.getString("date_of_birth"));
+                    user.lastName = userPart.getString("last_name");
+                    user.firstName = userPart.getString("first_name");
+                    user.hideLocation = temp.getBoolean("hideLocation");
+                    user.primaryLocation = temp.getString("primaryLocation");
+                    user.dateOfBirth = birth;
+                    user.email = userPart.getString("email");
+                    user.username = userPart.getString("username");
+                    user.bio = temp.getString("bio");
+                    user.me = true;
+                    user.Person_ID = temp.getInt("id");
+                    user.isBanned = temp.getBoolean("isBanned");
+                    bundle.putSerializable("me", user);
+                    Intent intent = new Intent(Login.this, HomeScreenActivity.class);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }catch (Exception e) {}
+            }
+        };
+        JsonObjectRequest req = Requests.getMyInfo(getCredentials(), listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);

@@ -65,18 +65,19 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final InterestFragment newFragment = new InterestFragment();
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
+        user = (User)bundle.getSerializable("me");
 
-        if(bundle.containsKey("viewUser")) {
+        /**if(bundle.containsKey("viewUser")) {
             user = (User)bundle.getSerializable("viewUser");
             bundle.remove("viewUser");
         } else {
-            user = (User) bundle.getSerializable("user");
+            user = (User) bundle.getSerializable("me");
         }
 
-        if(!user.me) {
-            edit.setVisibility(GONE);
-            report.setVisibility(VISIBLE);
-        }
+        //if(!user.me) {
+        //    edit.setVisibility(GONE);
+        //    report.setVisibility(VISIBLE);
+        //}**/
 
         about.setText(user.bio);
         String fullName = user.firstName + " " + user.lastName;

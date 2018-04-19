@@ -281,13 +281,6 @@ public class NewAccount extends AppCompatActivity {
                 valid[0] = true;
             }
         };
-        JsonObjectRequest req = Requests.ValidateUsername(getUserParams(), listen);
-        if(type == "email") {
-            req = Requests.ValidateEmail(getUserParams(), listen);
-        }
-        if(req != null) {
-            VolleyHandler.getInstance(context).addToRequestQueue(req);
-        }
         return valid[0];
     }
 

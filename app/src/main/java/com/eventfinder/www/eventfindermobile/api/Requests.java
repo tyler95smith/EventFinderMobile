@@ -29,39 +29,6 @@ import java.util.Vector;
 
 public class Requests {
 
-    public static JsonObjectRequest ValidateUsername(HashMap<String, String> username, final VolleyResponseListener listener) {
-        String url = EventFinderAPI.API_URL + "validateusername/";
-        JSONObject emailJSON = new JSONObject(username);
-        JsonObjectRequest req = new JsonObjectRequest(url, emailJSON, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                listener.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(error.toString());
-            }
-        });
-        return req;
-    }
-
-    public static JsonObjectRequest ValidateEmail(HashMap<String,String> email, final VolleyResponseListener listener) {
-        String url = EventFinderAPI.API_URL + "validateemail/";
-        JSONObject emailJSON = new JSONObject(email);
-        JsonObjectRequest req = new JsonObjectRequest(url, emailJSON, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                listener.onResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onError(error.toString());
-            }
-        });
-        return req;
-    }
 
     public static JsonObjectRequest createPersonalAccount(HashMap<String,String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
 
@@ -224,6 +191,25 @@ public class Requests {
                 }
             });
             return req;
+    }
+
+    public static JsonObjectRequest getMyInfo(HashMap<String,String> params, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "getmyinfo/";
+        try {
+            JSONObject myJSON = new JSONObject(params);
+            JsonObjectRequest req = new JsonObjectRequest(url, myJSON, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    listener.onResponse(response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    listener.onError(error.toString());
+                }
+            });
+            return req;
+        }catch (Exception e){return null;}
     }
 
     public static JsonObjectRequest createNewEvent(HashMap<String,String> params, ArrayList<Integer> interestIDs, ArrayList<Integer> attendeeIDs, final VolleyResponseListener listener) {
