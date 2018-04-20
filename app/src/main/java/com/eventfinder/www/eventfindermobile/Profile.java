@@ -67,17 +67,17 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final Bundle bundle = getIntent().getExtras();
         user = (User)bundle.getSerializable("me");
 
-        /**if(bundle.containsKey("viewUser")) {
+        if(bundle.containsKey("viewUser")) {
             user = (User)bundle.getSerializable("viewUser");
             bundle.remove("viewUser");
         } else {
             user = (User) bundle.getSerializable("me");
         }
 
-        //if(!user.me) {
-        //    edit.setVisibility(GONE);
-        //    report.setVisibility(VISIBLE);
-        //}**/
+        if(!user.me) {
+            edit.setVisibility(GONE);
+            report.setVisibility(VISIBLE);
+        }
 
         about.setText(user.bio);
         String fullName = user.firstName + " " + user.lastName;
@@ -199,6 +199,16 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
                         edit.setText("Edit Profile");
                         image.setOnClickListener(null);
                     }
+                }
+            });
+
+            report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bundle.putSerializable("userEvent", user);
+                    getIntent().putExtras(bundle);
+                    android.support.v4.app.DialogFragment reportFrag = new ReportFragment();
+                    reportFrag.show(getSupportFragmentManager(), "Report");
                 }
             });
         }
