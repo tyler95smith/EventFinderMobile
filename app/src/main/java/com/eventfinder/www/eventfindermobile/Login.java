@@ -103,7 +103,7 @@ public class Login extends AppCompatActivity {
         VolleyResponseListener listener = new VolleyResponseListener() {
             @Override
             public void onError(String message) {
-                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
