@@ -205,20 +205,19 @@ public class Requests {
 
     //----------------------------------------------------------------------------
     //
-    //  Create a new event with the current logged in user as the host.
+    //  Create a new event with the current logged in user as the host and intial
+    //  attendee.
     //
     //----------------------------------------------------------------------------
-    public static JsonObjectRequest createNewEvent(HashMap<String,String> params, ArrayList<Integer> interestIDs, ArrayList<Integer> attendeeIDs, final VolleyResponseListener listener) {
+    public static JsonObjectRequest createNewEvent(HashMap<String,String> params, ArrayList<Integer> interestIDs, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "createevent/";
         try {
             JSONArray interests = new JSONArray();
             if(interestIDs != null) {
                 interests = new JSONArray(interestIDs);
             }
-            JSONArray attendees = new JSONArray(attendeeIDs);
             JSONObject eventJSON = new JSONObject(params);
             eventJSON.put("interests", interests);
-            eventJSON.put("attendees", attendees);
             System.out.print(eventJSON);
 
             return createJsonObjReq(Request.Method.POST, url, eventJSON, listener, true);

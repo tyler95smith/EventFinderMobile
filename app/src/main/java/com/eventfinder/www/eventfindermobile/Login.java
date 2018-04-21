@@ -117,6 +117,7 @@ public class Login extends AppCompatActivity {
                     Date birth = valid.returnDate(temp.getString("date_of_birth"));
                     user.lastName = userPart.getString("last_name");
                     user.firstName = userPart.getString("first_name");
+                    user.id = userPart.getInt("id");
                     user.hideLocation = temp.getBoolean("hideLocation");
                     user.primaryLocation = temp.getString("primaryLocation");
                     user.dateOfBirth = birth;
@@ -133,7 +134,7 @@ public class Login extends AppCompatActivity {
                 }catch (Exception e) {}
             }
         };
-        JsonObjectRequest req = Requests.getMyInfo(getCredentials(), listener);
+        JsonObjectRequest req = Requests.getMyInfo(listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
