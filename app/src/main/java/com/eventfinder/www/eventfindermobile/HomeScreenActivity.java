@@ -1,6 +1,7 @@
 package com.eventfinder.www.eventfindermobile;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.FragmentActivity;
@@ -13,6 +14,15 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.eventfinder.www.eventfindermobile.api.EventFinderAPI;
+import com.eventfinder.www.eventfindermobile.api.Requests;
+import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
+import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
+
+import org.json.JSONArray;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -36,6 +46,7 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
         setContentView(R.layout.activity_home_screen);
         interestBtn = (Button)findViewById(R.id.interest);
 
+        getRecentEvents();
         Event event = new Event();
         Event event2 = new Event();
         events = new Event[] {
@@ -119,5 +130,23 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, String selected) {
         interestBtn.setText(selected);
+    }
+
+    private void getRecentEvents(){
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_LONG;
+        VolleyResponseListener listener = new VolleyResponseListener(){
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, "Recent events could not be loaded.", duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                Toast.makeText(context, "Recent events loaded successfully.", duration).show();
+            }
+        };
+        JsonArrayRequest req = Requests.getRecentEvents(10,listener);
+        VolleyHandler.getInstance(context).addToRequestQueue(req);
     }
 }
