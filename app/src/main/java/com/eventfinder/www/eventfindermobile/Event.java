@@ -10,18 +10,18 @@ import java.util.Date;
  */
 
 public class Event implements Serializable {
-    Date dateCreated = new Date();
-    String eventName = "Test";
-    String location = "Test";
-    Date eventDate = new Date();
-    String time = "12:00 am";
-    String description = ".";
-    int ageMin = 0;
-    int ageMax = 100;
-    int id;
-    ArrayList<String> interests;
-    ArrayList<User> attendees = new ArrayList<>();
-    User host;
-    int maxAttendees;
-    boolean isHidden = false;
+    public int id = 0; //default 0
+    public Date dateCreated = new Date();
+    public String eventName = "Test";
+    public String location = "Test";
+    public Date eventDate = new Date();
+    public String time = "12:00 am";
+    public String description = ".";
+    public int ageMin = 0;
+    public int ageMax = 100;
+    public ArrayList<String> interests;
+    public ArrayList<User> attendees = new ArrayList<>();
+    public User host;
+    public int maxAttendees;
+    public boolean isHidden = false;
 }

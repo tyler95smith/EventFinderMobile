@@ -65,6 +65,8 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final InterestFragment newFragment = new InterestFragment();
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
+
+        //TODO: Some activities are not passing user in bundle, causes app to crash. Will need to fix this or find a more universal way to store/get logged in user data.
         user = (User)bundle.getSerializable("me");
 
         if(bundle.containsKey("viewUser")) {

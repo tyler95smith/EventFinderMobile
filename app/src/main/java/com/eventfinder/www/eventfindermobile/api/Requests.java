@@ -82,6 +82,59 @@ public class Requests {
         );
     }
 
+    //---------------------------------------------------------------------------------
+    //
+    //  Creates JsonArrayRequest with option to include token in request header.
+    //
+    //---------------------------------------------------------------------------------
+    private static JsonArrayRequest createJsonArrReq(int method, String url, JSONArray json, final VolleyResponseListener listener, boolean withToken){
+
+        //
+        //Include Token in request header
+        if(withToken) {
+            return new JsonArrayRequest(method, url, json,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            listener.onResponse(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+                    }
+            )
+            {
+                @Override
+                public HashMap<String, String> getHeaders() throws AuthFailureError {
+                    EventFinderAPI api = new EventFinderAPI();
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "JWT " + api.getToken());
+                    return params;
+                }
+            };
+        }
+
+        //
+        //Request with no token in header
+        return new JsonArrayRequest(method, url, json,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        listener.onResponse(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onError(error.toString());
+                    }
+                }
+        );
+    }
+
     public static JsonObjectRequest createPersonalAccount(HashMap<String,String> acctParams, HashMap<String, String> userParams, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "createpersonaccount/";
         try {
@@ -189,6 +242,39 @@ public class Requests {
         }
     }
 
+    public static JsonArrayRequest getMyEvents(int userID, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "getmyevents/?user=" + userID;
+
+        try {
+            JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url, null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            listener.onResponse(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            listener.onError(error.toString());
+                        }
+                    })
+            {
+                @Override
+                public HashMap<String, String> getHeaders () throws AuthFailureError {
+                    EventFinderAPI api = new EventFinderAPI();
+                    HashMap<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", "JWT " + api.getToken());
+                    System.out.println("Headers " + params.toString());
+                    return params;
+                }
+            };
+            return req;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     /*
         Volley Request to get a JWT (JSON Web Token)
@@ -211,24 +297,27 @@ public class Requests {
 
     //----------------------------------------------------------------------------
     //
-    //  Create a new event with the current logged in user as the host.
+    //  Create a new event with the current logged in user as the host and initial
+    //  attendee.
     //
     //----------------------------------------------------------------------------
-    public static JsonObjectRequest createNewEvent(HashMap<String,String> params, ArrayList<Integer> interestIDs, ArrayList<Integer> attendeeIDs, final VolleyResponseListener listener) {
+    public static JsonObjectRequest createNewEvent(HashMap<String,String> params, ArrayList<Integer> interestIDs, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "createevent/";
         try {
             JSONArray interests = new JSONArray();
             if(interestIDs != null) {
                 interests = new JSONArray(interestIDs);
             }
-            JSONArray attendees = new JSONArray(attendeeIDs);
             JSONObject eventJSON = new JSONObject(params);
             eventJSON.put("interests", interests);
-            eventJSON.put("attendees", attendees);
-            System.out.print(eventJSON);
 
             return createJsonObjReq(Request.Method.POST, url, eventJSON, listener, true);
         }
         catch (Exception e) { return null;}
+    }
+
+    public static JsonArrayRequest getRecentEvents(int n, final VolleyResponseListener listener){
+        String url = EventFinderAPI.API_URL + "getrecentevents/" + n + "/";
+        return createJsonArrReq(Request.Method.GET, url, null, listener, true);
     }
 }
