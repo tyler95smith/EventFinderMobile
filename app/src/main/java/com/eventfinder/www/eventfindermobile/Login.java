@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
                     user.username = userPart.getString("username");
                     user.bio = temp.getString("bio");
                     user.me = true;
-                    user.Person_ID = temp.getInt("id");
+                    user.person_ID = temp.getInt("id");
                     user.isBanned = temp.getBoolean("isBanned");
                     bundle.putSerializable("me", user);
                     Intent intent = new Intent(Login.this, HomeScreenActivity.class);

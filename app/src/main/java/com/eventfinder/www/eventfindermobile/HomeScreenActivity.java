@@ -126,6 +126,7 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
         VolleyResponseListener listener = new VolleyResponseListener(){
             @Override
             public void onError(String message) {
+                System.out.println(message);
                 Toast.makeText(context, "Recent events could not be loaded.", duration).show();
             }
 
