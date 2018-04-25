@@ -155,13 +155,19 @@ public class Requests {
             userJSON.put("username", "changeme2");
             JSONObject acctJSON = new JSONObject(acctParams);
             acctJSON.put("user", userJSON);
-            acctJSON.put("id", "2"); // this is currently hard coded and needs to be changed to use the user objects id (user.id) but will need the id passed to this function.
 
             return createJsonObjReq(Request.Method.PATCH, url, acctJSON, listener, true);
 
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    public static JsonObjectRequest updateEvent(HashMap<String, String> params, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "updateevent/";
+        JSONObject eventJSON = new JSONObject(params);
+
+        return createJsonObjReq(Request.Method.PATCH, url, eventJSON, listener, false);
     }
 
     /*
