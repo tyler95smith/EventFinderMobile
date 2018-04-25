@@ -104,14 +104,14 @@ public class ViewEventActivity extends AppCompatActivity {
         EditText name = (EditText) findViewById(R.id.eventName);
         EditText when = (EditText)findViewById(R.id.Date);
         EditText time = (EditText)findViewById(R.id.Time);
-        String dateTime = when + " " + time;
+        String dateTime = when.getText() + " " + time.getText();
         EditText where = (EditText)findViewById(R.id.Place);
         MultiAutoCompleteTextView des = (MultiAutoCompleteTextView)findViewById(R.id.description);
         params.put("id", String.valueOf(event.id));
-        params.put("event_name", name.toString());
+        params.put("event_name", name.getText().toString());
         params.put("event_date", dateTime);
-        params.put("location", where.toString());
-        params.put("description", des.toString());
+        params.put("location", where.getText().toString());
+        params.put("description", des.getText().toString());
         return params;
     }
 
