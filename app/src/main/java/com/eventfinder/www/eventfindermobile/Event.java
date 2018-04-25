@@ -10,7 +10,7 @@ import java.util.Date;
  */
 
 public class Event implements Serializable {
-    public int id = 0; //default 0
+    public int id = 1; //default 0
     public Date dateCreated = new Date();
     public String eventName = "Test";
     public String location = "Test";
