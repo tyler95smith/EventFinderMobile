@@ -258,7 +258,7 @@ public class Requests {
 
     //----------------------------------------------------------------------------
     //
-    //  Create a new event with the current logged in user as the host and intial
+    //  Create a new event with the current logged in user as the host and initial
     //  attendee.
     //
     //----------------------------------------------------------------------------
@@ -271,7 +271,6 @@ public class Requests {
             }
             JSONObject eventJSON = new JSONObject(params);
             eventJSON.put("interests", interests);
-            System.out.print(eventJSON);
 
             return createJsonObjReq(Request.Method.POST, url, eventJSON, listener, true);
         }
