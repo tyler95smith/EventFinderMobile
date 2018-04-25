@@ -66,7 +66,15 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
 
-        user = (User) bundle.getSerializable("user");
+        //TODO: Some activities are not passing user in bundle, causes app to crash. Will need to fix this or find a more universal way to store/get logged in user data.
+        user = (User)bundle.getSerializable("me");
+
+        if(bundle.containsKey("viewUser")) {
+            user = (User)bundle.getSerializable("viewUser");
+            bundle.remove("viewUser");
+        } else {
+            user = (User) bundle.getSerializable("me");
+        }
 
         if(!user.me) {
             edit.setVisibility(GONE);
@@ -195,6 +203,16 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
                     }
                 }
             });
+
+            report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    bundle.putSerializable("userEvent", user);
+                    getIntent().putExtras(bundle);
+                    android.support.v4.app.DialogFragment reportFrag = new ReportFragment();
+                    reportFrag.show(getSupportFragmentManager(), "Report");
+                }
+            });
         }
     }
 
@@ -250,6 +268,7 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         //EditText dob = (EditText)findViewById(R.id.date_of_birth);
         EditText bio = (EditText)findViewById(R.id.aboutMe);
         //params.put("date_of_birth", dob.getText().toString());
+        params.put("id", String.valueOf(user.id));
         params.put("bio",bio.getText().toString());
         return params;
     }

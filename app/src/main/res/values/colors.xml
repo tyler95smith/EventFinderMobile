@@ -3,6 +3,19 @@
     <color name="colorPrimary">#29841f</color>
     <color name="colorPrimaryDark">#1f6e16</color>
     <color name="colorAccent">#50af4c</color>
+    <color name="white">#ffffff</color>
 
     <color name="black_overlay">#66000000</color>
+
+    <color name="msg_bg_you">#5eb964</color>
+    <color name="msg_bg_from">#e5e7eb</color>
+    <color name="msg_border_color">#a1a1a1</color>
+    <color name="msg_from_label">#777777</color>
+    <color name="msg_from_text">#434343</color>
+    <color name="msg_you_text">#ffffff</color>
+    <color name="msg_input_bg">#e8e8e8</color>
+    <color name="msg_input_text">#626262</color>
+    <color name="msg_submit_btn_bg">#1e6258</color>
+    <color name="msg_submit_btn_text">#ffffff</color>
+
 </resources>

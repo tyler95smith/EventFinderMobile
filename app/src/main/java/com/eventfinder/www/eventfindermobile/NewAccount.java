@@ -281,13 +281,6 @@ public class NewAccount extends AppCompatActivity {
                 valid[0] = true;
             }
         };
-        JsonObjectRequest req = Requests.ValidateUsername(getUserParams(), listen);
-        if(type == "email") {
-            req = Requests.ValidateEmail(getUserParams(), listen);
-        }
-        if(req != null) {
-            VolleyHandler.getInstance(context).addToRequestQueue(req);
-        }
         return valid[0];
     }
 
@@ -328,10 +321,10 @@ public class NewAccount extends AppCompatActivity {
 
         // Create listener to determine how to handle the response from the request
         VolleyResponseListener listener = new VolleyResponseListener() {
-            int duration = Toast.LENGTH_SHORT;
+            int duration = Toast.LENGTH_LONG;
             @Override
             public void onError(String message) {
-                Toast.makeText(context, "Oops. There was an error making the request.", duration).show();
+                Toast.makeText(context, "A User with that Username or Email already exists. " , duration).show();
             }
 
             @Override

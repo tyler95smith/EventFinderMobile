@@ -1,6 +1,9 @@
 package com.eventfinder.www.eventfindermobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationBuilderWithBuilderAccessor;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,16 +11,31 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class NotificationsActivity extends AppCompatActivity {
+import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
+
+import org.json.JSONArray;
+
+import java.util.Vector;
+
+public class NotificationsActivity extends AppCompatActivity implements InviteBannerFragment.OnHeadlineSelectedListener, NotificationBanner.OnHeadlineSelectedListener{
     private TabLayout tabs;
     private ViewPager viewPager;
     private NotificationsPagerAdapter adapter;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+        bundle = getIntent().getExtras();
+        User user = (User)bundle.getSerializable("user");
+
+        displayNotif();
+
+        //get user notifications
 
         //
         // Set up tabs (TabLayout) with the Viewpager using the NotificationsPagerAdapter
@@ -85,5 +103,31 @@ public class NotificationsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    void displayNotif() {
+        /*getSupportFragmentManager().beginTransaction()
+                .add(R.id.invite, new InviteBannerFragment())
+                .commit();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.message, new NotificationBanner())
+                .commit();*/
+    }
+
+    @Override
+    public void onArticleSelected(Notification not) {
+        if(not.isInvite) {
+            Intent intent = new Intent(NotificationsActivity.this, Profile.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("viewUser", not.user);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(NotificationsActivity.this, ViewEventActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("event", not.event);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 }
