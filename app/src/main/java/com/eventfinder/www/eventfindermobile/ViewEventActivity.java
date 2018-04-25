@@ -23,13 +23,14 @@ import java.util.HashMap;
 
 public class ViewEventActivity extends AppCompatActivity {
     Event event;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_event);
         final Bundle bundle = getIntent().getExtras();
-        User user = (User)bundle.getSerializable("user");
+        user = (User)bundle.getSerializable("me");
         event = (Event)bundle.getSerializable("event");
         final EditText name = (EditText) findViewById(R.id.eventName);
         final EditText when = (EditText)findViewById(R.id.Date);
@@ -80,6 +81,13 @@ public class ViewEventActivity extends AppCompatActivity {
             }
         });
 
+        request.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                sendRequest(user,event);
+            }
+        });
+
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,6 +131,33 @@ public class ViewEventActivity extends AppCompatActivity {
         };
 
         JsonObjectRequest req = Requests.updateEvent(getParams(), listener);
+
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    private void sendRequest(User u, Event e) {
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+
+        HashMap<String,String> params = new HashMap();
+        params.put("event", String.valueOf(e.id));
+        params.put("requester", String.valueOf(u.id));
+
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                Toast.makeText(context, "RSVP successfully sent", duration).show();
+            }
+        };
+
+        JsonObjectRequest req = Requests.SendRsvpRequest(params,listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
