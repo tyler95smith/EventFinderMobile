@@ -51,7 +51,7 @@ public class ViewEventActivity extends AppCompatActivity {
         }
 
         final Button report = (Button)findViewById(R.id.reportEvent);
-        if(event.host == user) {
+        if(event.host != user) {
             report.setVisibility(View.GONE);
             edit.setVisibility(View.VISIBLE);
             request.setVisibility(View.GONE);

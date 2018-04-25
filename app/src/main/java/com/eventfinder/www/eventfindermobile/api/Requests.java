@@ -114,7 +114,7 @@ public class Requests {
         String url = EventFinderAPI.API_URL + "updateevent/";
         JSONObject eventJSON = new JSONObject(params);
 
-        return createJsonObjReq(Request.Method.PATCH, url, eventJSON, listener, false);
+        return createJsonObjReq(Request.Method.PUT, url, eventJSON, listener, true);
     }
 
     /*

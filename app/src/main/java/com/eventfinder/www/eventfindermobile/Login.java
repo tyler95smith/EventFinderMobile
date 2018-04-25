@@ -133,7 +133,7 @@ public class Login extends AppCompatActivity {
                 }catch (Exception e) {}
             }
         };
-        JsonObjectRequest req = Requests.getMyInfo(getCredentials(), listener);
+        JsonObjectRequest req = Requests.getMyInfo(listener);
 
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);

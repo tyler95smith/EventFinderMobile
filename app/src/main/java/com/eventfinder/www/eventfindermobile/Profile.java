@@ -266,7 +266,7 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         //EditText dob = (EditText)findViewById(R.id.date_of_birth);
         EditText bio = (EditText)findViewById(R.id.aboutMe);
         //params.put("date_of_birth", dob.getText().toString());
-        params.put("id", String.valueOf(user.id));
+        params.put("id", String.valueOf(user.Person_ID));
         params.put("bio",bio.getText().toString());
         return params;
     }
