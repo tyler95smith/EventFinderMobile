@@ -22,9 +22,6 @@ public class DataParsing {
     //
     //-------------------------------------------------------------------------------
     public static Event EventFromJSON(JSONObject eventData){
-        System.out.println(eventData);
-        SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSSSS'Z'");
-        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
         Event e = new Event();
         try {
             e.id = eventData.getInt("id");
@@ -57,6 +54,11 @@ public class DataParsing {
         }
     }
 
+    //-------------------------------------------------------------------------------
+    //
+    //  Build User object from Person JSON.
+    //
+    //-------------------------------------------------------------------------------
     public static User UserFromPersonJSON(JSONObject person) {
         User u = new User();
         try {
@@ -80,11 +82,23 @@ public class DataParsing {
         return null;
     }
 
+    //-------------------------------------------------------------------------------
+    //
+    //  Get Date object from string representation.
+    //      Currently supported formats:
+    //          df1: yyyy-MM-dd'T'hh:mm:ss.SSSSSS'Z'
+    //          df2: yyyy-MM-dd'T'hh:mm:ss'Z'
+    //          df3: yyyy-MM-dd
+    //-------------------------------------------------------------------------------
     public static Date DateFromString(String dateString){
+
         SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSSSS'Z'");
         SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
         SimpleDateFormat df3 = new SimpleDateFormat("yyyy-MM-dd");
+
         try {
+            //
+            // Note: Would be better to use regular expressions to check if string matches a supported date string format.
             if (dateString.contains(".")) {
                 return df1.parse(dateString);
             } else if(dateString.contains("Z")) {
