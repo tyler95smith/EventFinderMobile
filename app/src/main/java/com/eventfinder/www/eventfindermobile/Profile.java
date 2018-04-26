@@ -87,7 +87,11 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         EditText username = (EditText) findViewById(R.id.UsernameBox);
         username.setText(user.username);
         TextView gender = (TextView) findViewById(R.id.GenderBox);
-        gender.setText(user.gender);
+        if(user.isFemale) {
+            gender.setText("Female");
+        } else {
+            gender.setText("Male");
+        }
         TextView age = (TextView) findViewById(R.id.AgeBox);
         Calendar now = Calendar.getInstance();
         Calendar dob = Calendar.getInstance();
