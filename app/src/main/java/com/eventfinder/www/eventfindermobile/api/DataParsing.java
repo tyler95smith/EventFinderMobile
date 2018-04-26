@@ -1,6 +1,7 @@
 package com.eventfinder.www.eventfindermobile.api;
 
 import com.eventfinder.www.eventfindermobile.Event;
+import com.eventfinder.www.eventfindermobile.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,6 +25,7 @@ public class DataParsing {
         SimpleDateFormat df1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSSSS'Z'");
         SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
         Event e = new Event();
+        User host = new User();
         try {
             e.id = eventData.getInt("id");
             if (eventData.getString("date_created").contains(".")) {
@@ -42,6 +44,11 @@ public class DataParsing {
             e.ageMin = eventData.getInt("age_min");
             e.ageMax = eventData.getInt("age_max");
             e.isHidden = eventData.getBoolean("is_hidden");
+            JSONObject hostInfo = eventData.getJSONObject("host_info");
+            JSONObject hostUser = hostInfo.getJSONObject("user");
+            host.username = hostUser.getString("username");
+            host.id = hostUser.getInt("id");
+            e.host = host;
 
             // TODO: Need to figure out how interests will work and update app/api accordingly.
             // currently api returns id's of interests stored in the data base.

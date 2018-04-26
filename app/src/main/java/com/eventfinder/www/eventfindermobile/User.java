@@ -9,19 +9,19 @@ import java.util.Date;
  */
 
 public class User implements Serializable {
-    String username = ".";
-    String firstName = ".";
-    String lastName = ".";
-    String email = ".";
-    Date dateOfBirth = new Date();
-    String bio = ".";
-    String gender = "Male";
+    public String username = ".";
+    public String firstName = ".";
+    public String lastName = ".";
+    public String email = ".";
+    public Date dateOfBirth = new Date();
+    public String bio = ".";
+    public String gender = "Male";
     String primaryLocation;
-    ArrayList<String> interests = new ArrayList<>();
-    int id = 0;
-    int Person_ID = 0;
+    public ArrayList<String> interests = new ArrayList<>();
+    public int id = 0;
+    public int Person_ID = 0;
     boolean hideLocation = false;
     boolean isBanned = false;
     boolean hasInterests = false;
-    boolean me = true;
+    public boolean me = true;
 }

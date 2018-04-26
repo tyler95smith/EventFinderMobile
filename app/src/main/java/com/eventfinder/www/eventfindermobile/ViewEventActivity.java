@@ -18,6 +18,7 @@ import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -29,7 +30,7 @@ public class ViewEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_event);
         final Bundle bundle = getIntent().getExtras();
-        User user = (User)bundle.getSerializable("user");
+        User user = (User)bundle.getSerializable("me");
         event = (Event)bundle.getSerializable("event");
         final EditText name = (EditText) findViewById(R.id.eventName);
         final EditText when = (EditText)findViewById(R.id.Date);
@@ -43,7 +44,8 @@ public class ViewEventActivity extends AppCompatActivity {
         if(event != null)
         {
             name.setText(event.eventName);
-            String date = event.eventDate.toString();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String date = format.format(event.eventDate);
             when.setText(date);
             time.setText(event.time);
             where.setText(event.location);
@@ -51,11 +53,13 @@ public class ViewEventActivity extends AppCompatActivity {
         }
 
         final Button report = (Button)findViewById(R.id.reportEvent);
-        if(event.host != user) {
-            report.setVisibility(View.GONE);
-            edit.setVisibility(View.VISIBLE);
-            request.setVisibility(View.GONE);
-            message.setVisibility(View.GONE);
+        if(event.host != null) {
+            if (event.host.id == user.id) {
+                report.setVisibility(View.GONE);
+                edit.setVisibility(View.VISIBLE);
+                request.setVisibility(View.GONE);
+                message.setVisibility(View.GONE);
+            }
         }
 
         edit.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +101,14 @@ public class ViewEventActivity extends AppCompatActivity {
         EditText when = (EditText)findViewById(R.id.Date);
         EditText time = (EditText)findViewById(R.id.Time);
         String dateTime = when.getText() + " " + time.getText();
+        DateValidator valid = new DateValidator();
+        Date date = valid.getCorrectFormat(dateTime);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         EditText where = (EditText)findViewById(R.id.Place);
         MultiAutoCompleteTextView des = (MultiAutoCompleteTextView)findViewById(R.id.description);
         params.put("id", String.valueOf(event.id));
         params.put("event_name", name.getText().toString());
-        params.put("event_date", dateTime);
+        params.put("event_date", format.format(date));
         params.put("location", where.getText().toString());
         params.put("description", des.getText().toString());
         return params;
