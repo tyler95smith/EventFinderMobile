@@ -54,27 +54,16 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
 
         bundle = getIntent().getExtras();
 
-        User user = (User)bundle.getSerializable("user");
+        User user = (User)bundle.getSerializable("me");
 
-        // don't think user is being implemented yet
-        /*
         if (user != null) {
             GetPastEvents(user.id);
             GetFutureEvents(user.id);
-            GetMyEvents(user.id);
+            //GetMyEvents(user.id);
         } else {
             //make error toast
         }
 
-
-        TextView testText = (TextView)findViewById(R.id.testText);
-        testText.setText(String.valueOf(user.id));
-*/
-        // once the user logged in is being passed around switch to the above code
-        int testId = 2;
-        GetPastEvents(testId);
-        GetFutureEvents(testId);
-        //GetMyEvents(testId);
 /*
         // code to ver
         LinearLayout linearLayout = findViewById(R.id.my_events_list);
@@ -119,7 +108,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FavoriteEventsActivity.this, HomeScreenActivity.class);
-                intent.putExtra("bundle", bundle);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
