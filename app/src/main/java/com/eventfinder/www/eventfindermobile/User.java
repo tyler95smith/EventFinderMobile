@@ -15,7 +15,7 @@ public class User implements Serializable {
     public String email = ".";
     public Date dateOfBirth = new Date();
     public String bio = ".";
-    public String gender = "Male";
+    public boolean isFemale = true;
     public String primaryLocation;
     public ArrayList<String> interests = new ArrayList<>();
     public int id = 0;
