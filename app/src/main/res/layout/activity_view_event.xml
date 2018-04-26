@@ -16,8 +16,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/message" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/reportEvent"
@@ -61,10 +60,10 @@
     <MultiAutoCompleteTextView
         android:id="@+id/description"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:enabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/message"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Description" />
@@ -121,11 +120,11 @@
 
     <EditText
         android:id="@+id/Time"
-        android:layout_width="97dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:enabled="false"
-        android:text="7:00PM"
+        android:text="7:00 PM"
         android:textAlignment="textEnd"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/Date"

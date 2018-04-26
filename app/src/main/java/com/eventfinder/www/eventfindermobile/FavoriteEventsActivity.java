@@ -118,7 +118,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(FavoriteEventsActivity.this, HomeScreenActivity.class);
-                intent.putExtra("bundle", bundle);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

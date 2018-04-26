@@ -54,12 +54,10 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
         eventList=(ListView)findViewById(R.id.bannerlist);
         eventListAdapter = new EventListAdapter(this, events);
         eventList.setAdapter(eventListAdapter);
+        bundle = getIntent().getExtras();
+        User user = (User)bundle.getSerializable("me");
 
         getRecentEvents();
-
-        User user = new User();
-        bundle = getIntent().getExtras();
-        bundle.putSerializable("user", (Serializable)user);
 
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
@@ -126,6 +124,7 @@ public class HomeScreenActivity extends AppCompatActivity implements InterestSea
         VolleyResponseListener listener = new VolleyResponseListener(){
             @Override
             public void onError(String message) {
+                System.out.println(message);
                 Toast.makeText(context, "Recent events could not be loaded.", duration).show();
             }
 

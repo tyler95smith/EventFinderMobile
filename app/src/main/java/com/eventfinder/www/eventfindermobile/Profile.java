@@ -87,7 +87,11 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         EditText username = (EditText) findViewById(R.id.UsernameBox);
         username.setText(user.username);
         TextView gender = (TextView) findViewById(R.id.GenderBox);
-        gender.setText(user.gender);
+        if(user.isFemale) {
+            gender.setText("Female");
+        } else {
+            gender.setText("Male");
+        }
         TextView age = (TextView) findViewById(R.id.AgeBox);
         Calendar now = Calendar.getInstance();
         Calendar dob = Calendar.getInstance();
@@ -268,7 +272,7 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         //EditText dob = (EditText)findViewById(R.id.date_of_birth);
         EditText bio = (EditText)findViewById(R.id.aboutMe);
         //params.put("date_of_birth", dob.getText().toString());
-        params.put("id", String.valueOf(user.Person_ID));
+        params.put("id", String.valueOf(user.person_ID));
         params.put("bio",bio.getText().toString());
         return params;
     }
