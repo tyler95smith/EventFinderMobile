@@ -163,6 +163,13 @@ public class Requests {
         }
     }
 
+    public static JsonObjectRequest SendRsvpRequest(HashMap<String, String> params, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "creatersvp/";
+        JSONObject rsvpJSON = new JSONObject(params);
+
+        return createJsonObjReq(Request.Method.POST, url, rsvpJSON, listener, true);
+    }
+
     public static JsonObjectRequest updateEvent(HashMap<String, String> params, final VolleyResponseListener listener) {
         String url = EventFinderAPI.API_URL + "updateevent/";
         JSONObject eventJSON = new JSONObject(params);

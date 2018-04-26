@@ -16,12 +16,12 @@ public class User implements Serializable {
     public Date dateOfBirth = new Date();
     public String bio = ".";
     public String gender = "Male";
-    String primaryLocation;
+    public String primaryLocation;
     public ArrayList<String> interests = new ArrayList<>();
     public int id = 0;
-    public int Person_ID = 0;
-    boolean hideLocation = false;
-    boolean isBanned = false;
-    boolean hasInterests = false;
+    public int person_ID = 0;
+    public boolean hideLocation = false;
+    public boolean isBanned = false;
+    public boolean hasInterests = false;
     public boolean me = true;
 }
