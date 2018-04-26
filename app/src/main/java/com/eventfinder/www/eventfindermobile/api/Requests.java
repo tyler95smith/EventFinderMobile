@@ -328,18 +328,38 @@ public class Requests {
         return createJsonArrReq(Request.Method.GET, url, null, listener, true);
     }
 
-    //--------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------
     //
-    //  Create new conversation based on event ID and guest user ID.
+    //  Create new conversation based on logged in user, event ID and guest user ID.
     //      fields: "event": int, "guest": int
     //
-    //--------------------------------------------------------------------------
+    //  TOKEN REQUIRED
+    //
+    //----------------------------------------------------------------------------------
     public static JsonObjectRequest createConversation(int eventID, int guestUserID, final VolleyResponseListener listener){
         String url = EventFinderAPI.API_URL + "createconversation/";
         JSONObject json = new JSONObject();
         try {
             json.put("event", eventID);
             json.put("guest", guestUserID);
+        } catch (Exception e) { return null;}
+        return createJsonObjReq(Request.Method.POST, url, json, listener, true);
+    }
+
+    //----------------------------------------------------------------------------------
+    //
+    //  Create new message based on logged in user and conversation ID.
+    //      fields: "conversation": int, "message": String
+    //
+    //  TOKEN REQUIRED
+    //
+    //----------------------------------------------------------------------------------
+    public static JsonObjectRequest createMessage(int conversationID, String message, final VolleyResponseListener listener){
+        String url = EventFinderAPI.API_URL + "createconversation/";
+        JSONObject json = new JSONObject();
+        try {
+            json.put("conversation", conversationID);
+            json.put("message", message);
         } catch (Exception e) { return null;}
         return createJsonObjReq(Request.Method.POST, url, json, listener, true);
     }
