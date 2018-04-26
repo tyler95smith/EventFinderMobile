@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.eventfinder.www.eventfindermobile.api.EventFinderAPI;
 import com.eventfinder.www.eventfindermobile.api.Requests;
 import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
 import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
@@ -82,6 +84,13 @@ public class ViewEventActivity extends AppCompatActivity {
                     time.setEnabled(false);
                     des.setEnabled(false);
                 }
+            }
+        });
+
+        message.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                newConversationRequest(user.id, event.id);
             }
         });
 
@@ -166,6 +175,27 @@ public class ViewEventActivity extends AppCompatActivity {
 
         JsonObjectRequest req = Requests.SendRsvpRequest(params,listener);
 
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    private void newConversationRequest(int userID, int eventID) {
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                Toast.makeText(context, "Conversation successfully created.", duration).show();
+                //TODO: OPEN CHAT ACTIVITY WITH RETURNED CONVERSATION ON SUCCESS
+            }
+        };
+        JsonObjectRequest req = Requests.createConversation(eventID, userID, listener);
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
         }
