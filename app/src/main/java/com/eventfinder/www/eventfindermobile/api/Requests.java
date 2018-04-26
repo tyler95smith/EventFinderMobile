@@ -327,4 +327,22 @@ public class Requests {
         String url = EventFinderAPI.API_URL + "getrecentevents/" + n + "/";
         return createJsonArrReq(Request.Method.GET, url, null, listener, true);
     }
+
+    //--------------------------------------------------------------------------
+    //
+    //  Create new conversation based on event ID and guest user ID.
+    //      fields: "event": int, "guest": int
+    //
+    //--------------------------------------------------------------------------
+    public static JsonObjectRequest createConversation(int eventID, int guestUserID, final VolleyResponseListener listener){
+        String url = EventFinderAPI.API_URL + "createconversation/";
+        JSONObject json = new JSONObject();
+        try {
+            json.put("event", eventID);
+            json.put("guest", guestUserID);
+        } catch (Exception e) { return null;}
+        return createJsonObjReq(Request.Method.POST, url, json, listener, true);
+    }
+
+
 }
