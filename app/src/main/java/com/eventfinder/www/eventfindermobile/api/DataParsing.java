@@ -23,6 +23,7 @@ public class DataParsing {
     //-------------------------------------------------------------------------------
     public static Event EventFromJSON(JSONObject eventData){
         Event e = new Event();
+        User host = new User();
         try {
             e.id = eventData.getInt("id");
             e.dateCreated = DateFromString(eventData.getString("date_created"));
@@ -33,6 +34,11 @@ public class DataParsing {
             e.ageMin = eventData.getInt("age_min");
             e.ageMax = eventData.getInt("age_max");
             e.isHidden = eventData.getBoolean("is_hidden");
+            JSONObject hostInfo = eventData.getJSONObject("host_info");
+            JSONObject hostUser = hostInfo.getJSONObject("user");
+            host.username = hostUser.getString("username");
+            host.id = hostUser.getInt("id");
+            e.host = host;
 
             // TODO: Need to figure out how interests will work and update app/api accordingly.
             // currently api returns id's of interests stored in the data base.

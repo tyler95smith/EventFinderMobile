@@ -1,5 +1,6 @@
 package com.eventfinder.www.eventfindermobile;
 
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.eventfinder.www.eventfindermobile.api.EventFinderAPI;
 import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
@@ -54,7 +55,7 @@ public class NewAccount extends AppCompatActivity {
                 if (isInputValid(mainLayout)) {
                     createAccount();
                     Toast.makeText(context, "Confirmation Email Sent", Toast.LENGTH_LONG);
-                    startActivity(new Intent(NewAccount.this, Login.class));
+
                 } else { // show error messages
                     Toast.makeText(context, "Please fix the errors above!",duration).show();
                 }
@@ -324,13 +325,18 @@ public class NewAccount extends AppCompatActivity {
             int duration = Toast.LENGTH_LONG;
             @Override
             public void onError(String message) {
-                Toast.makeText(context, "A User with that Username or Email already exists. " , duration).show();
+                if(message.contains("user with this email")) {
+                    Toast.makeText(context, "Email is already associated with an account", duration).show();
+                } else {
+                    Toast.makeText(context, "Username is already in use", duration).show();
+                }
             }
 
             @Override
             public void onResponse(Object response) {
                 //Handle JSON response... for now just shows a simple message
                 Toast.makeText(context, "The request to create account was made successfully.", duration).show();
+                startActivity(new Intent(NewAccount.this, Login.class));
             }
         };
 

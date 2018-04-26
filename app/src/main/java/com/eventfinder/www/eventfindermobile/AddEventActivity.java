@@ -98,10 +98,11 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
                         event.interests = interests;
                     }
                     event.eventName = eventName.getText().toString();
+                    event.location = location.getText().toString();
                     event.ageMax = Integer.parseInt(ageMax.getText().toString());
                     event.ageMin = Integer.parseInt(ageMin.getText().toString());
                     event.dateCreated = Calendar.getInstance().getTime();
-                    event.eventDate = dv.getDateTime(dateTime);
+                    event.eventDate = dv.getCorrectFormat(dateTime);
                     event.description = description.getText().toString();
                     event.host = user;
                     event.attendees.add(user);

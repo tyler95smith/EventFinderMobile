@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EventFinderMobile.iml" filepath="$PROJECT_DIR$/EventFinderMobile.iml" />
+      <module fileurl="file://C:\Users\Taylor\Documents\EventFinderMOBILE\EventFinderMobile\EventFinderMobile.iml" filepath="C:\Users\Taylor\Documents\EventFinderMOBILE\EventFinderMobile\EventFinderMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Taylor\Documents\EventFinderMOBILE\EventFinderMobile\app\app.iml" filepath="C:\Users\Taylor\Documents\EventFinderMOBILE\EventFinderMobile\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
+      <module fileurl="file://C:\Users\Taylor\Documents\EventFinderMOBILE\EventFinderMobile\volley\volley.iml" filepath="C:\Users\Taylor\Documents\EventFinderMOBILE\EventFinderMobile\volley\volley.iml" />
     </modules>
   </component>
 </project>
