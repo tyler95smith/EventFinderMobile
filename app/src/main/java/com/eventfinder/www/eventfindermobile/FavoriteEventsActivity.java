@@ -54,26 +54,25 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
 
         bundle = getIntent().getExtras();
 
-        User user = (User)bundle.getSerializable("user");
+        User user = (User)bundle.getSerializable("me");
 
-        // don't think user is being implemented yet
-        /*
         if (user != null) {
+            //GetEvents(user.id);
             GetPastEvents(user.id);
             GetFutureEvents(user.id);
-            GetMyEvents(user.id);
+            //GetMyEvents(user.id);
         } else {
             //make error toast
         }
 
-
+/*
         TextView testText = (TextView)findViewById(R.id.testText);
         testText.setText(String.valueOf(user.id));
 */
         // once the user logged in is being passed around switch to the above code
-        int testId = 2;
-        GetPastEvents(testId);
-        GetFutureEvents(testId);
+        //int testId = 2;
+        //GetPastEvents(testId);
+        //GetFutureEvents(testId);
         //GetMyEvents(testId);
 /*
         // code to ver
@@ -184,9 +183,9 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
                     //Bundle bundle = new Bundle();
-                    String prefix = "past_";
-                    intent.putExtra("eventPrefix", prefix);
-                    intent.putExtra(prefix + "events", eventArr);
+                    //String prefix = "past_";
+                    //intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra("events", eventArr);
                     //intent.putExtras(bundle);
 
                     EventBanner eventBanner = new EventBanner();
@@ -234,9 +233,9 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
                     //Bundle bundle = new Bundle();
-                    String prefix = "future_";
-                    intent.putExtra("eventPrefix", prefix);
-                    intent.putExtra(prefix + "events", eventArr);
+                    //String prefix = "future_";
+                    //intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra("events", eventArr);
                     //intent.putExtras(bundle);
 
                     EventBanner eventBanner = new EventBanner();
@@ -284,9 +283,9 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
                     //Bundle bundle = new Bundle();
-                    String prefix = "my_";
-                    intent.putExtra("eventPrefix", prefix);
-                    intent.putExtra(prefix + "events", eventArr);
+                    //String prefix = "my_";
+                    //intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra("events", eventArr);
                     //intent.putExtras(bundle);
 
                     EventBanner eventBanner = new EventBanner();
