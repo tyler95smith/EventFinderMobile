@@ -68,18 +68,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
-        for(int i = 0; i < 10; i++) {
-            String txt = "This is message # " + i;
-            ChatMessage m;
-            if(i%2 == 0) {
-                m = new ChatMessage(user.id,user.username, txt, true, new Date(0));
-            } else {
-                m = new ChatMessage(otherUser.id,otherUser.username, txt, false, new Date(0));
-            }
-            appendMessage(m);
-        }
-
     }
 
     private void appendMessage(ChatMessage m) {
