@@ -36,10 +36,10 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
     User user;
     TextView ints;
     private static final int SELECT_PICTURE = 0;
-    ArrayList<String> interests = new ArrayList<>();
+    ArrayList<Integer> interests = new ArrayList<>();
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, ArrayList<String> ints) {
+    public void onDialogPositiveClick(DialogFragment dialog, ArrayList<Integer> ints) {
         interests = ints;
         updateInterestString();
         user.interests = interests;
@@ -60,23 +60,23 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         final EditText name = (EditText) findViewById(R.id.NameBox);
         final Button addInt = (Button) findViewById(R.id.addInterests);
         final EditText about = (EditText) findViewById(R.id.aboutMe);
-        final Button report = (Button)findViewById(R.id.reportUser);
+        final Button report = (Button) findViewById(R.id.reportUser);
         final Button pass = (Button) findViewById(R.id.changePass);
         final InterestFragment newFragment = new InterestFragment();
         final ChangePassword changep = new ChangePassword();
         final Bundle bundle = getIntent().getExtras();
 
         //TODO: Some activities are not passing user in bundle, causes app to crash. Will need to fix this or find a more universal way to store/get logged in user data.
-        user = (User)bundle.getSerializable("me");
+        user = (User) bundle.getSerializable("me");
 
-        if(bundle.containsKey("viewUser")) {
-            user = (User)bundle.getSerializable("viewUser");
+        if (bundle.containsKey("viewUser")) {
+            user = (User) bundle.getSerializable("viewUser");
             bundle.remove("viewUser");
         } else {
             user = (User) bundle.getSerializable("me");
         }
 
-        if(!user.me) {
+        if (!user.me) {
             edit.setVisibility(GONE);
             report.setVisibility(VISIBLE);
         }
@@ -87,7 +87,7 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         EditText username = (EditText) findViewById(R.id.UsernameBox);
         username.setText(user.username);
         TextView gender = (TextView) findViewById(R.id.GenderBox);
-        if(user.isFemale) {
+        if (user.isFemale) {
             gender.setText("Female");
         } else {
             gender.setText("Male");
@@ -105,125 +105,119 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
         email.setText(user.email);
         interests = user.interests;
         ints = (TextView) findViewById(R.id.interestBox);
-        if (user.interests != null) {
-            user.hasInterests = true;
-        }
-        if (user.hasInterests == true) {
+
+        TextView ints = (TextView) findViewById(R.id.interestBox);
+        String stringOfInterests;
+
+        if (interests == null || interests.size() < 1) {
+            stringOfInterests = "None";
+        } else {
+            stringOfInterests = "";
             updateInterestString();
-            ArrayList<String> interests = user.interests;
-            TextView ints = (TextView) findViewById(R.id.interestBox);
-            String stringOfInterests;
-            if (interests == null || interests.size() < 1) {
-                stringOfInterests = "None";
-            } else {
-                stringOfInterests = "";
-                for (String i : interests) {
-                    stringOfInterests += (i + "\n");
+        }
+        final FragmentManager fm = getFragmentManager();
+        addInt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newFragment.show(fm, "interests");
+            }
+        });
+
+
+        final android.support.v4.app.FragmentManager changeManage = getSupportFragmentManager();
+        pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changep.show(changeManage, "password");
+            }
+        });
+
+        image = (ImageView) findViewById(R.id.ProfilePic);
+
+        //ints.setText(stringOfInterests);
+
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
+            }
+        });
+
+        addbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, AddEventActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        notbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, NotificationsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        favbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, FavoriteEventsActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!name.isEnabled()) {
+                    addInt.setVisibility(VISIBLE);
+                    pass.setVisibility(VISIBLE);
+                    name.setEnabled(true);
+                    about.setEnabled(true);
+                    edit.setText("Submit");
+                    image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent();
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+                        }
+                    });
+                } else {
+                    updateUser(); // i think this is where this goes
+                    addInt.setVisibility(GONE);
+                    pass.setVisibility(GONE);
+                    name.setEnabled(false);
+                    about.setEnabled(false);
+                    edit.setText("Edit Profile");
+                    image.setOnClickListener(null);
                 }
             }
-            final FragmentManager fm = getFragmentManager();
-            addInt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    newFragment.show(fm, "interests");
-                }
-            });
+        });
 
-
-            final android.support.v4.app.FragmentManager changeManage = getSupportFragmentManager();
-            pass.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    changep.show(changeManage, "password");
-                }
-            });
-
-            image = (ImageView) findViewById(R.id.ProfilePic);
-
-            //ints.setText(stringOfInterests);
-
-            homebtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this, HomeScreenActivity.class);
-                    intent.putExtra("bundle", bundle);
-                    startActivity(intent);
-                }
-            });
-
-            addbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this, AddEventActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-
-            notbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this, NotificationsActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-
-            favbtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(Profile.this, FavoriteEventsActivity.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-
-            edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!name.isEnabled()) {
-                        addInt.setVisibility(VISIBLE);
-                        pass.setVisibility(VISIBLE);
-                        name.setEnabled(true);
-                        about.setEnabled(true);
-                        edit.setText("Submit");
-                        image.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent();
-                                intent.setType("image/*");
-                                intent.setAction(Intent.ACTION_GET_CONTENT);
-                                startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
-                            }
-                        });
-                    } else {
-                        updateUser(); // i think this is where this goes
-                        addInt.setVisibility(GONE);
-                        pass.setVisibility(GONE);
-                        name.setEnabled(false);
-                        about.setEnabled(false);
-                        edit.setText("Edit Profile");
-                        image.setOnClickListener(null);
-                    }
-                }
-            });
-
-            report.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    bundle.putSerializable("userEvent", user);
-                    getIntent().putExtras(bundle);
-                    android.support.v4.app.DialogFragment reportFrag = new ReportFragment();
-                    reportFrag.show(getSupportFragmentManager(), "Report");
-                }
-            });
-        }
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bundle.putSerializable("userEvent", user);
+                getIntent().putExtras(bundle);
+                android.support.v4.app.DialogFragment reportFrag = new ReportFragment();
+                reportFrag.show(getSupportFragmentManager(), "Report");
+            }
+        });
     }
 
     public void updateInterestString() {
         String stringOfInterests = "";
+        InterestArray inters = new InterestArray();
         for (int i = 0; i < interests.size(); i++) {
-            stringOfInterests += (interests.get(i) + "\n");
+            stringOfInterests += (inters.ints[interests.get(i)] + "\n");
         }
         ints.setText(stringOfInterests);
     }
@@ -269,16 +263,17 @@ public class Profile extends AppCompatActivity implements InterestFragment.Inter
     private HashMap<String, String> getAcctParams()
     {
         HashMap<String, String> params = new HashMap<String, String>();
+        String ints = "";
+        for( int i: user.interests) {
+            ints += (i + ",");
+        }
         //EditText dob = (EditText)findViewById(R.id.date_of_birth);
         EditText bio = (EditText)findViewById(R.id.aboutMe);
         //params.put("date_of_birth", dob.getText().toString());
+        params.put("interests", ints);
         params.put("id", String.valueOf(user.person_ID));
         params.put("bio",bio.getText().toString());
         return params;
-    }
-
-    private void getInterests() {
-
     }
 
     private void updateUser() {

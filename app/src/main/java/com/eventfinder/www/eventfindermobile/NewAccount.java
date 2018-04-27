@@ -298,6 +298,8 @@ public class NewAccount extends AppCompatActivity {
         EditText username = (EditText)findViewById(R.id.username);
         EditText email = (EditText)findViewById(R.id.email);
         EditText password = (EditText)findViewById(R.id.password);
+        EditText name = (EditText)findViewById(R.id.name);
+        params.put("first_name", name.getText().toString());
         params.put("username",username.getText().toString());
         params.put("email", email.getText().toString());
         params.put("password", password.getText().toString());
@@ -309,6 +311,12 @@ public class NewAccount extends AppCompatActivity {
     {
         HashMap<String, String> params = new HashMap<String, String>();
         EditText dob = (EditText)findViewById(R.id.date_of_birth);
+        ToggleButton isFemale = (ToggleButton)findViewById(R.id.Female);
+        if(isFemale.isChecked()) {
+            params.put("isFemale", String.valueOf(true));
+        } else {
+            params.put("isFemale", String.valueOf(false));
+        }
         params.put("date_of_birth", dob.getText().toString());
         return params;
     }

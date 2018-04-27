@@ -41,10 +41,10 @@ public class DataParsing {
 
             // TODO: Need to figure out how interests will work and update app/api accordingly.
             // currently api returns id's of interests stored in the data base.
-            //JSONArray interestArr = eventData.getJSONArray("interests");
-            //for (int j = 0; j < interestArr.length(); j++) {
-                //e.interests.add(interestArr.getString(j));
-            //}
+            JSONArray interestArr = eventData.getJSONArray("interests");
+            for (int j = 0; j < interestArr.length(); j++) {
+                e.interests.add(interestArr.getInt(j));
+            }
 
             JSONArray attendeeArr = eventData.getJSONArray("attendees_info");
             for (int j = 0; j < attendeeArr.length(); j++) {

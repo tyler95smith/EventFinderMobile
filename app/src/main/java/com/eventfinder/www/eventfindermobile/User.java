@@ -17,7 +17,7 @@ public class User implements Serializable {
     public String bio = ".";
     public boolean isFemale = true;
     public String primaryLocation;
-    public ArrayList<String> interests = new ArrayList<>();
+    public ArrayList<Integer> interests = new ArrayList<>();
     public int id = 0;
     public int person_ID = 0;
     public boolean hideLocation = false;
