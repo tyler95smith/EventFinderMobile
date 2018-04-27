@@ -1,4 +1,5 @@
 package com.eventfinder.www.eventfindermobile.api;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -365,5 +366,14 @@ public class Requests {
         return createJsonObjReq(Request.Method.POST, url, json, listener, true);
     }
 
-
+    //----------------------------------------------------------------------------------
+    //  Get conversations for logged in user.
+    //
+    //  TOKEN REQUIRED
+    //
+    //----------------------------------------------------------------------------------
+    public static JsonArrayRequest getConversations(final VolleyResponseListener listener){
+        String url = EventFinderAPI.API_URL + "getconversations/";
+        return createJsonArrReq(Request.Method.GET, url, null, listener, true);
+    }
 }

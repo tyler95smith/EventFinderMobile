@@ -14,10 +14,17 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.eventfinder.www.eventfindermobile.api.DataParsing;
+import com.eventfinder.www.eventfindermobile.api.Requests;
+import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
 import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class NotificationsActivity extends AppCompatActivity implements InviteBannerFragment.OnHeadlineSelectedListener, NotificationBanner.OnHeadlineSelectedListener{
@@ -31,7 +38,9 @@ public class NotificationsActivity extends AppCompatActivity implements InviteBa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
         bundle = getIntent().getExtras();
-        User user = (User)bundle.getSerializable("user");
+        User user = (User)bundle.getSerializable("me");
+
+        loadConversations();
 
         displayNotif();
 
@@ -128,6 +137,39 @@ public class NotificationsActivity extends AppCompatActivity implements InviteBa
             bundle.putSerializable("event", not.event);
             intent.putExtras(bundle);
             startActivity(intent);
+        }
+    }
+
+    private void loadConversations(){
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                try {
+                    JSONArray convJSON = (JSONArray) response;
+                    ArrayList<Conversation> conversations = new ArrayList<>();
+                    for (int i = 0; i < convJSON.length(); i++) {
+                        JSONObject cData = convJSON.getJSONObject(i);
+                        Conversation conversation = DataParsing.ConversationDataFromJSON(cData);
+                        conversations.add(conversation);
+                    }
+                    bundle.putSerializable("conversation_array_list", conversations);
+                } catch (Exception e) {
+                    Toast.makeText(context, "Error loading conversations.", duration).show();
+                }
+            }
+        };
+
+        JsonArrayRequest req = Requests.getConversations(listener);
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
         }
     }
 }

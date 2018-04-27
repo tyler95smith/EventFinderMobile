@@ -18,4 +18,6 @@
     <color name="msg_submit_btn_bg">#1e6258</color>
     <color name="msg_submit_btn_text">#ffffff</color>
 
+    <color name="conversation_list_item_bg">#ffffff</color>
+
 </resources>

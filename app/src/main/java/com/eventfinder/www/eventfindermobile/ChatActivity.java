@@ -1,12 +1,14 @@
 package com.eventfinder.www.eventfindermobile;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -16,6 +18,7 @@ import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
 import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.Date;
 import java.util.LinkedList;
@@ -29,8 +32,11 @@ public class ChatActivity extends AppCompatActivity {
     private Conversation conversation;
     private Button sendButton;
     private EditText newMessageText;
+    private ConstraintLayout header;
+    private TextView headerText;
     private User user;
     private User otherUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +44,28 @@ public class ChatActivity extends AppCompatActivity {
 
         sendButton = (Button)findViewById(R.id.msgSubmit);
         newMessageText = (EditText)findViewById(R.id.msgInput);
+        headerText = (TextView)findViewById(R.id.event_name);
+
 
         //get data from bundle
         final Bundle bundle = getIntent().getExtras();
+        user = (User)bundle.getSerializable("me");
         conversation = (Conversation)bundle.getSerializable("conversation");
         if(conversation.messages == null) {
             conversation.messages = new LinkedList<>();
+        }else{
+            for(ChatMessage message : conversation.messages){
+                if(message.m_senderID == user.id){
+                    message.m_isCurrentUser = true;
+                }
+            }
         }
+
+        headerText.setText("Event: " + conversation.event.eventName);
 
         messagesListView = (ListView) findViewById(R.id.list_view_messages);
         adapter = new ChatMessagesListAdapter(this, conversation.messages);
         messagesListView.setAdapter(adapter);
-
-        user = (User)bundle.getSerializable("me");
 
         if(user.id == conversation.event.host.id){
             conversation.event.host.me = true;

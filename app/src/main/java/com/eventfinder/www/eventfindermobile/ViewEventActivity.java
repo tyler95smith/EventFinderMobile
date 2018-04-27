@@ -199,13 +199,6 @@ public class ViewEventActivity extends AppCompatActivity {
                 Toast.makeText(context, "Conversation successfully created.", duration).show();
                 JSONObject convJSON = (JSONObject)response;
                 Conversation conversation = DataParsing.ConversationDataFromJSON(convJSON);
-                if(conversation.messages != null){
-                    for(ChatMessage message : conversation.messages){
-                        if(message.m_senderID == user.id){
-                            message.m_isCurrentUser = true;
-                        }
-                    }
-                }
                 bundle.putSerializable("conversation", conversation);
                 Intent intent = new Intent(ViewEventActivity.this, ChatActivity.class);
                 intent.putExtras(bundle);
