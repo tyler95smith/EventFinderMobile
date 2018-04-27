@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 //==================================================================
 
 public class PastEventsListFragment extends Fragment{
+    private static final String TAG = "PastEventsListFragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_pastevents_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_pastevents_list, container, false);
+
+        return view;
     }
 
     //---------------------------------------------------------------------

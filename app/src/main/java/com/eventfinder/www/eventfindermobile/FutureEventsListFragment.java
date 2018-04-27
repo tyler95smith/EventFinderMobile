@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 //==================================================================
 
 public class FutureEventsListFragment extends Fragment{
+    private static final String TAG = "FutureEventsListFragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_futureevents_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_futureevents_list, container, false);
+
+        return view;
     }
 
     //---------------------------------------------------------------------
