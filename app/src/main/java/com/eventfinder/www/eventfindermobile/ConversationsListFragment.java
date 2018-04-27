@@ -26,14 +26,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-//==================================================================
-//
-//  IMPORTANT: This is just a temporary fragment as a placeholder
-//  of sorts. This will actually need to be implemented as a
-//  ListFragment.
-//
-//==================================================================
-public class MessagesListFragment extends Fragment{
+public class ConversationsListFragment extends Fragment{
     private List<Conversation> conversations;
     private ListView conversationsListView;
     private ConversationListAdapter adapter;

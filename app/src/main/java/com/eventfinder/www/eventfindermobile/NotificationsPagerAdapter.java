@@ -31,7 +31,7 @@ public class NotificationsPagerAdapter extends FragmentPagerAdapter{
         if(position == NOTIFICATIONS_TAB_POS) {
             return new NotificationsListFragment();
         } else {
-            return new MessagesListFragment();
+            return new ConversationsListFragment();
         }
     }
 

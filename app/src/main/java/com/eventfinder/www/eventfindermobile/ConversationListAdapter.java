@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,12 +61,19 @@ public class ConversationListAdapter extends BaseAdapter {
 
         TextView convUserName = (TextView) convertView.findViewById(R.id.conversation_username);
         TextView convEventName = (TextView) convertView.findViewById(R.id.conversation_event_name);
+        TextView date = (TextView)convertView.findViewById(R.id.most_recent_msg_date);
         if(currentUser.id == c.event.host.id){
-            convUserName.setText(c.guest.username);
+            convUserName.setText("Guest: " +c.guest.username);
         } else{
-            convUserName.setText(c.event.host.username);
+            convUserName.setText("Host: " +c.event.host.username);
         }
         convEventName.setText(c.event.eventName);
+
+        ChatMessage m = c.messages.get(0);
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd',' yyyy");
+        Date d = m.m_dateSent;
+        String dateString = df.format(d);
+        date.setText(dateString);
 
         return convertView;
     }

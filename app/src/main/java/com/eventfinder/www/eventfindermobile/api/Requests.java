@@ -376,4 +376,15 @@ public class Requests {
         String url = EventFinderAPI.API_URL + "getconversations/";
         return createJsonArrReq(Request.Method.GET, url, null, listener, true);
     }
+
+    //----------------------------------------------------------------------------------
+    //  Get notifications for logged in user.
+    //
+    //  TOKEN REQUIRED
+    //
+    //----------------------------------------------------------------------------------
+    public static JsonObjectRequest getNotifications(final VolleyResponseListener listener){
+        String url = EventFinderAPI.API_URL + "getnotifications/";
+        return createJsonObjReq(Request.Method.GET, url, null, listener, true);
+    }
 }

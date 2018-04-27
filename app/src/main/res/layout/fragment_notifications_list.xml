@@ -7,12 +7,7 @@
 
 
     <ListView
-        android:id="@+id/invite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <ListView
-        android:id="@+id/message"
+        android:id="@+id/notifications_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -3,6 +3,7 @@ package com.eventfinder.www.eventfindermobile.api;
 import com.eventfinder.www.eventfindermobile.ChatMessage;
 import com.eventfinder.www.eventfindermobile.Conversation;
 import com.eventfinder.www.eventfindermobile.Event;
+import com.eventfinder.www.eventfindermobile.Notification;
 import com.eventfinder.www.eventfindermobile.User;
 
 import org.json.JSONArray;
@@ -145,6 +146,28 @@ public class DataParsing {
             Date sentTime = DateFromString(mJSON.getString("date_sent")) ;
             ChatMessage m = new ChatMessage(senderID,name,msg,false,sentTime);
             return m;
+        } catch (Exception e) {return null;}
+    }
+
+    public static Notification NotificationFromRsvpJSON(JSONObject rsvpJSON){
+        try{
+            Notification n = new Notification();
+            n.user = UserFromPersonJSON(rsvpJSON.getJSONObject("requester_info"));
+            n.isInvite = true;
+            n.event = EventFromJSON(rsvpJSON.getJSONObject("event_info"));
+            n.message = "";
+            return n;
+        } catch (Exception e) {return null;}
+    }
+
+    public static Notification NotificationFromNotifJSON(JSONObject notifJSON){
+        try{
+            Notification n = new Notification();
+            n.user = UserFromPersonJSON(notifJSON.getJSONObject("sender_info"));
+            n.isInvite = false;
+            n.event = null;
+            n.message = notifJSON.getString("message");
+            return n;
         } catch (Exception e) {return null;}
     }
 }

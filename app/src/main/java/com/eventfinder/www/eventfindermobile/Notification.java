@@ -7,8 +7,8 @@ import java.io.Serializable;
  */
 
 public class Notification implements Serializable {
-    Event event;
-    User user;
-    String message;
-    boolean isInvite;
+    public Event event;
+    public User user;
+    public String message;
+    public boolean isInvite;
 }
