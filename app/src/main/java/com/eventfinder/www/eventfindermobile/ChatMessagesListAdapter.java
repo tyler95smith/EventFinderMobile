@@ -45,7 +45,7 @@ public class ChatMessagesListAdapter extends BaseAdapter {
         ChatMessage m = messages.get(position);
 
         // Identifying the message owner
-        if (m.isCurrentUser()) {
+        if (m.m_isCurrentUser) {
             convertView = mInflater.inflate(R.layout.msg_list_item_right, null);
         } else {
             convertView = mInflater.inflate(R.layout.msg_list_item_left, null);
@@ -54,8 +54,8 @@ public class ChatMessagesListAdapter extends BaseAdapter {
         TextView msgFromLabel = (TextView) convertView.findViewById(R.id.fromMsgLabel);
         TextView msgText = (TextView) convertView.findViewById(R.id.msgText);
 
-        msgFromLabel.setText(m.getSenderName());
-        msgText.setText(m.getText());
+        msgFromLabel.setText(m.m_senderName);
+        msgText.setText(m.m_txt);
 
         return convertView;
     }

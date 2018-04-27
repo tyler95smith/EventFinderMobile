@@ -72,7 +72,7 @@ public class NotificationsActivity extends AppCompatActivity implements InviteBa
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(NotificationsActivity.this, HomeScreenActivity.class);
-                intent.putExtra("bundle", bundle);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

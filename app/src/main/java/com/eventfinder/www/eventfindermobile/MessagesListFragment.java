@@ -17,7 +17,7 @@ import android.widget.Button;
 //==================================================================
 public class MessagesListFragment extends Fragment{
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_messages_list, container, false);
 
         Button btn=(Button)rootView.findViewById(R.id.m1);
@@ -25,7 +25,9 @@ public class MessagesListFragment extends Fragment{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ChatActivity.class));
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.putExtras(savedInstanceState);
+                startActivity(intent);
             }
         });
 

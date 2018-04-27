@@ -342,8 +342,9 @@ public class Requests {
         try {
             json.put("event", eventID);
             json.put("guest", guestUserID);
+            System.out.println(json);
+            return createJsonObjReq(Request.Method.POST, url, json, listener, true);
         } catch (Exception e) { return null;}
-        return createJsonObjReq(Request.Method.POST, url, json, listener, true);
     }
 
     //----------------------------------------------------------------------------------
@@ -355,7 +356,7 @@ public class Requests {
     //
     //----------------------------------------------------------------------------------
     public static JsonObjectRequest createMessage(int conversationID, String message, final VolleyResponseListener listener){
-        String url = EventFinderAPI.API_URL + "createconversation/";
+        String url = EventFinderAPI.API_URL + "createmessage/";
         JSONObject json = new JSONObject();
         try {
             json.put("conversation", conversationID);
