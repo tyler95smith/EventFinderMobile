@@ -39,18 +39,18 @@ public class ChatActivity extends AppCompatActivity {
         sendButton = (Button)findViewById(R.id.msgSubmit);
         newMessageText = (EditText)findViewById(R.id.msgInput);
 
-        messagesListView = (ListView) findViewById(R.id.list_view_messages);
-        adapter = new ChatMessagesListAdapter(this, messagesList);
-        messagesListView.setAdapter(adapter);
-
         //get data from bundle
         final Bundle bundle = getIntent().getExtras();
         conversation = (Conversation)bundle.getSerializable("conversation");
-        if(conversation.messages != null) {
-            messagesList = conversation.messages;
+        if(conversation.messages == null) {
+            conversation.messages = new LinkedList<>();
         }
 
-        User user = (User)bundle.getSerializable("me");
+        messagesListView = (ListView) findViewById(R.id.list_view_messages);
+        adapter = new ChatMessagesListAdapter(this, conversation.messages);
+        messagesListView.setAdapter(adapter);
+
+        user = (User)bundle.getSerializable("me");
 
         if(user.id == conversation.event.host.id){
             conversation.event.host.me = true;
@@ -63,6 +63,7 @@ public class ChatActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("wtf?");
                 createNewMessage();
             }
         });
@@ -82,7 +83,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void appendMessage(ChatMessage m) {
-        messagesList.add(m);
+        conversation.messages.add(m);
         adapter.notifyDataSetChanged();
     }
 
