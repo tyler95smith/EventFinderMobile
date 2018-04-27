@@ -63,9 +63,9 @@ public class ConversationListAdapter extends BaseAdapter {
         TextView convEventName = (TextView) convertView.findViewById(R.id.conversation_event_name);
         TextView date = (TextView)convertView.findViewById(R.id.most_recent_msg_date);
         if(currentUser.id == c.event.host.id){
-            convUserName.setText("Guest: " +c.guest.username);
+            convUserName.setText(c.guest.username);
         } else{
-            convUserName.setText("Host: " +c.event.host.username);
+            convUserName.setText(c.event.host.username);
         }
         convEventName.setText(c.event.eventName);
 
