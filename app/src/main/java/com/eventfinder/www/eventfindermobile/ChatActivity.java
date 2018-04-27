@@ -95,9 +95,15 @@ public class ChatActivity extends AppCompatActivity {
         if(messageText == null || messageText == ""){
             return;
         }
+
+        newMessageText.setEnabled(false);
+        newMessageText.clearFocus();
+        Toast.makeText(context, "Sending message...", duration).show();
+
         VolleyResponseListener listener = new VolleyResponseListener() {
             @Override
             public void onError(String message) {
+                newMessageText.setEnabled(true);
                 Toast.makeText(context, message, duration).show();
             }
 
@@ -109,6 +115,9 @@ public class ChatActivity extends AppCompatActivity {
                     m.m_isCurrentUser = true;
                 }
                 appendMessage(m);
+                Toast.makeText(context, "Message sent.", duration).show();
+                newMessageText.setText("");
+                newMessageText.setEnabled(true);
             }
         };
 
