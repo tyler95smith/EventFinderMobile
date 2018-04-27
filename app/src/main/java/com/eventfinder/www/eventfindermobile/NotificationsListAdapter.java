@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.eventfinder.www.eventfindermobile.api.Requests;
+
 import java.util.List;
 
 /**
@@ -70,7 +72,7 @@ public class NotificationsListAdapter extends BaseAdapter {
             acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //request to accept a RSVP
+                    //accept rsvp
                 }
             });
             declineButton.setOnClickListener(new View.OnClickListener() {

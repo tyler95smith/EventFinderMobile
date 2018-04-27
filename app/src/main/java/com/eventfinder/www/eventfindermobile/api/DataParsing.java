@@ -156,6 +156,7 @@ public class DataParsing {
             n.isInvite = true;
             n.event = EventFromJSON(rsvpJSON.getJSONObject("event_info"));
             n.message = "";
+            n.id = rsvpJSON.getInt("id");
             return n;
         } catch (Exception e) {return null;}
     }
@@ -167,6 +168,7 @@ public class DataParsing {
             n.isInvite = false;
             n.event = null;
             n.message = notifJSON.getString("message");
+            n.id = notifJSON.getInt("id");
             return n;
         } catch (Exception e) {return null;}
     }

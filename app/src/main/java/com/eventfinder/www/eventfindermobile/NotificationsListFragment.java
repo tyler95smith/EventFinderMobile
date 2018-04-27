@@ -77,11 +77,11 @@ public class NotificationsListFragment extends Fragment{
                     JSONArray rsvpData = notifsJSON.getJSONArray("rsvps");
                     for(int i =0; i <rsvpData.length(); i++){
                         Notification n = DataParsing.NotificationFromRsvpJSON(rsvpData.getJSONObject(i));
-                        notifications.add(n);
+                        addNotification(n);
                     }
                     for (int i=0; i < messageData.length(); i++){
                         Notification n = DataParsing.NotificationFromNotifJSON(messageData.getJSONObject(i));
-                        notifications.add(n);
+                        addNotification(n);
                     }
                 } catch (Exception e) {
                     Toast.makeText(context, "Error loading notifications.", duration).show();

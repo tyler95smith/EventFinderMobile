@@ -387,4 +387,21 @@ public class Requests {
         String url = EventFinderAPI.API_URL + "getnotifications/";
         return createJsonObjReq(Request.Method.GET, url, null, listener, true);
     }
+    //----------------------------------------------------------------------------------
+    //  Mark RSVP as accepted/declined.
+    //
+    //  TOKEN REQUIRED
+    //
+    //----------------------------------------------------------------------------------
+    public static JsonObjectRequest updateRSVP(int id, int status, final VolleyResponseListener listener){
+        String url = EventFinderAPI.API_URL + "update/";
+        try {
+            JSONObject j = new JSONObject();
+            j.put("id", id);
+            j.put("status", status);
+            return createJsonObjReq(Request.Method.PATCH, url, j, listener, true);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
