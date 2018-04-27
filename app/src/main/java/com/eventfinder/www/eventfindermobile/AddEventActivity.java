@@ -25,11 +25,11 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class AddEventActivity extends AppCompatActivity implements InterestFragment.InterestListener{
-    ArrayList<String> interests;
+    ArrayList<Integer> interests;
     Event event;
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, ArrayList<String> ints) {
+    public void onDialogPositiveClick(DialogFragment dialog, ArrayList<Integer> ints) {
         interests = ints;
 
     }
@@ -188,6 +188,11 @@ public class AddEventActivity extends AppCompatActivity implements InterestFragm
     private HashMap<String,String> formatEventParams(Event event)
     {
         HashMap<String,String>  params = new HashMap<>();
+        String ints = "";
+        for( int i: event.interests) {
+            ints += (i + ",");
+        }
+        params.put("interests", ints);
         params.put("event_name", event.eventName);
         params.put("location", event.location);
         params.put("description", event.description);

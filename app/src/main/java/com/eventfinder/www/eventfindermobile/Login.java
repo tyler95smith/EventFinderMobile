@@ -128,6 +128,14 @@ public class Login extends AppCompatActivity {
                     user.person_ID = temp.getInt("id");
                     user.isBanned = temp.getBoolean("isBanned");
                     user.isFemale = temp.getBoolean("isFemale");
+                    String ints = temp.getString("interests");
+                    String delims = "[,]";
+                    String[] inters = ints.split(delims);
+                    if(inters.length > 1) {
+                        for (int i = 0; i < inters.length; i++) {
+                            user.interests.add(Integer.valueOf(inters[i]));
+                        }
+                    }
                     bundle.putSerializable("me", user);
                     Intent intent = new Intent(Login.this, HomeScreenActivity.class);
                     intent.putExtras(bundle);

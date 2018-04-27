@@ -19,7 +19,7 @@ public class Event implements Serializable {
     public String description = ".";
     public int ageMin = 0;
     public int ageMax = 100;
-    public ArrayList<String> interests;
+    public ArrayList<Integer> interests = new ArrayList<>();
     public ArrayList<User> attendees = new ArrayList<>();
     public User host;
     public int maxAttendees;
