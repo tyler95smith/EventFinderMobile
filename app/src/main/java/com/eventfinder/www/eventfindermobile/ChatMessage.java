@@ -1,24 +1,21 @@
 package com.eventfinder.www.eventfindermobile;
 
 
-public class ChatMessage {
-    private String m_senderName, m_txt;
-    private boolean m_isCurrentUser;
+import java.io.Serializable;
+import java.util.Date;
 
-    public ChatMessage(String senderName, String txt, boolean isCurrentUser) {
+public class ChatMessage implements Serializable {
+    public String m_senderName, m_txt;
+    public boolean m_isCurrentUser = false;
+    public int m_senderID;
+    public Date m_dateSent;
+
+
+    public ChatMessage(int senderID, String senderName, String txt, boolean isCurrentUser, Date dateSent) {
         this.m_senderName = senderName;
         this.m_txt = txt;
         this.m_isCurrentUser = isCurrentUser;
-    }
-
-    public String getSenderName() {
-        return m_senderName;
-    }
-    public String getText() {
-        return m_txt;
-    }
-    public boolean isCurrentUser()
-    {
-        return m_isCurrentUser;
+        this.m_senderID = senderID;
+        this.m_dateSent = dateSent;
     }
 }

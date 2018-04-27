@@ -1,6 +1,7 @@
 package com.eventfinder.www.eventfindermobile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,25 +13,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.eventfinder.www.eventfindermobile.api.DataParsing;
+import com.eventfinder.www.eventfindermobile.api.EventFinderAPI;
 import com.eventfinder.www.eventfindermobile.api.Requests;
 import com.eventfinder.www.eventfindermobile.api.VolleyHandler;
 import com.eventfinder.www.eventfindermobile.api.VolleyResponseListener;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import static com.eventfinder.www.eventfindermobile.api.DataParsing.ConversationDataFromJSON;
+
 public class ViewEventActivity extends AppCompatActivity {
     Event event;
     User user;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_event);
-        final Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         user = (User)bundle.getSerializable("me");
         event = (Event)bundle.getSerializable("event");
         final EditText name = (EditText) findViewById(R.id.eventName);
@@ -41,7 +48,7 @@ public class ViewEventActivity extends AppCompatActivity {
         final Button request = (Button)findViewById(R.id.request);
         final Button message = (Button)findViewById(R.id.message);
         final Button edit = (Button)findViewById(R.id.edit);
-
+        System.out.println("EVENT ID: " + event.id);
         if(event != null)
         {
             name.setText(event.eventName);
@@ -82,6 +89,13 @@ public class ViewEventActivity extends AppCompatActivity {
                     time.setEnabled(false);
                     des.setEnabled(false);
                 }
+            }
+        });
+
+        message.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                newConversationRequest(event.id, user.id);
             }
         });
 
@@ -166,6 +180,39 @@ public class ViewEventActivity extends AppCompatActivity {
 
         JsonObjectRequest req = Requests.SendRsvpRequest(params,listener);
 
+        if(req != null) {
+            VolleyHandler.getInstance(context).addToRequestQueue(req);
+        }
+    }
+
+    private void newConversationRequest(int eventID, int userID) {
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+        VolleyResponseListener listener = new VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(context, message, duration).show();
+            }
+
+            @Override
+            public void onResponse(Object response) {
+                Toast.makeText(context, "Conversation successfully created.", duration).show();
+                JSONObject convJSON = (JSONObject)response;
+                Conversation conversation = DataParsing.ConversationDataFromJSON(convJSON);
+                if(conversation.messages != null){
+                    for(ChatMessage message : conversation.messages){
+                        if(message.m_senderID == user.id){
+                            message.m_isCurrentUser = true;
+                        }
+                    }
+                }
+                bundle.putSerializable("conversation", conversation);
+                Intent intent = new Intent(ViewEventActivity.this, ChatActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        };
+        JsonObjectRequest req = Requests.createConversation(eventID, userID, listener);
         if(req != null) {
             VolleyHandler.getInstance(context).addToRequestQueue(req);
         }
