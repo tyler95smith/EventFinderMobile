@@ -15,8 +15,26 @@ import android.view.ViewGroup;
 //==================================================================
 
 public class MyEventsListFragment extends Fragment{
+    private static final String TAG = "MyEventsListFragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_my_events_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_myevent_list, container, false);
+
+        return view;
     }
+
+    //---------------------------------------------------------------------
+    // Static factory method for creating new instances of this fragment.\
+    //      NOTE: need to understand this more before implementing.
+    //          Search the web for "fragment factory android"
+    //---------------------------------------------------------------------
+    /*
+    public static NotificationsListFragment newInstance(int position) {
+        NotificationsListFragment f = new NotificationsListFragment();
+        Bundle args = new Bundle();
+        args.putInt("position", position);
+        f.setArguments(args);
+        return f;
+    }
+    */
 }

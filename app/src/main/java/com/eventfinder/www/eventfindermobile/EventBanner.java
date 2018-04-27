@@ -37,9 +37,9 @@ public class EventBanner extends ListFragment {
         Bundle bundle = intent.getExtras();
         //Event[] event = bundle.getSerializable("events");
 
-        //String prefix = intent.getStringExtra("eventPrefix");
-        if ((Event[])intent.getSerializableExtra("events") != null) {
-            events = (Event[]) intent.getSerializableExtra("events");
+        String prefix = intent.getStringExtra("eventPrefix");
+        if ((Event[])intent.getSerializableExtra(prefix + "events") != null) {
+            events = (Event[]) intent.getSerializableExtra(prefix + "events");
         }
 
 

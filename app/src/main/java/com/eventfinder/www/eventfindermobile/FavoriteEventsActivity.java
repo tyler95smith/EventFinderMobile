@@ -43,7 +43,7 @@ import java.util.Vector;
 public class FavoriteEventsActivity extends AppCompatActivity implements EventBanner.OnHeadlineSelectedListener {
     private TabLayout tabs;
     private ViewPager viewPager;
-    private FavoriteEventsPagerAdapter adapter;
+    private FavoriteEventsPagerAdapter pagerAdapter;
 
     Bundle bundle;
 
@@ -51,6 +51,16 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_events);
+
+        pagerAdapter = new FavoriteEventsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the FavoriteEventsPagerAdapter
+        viewPager = (ViewPager)findViewById(R.id.fav_event_viewpager);
+        viewPager.setOffscreenPageLimit(3);
+        setupViewPager(viewPager);
+
+        tabs = (TabLayout) findViewById(R.id.fav_event_tablayout);
+        tabs.setupWithViewPager(viewPager);
 
         bundle = getIntent().getExtras();
 
@@ -60,7 +70,7 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
             //GetEvents(user.id);
             GetPastEvents(user.id);
             GetFutureEvents(user.id);
-            //GetMyEvents(user.id);
+            GetMyEvents(user.id);
         } else {
             //make error toast
         }
@@ -81,31 +91,6 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         testView.setText("IS THIS SHOWING UP?");
         linearLayout.addView(testView);
 */
-        //
-        // Set up tabs (TabLayout) with the Viewpager using the NotificationsPagerAdapter
-        // so the correct fragment can be displayed within the viewpager
-        tabs = (TabLayout) findViewById(R.id.fav_event_tablayout);
-        viewPager = (ViewPager) findViewById(R.id.fav_event_viewpager);
-        adapter = new FavoriteEventsPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-
-        //
-        //Update current tab item based on tab position
-        tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                viewPager.setCurrentItem(position);
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                viewPager.setCurrentItem(position);
-            }
-        });
 
         ImageButton homebtn = (ImageButton)findViewById(R.id.home);
         ImageButton profilebtn = (ImageButton)findViewById(R.id.profile);
@@ -180,15 +165,17 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
                     Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
-                    //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
-                    //Bundle bundle = new Bundle();
-                    //String prefix = "past_";
-                    //intent.putExtra("eventPrefix", prefix);
-                    intent.putExtra("events", eventArr);
-                    //intent.putExtras(bundle);
+                    String prefix = "past_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
 
                     EventBanner eventBanner = new EventBanner();
+                    prefix = intent.getStringExtra("eventPrefix");
+                    if (prefix != "past_") {
+                        prefix = "past_";
+                        intent.putExtra("eventPrefix", prefix);
+                    }
                     ft.add(R.id.past_events_list, eventBanner, "past_event_banner");
                     ft.commit();
 
@@ -230,15 +217,17 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
                     Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
-                    //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
-                    //Bundle bundle = new Bundle();
-                    //String prefix = "future_";
-                    //intent.putExtra("eventPrefix", prefix);
-                    intent.putExtra("events", eventArr);
-                    //intent.putExtras(bundle);
+                    String prefix = "future_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
 
                     EventBanner eventBanner = new EventBanner();
+                    prefix = intent.getStringExtra("eventPrefix");
+                    if (prefix != "future_") {
+                        prefix = "future_";
+                        intent.putExtra("eventPrefix", prefix);
+                    }
                     ft.add(R.id.future_events_list, eventBanner, "future_event_banner");
                     ft.commit();
 
@@ -280,16 +269,18 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
                     Vector<Event> eventVect = BuildEventArray(data); // convert the JSONArray into a Vector of Event Objects
 
                     Event[] eventArr = eventVect.toArray(new Event[eventVect.size()]);
-                    //printEventArray(eventArr);
                     Intent intent = FavoriteEventsActivity.this.getIntent();
-                    //Bundle bundle = new Bundle();
-                    //String prefix = "my_";
-                    //intent.putExtra("eventPrefix", prefix);
-                    intent.putExtra("events", eventArr);
-                    //intent.putExtras(bundle);
+                    String prefix = "my_";
+                    intent.putExtra("eventPrefix", prefix);
+                    intent.putExtra(prefix + "events", eventArr);
 
                     EventBanner eventBanner = new EventBanner();
-                    ft.add(R.id.my_events_list, eventBanner, "fav_my_event_banner");
+                    prefix = intent.getStringExtra("eventPrefix");
+                    if (prefix != "my_") {
+                        prefix = "my_";
+                        intent.putExtra("eventPrefix", prefix);
+                    }
+                    ft.add(R.id.my_events_list, eventBanner, "fav_myevent_banner");
                     ft.commit();
 
                     Toast.makeText(context, "The request was successful: " + eventVect.get(0).eventDate, duration).show();
@@ -341,22 +332,6 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
         }
     }
 
-    // This function needs to be modified somehow to convert based on class type ie user vs interests
-     <T> ArrayList<T> JsonArrayToArrayList(Class<T> classType, JSONArray data) {
-        ArrayList<T> list = new ArrayList<T>();
-        try {
-            if (data != null) {
-                int len = data.length();
-                for (int i = 0; i < len; i++) {
-                    list.add((T)data.get(i));
-                }
-            }
-            return list;
-        } catch (JSONException e) {
-            return null;
-        }
-    }
-
     void printEventArray(Event[] arr) {
         TextView textView = findViewById(R.id.testText);
 
@@ -367,5 +342,14 @@ public class FavoriteEventsActivity extends AppCompatActivity implements EventBa
             text += arr[i].eventName + ", ";
         }
         textView.setText(text);
+    }
+
+    private void setupViewPager(ViewPager viewPager){
+        // https://www.youtube.com/watch?v=bNpWGI_hGGg
+        FavoriteEventsPagerAdapter adapter = new FavoriteEventsPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new PastEventsListFragment(), "Past Events");
+        adapter.addFragment(new FutureEventsListFragment(), "Future Events");
+        adapter.addFragment(new MyEventsListFragment(), "My Events");
+        viewPager.setAdapter(adapter);
     }
 }
