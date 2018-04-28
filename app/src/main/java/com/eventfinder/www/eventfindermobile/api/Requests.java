@@ -404,4 +404,14 @@ public class Requests {
             return null;
         }
     }
+
+    public static JsonObjectRequest queryEvents(String query, final VolleyResponseListener listener) {
+        String url = EventFinderAPI.API_URL + "queryevents/";
+        try{
+            JSONObject j = new JSONObject();
+            j.put("query", query);
+            return createJsonObjReq(Request.Method.POST, url, j, listener, true);
+        } catch (Exception e){return null;}
+
+    }
 }

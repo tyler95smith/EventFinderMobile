@@ -39,12 +39,13 @@ public class DataParsing {
             e.ageMin = eventData.getInt("age_min");
             e.ageMax = eventData.getInt("age_max");
             e.isHidden = eventData.getBoolean("is_hidden");
-
-            // TODO: Need to figure out how interests will work and update app/api accordingly.
-            // currently api returns id's of interests stored in the data base.
-            JSONArray interestArr = eventData.getJSONArray("interests");
-            for (int j = 0; j < interestArr.length(); j++) {
-                e.interests.add(interestArr.getInt(j));
+            String interestArr = eventData.getString("interests");
+            String delims = "[,]";
+            String[] inters = interestArr.split(delims);
+            if(inters.length > 1) {
+                for (int i = 0; i < inters.length; i++) {
+                    e.interests.add(Integer.valueOf(inters[i]));
+                }
             }
 
             JSONArray attendeeArr = eventData.getJSONArray("attendees_info");
@@ -80,6 +81,14 @@ public class DataParsing {
             u.email = userPart.getString("email");
             u.firstName = userPart.getString("first_name");
             u.lastName = userPart.getString("last_name");
+            String interestArr = person.getString("interests");
+            String delims = "[,]";
+            String[] inters = interestArr.split(delims);
+            if(inters.length > 1) {
+                for (int i = 0; i < inters.length; i++) {
+                    u.interests.add(Integer.valueOf(inters[i]));
+                }
+            }
             //TODO: How to determine if this is "me"/current logged in user?
             //u.me = ????
             return u;
